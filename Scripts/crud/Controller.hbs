@@ -1,0 +1,58 @@
+{{#meta}}
+output: Sln.{{App}}/Sln.{{App}}.Host/Controllers/{{Entity}}sController.cs
+enable: {{useController}}
+{{/meta}}
+using Microsoft.AspNetCore.Mvc;
+using Sln.{{App}}.Contract.Requests.{{Module}}s;
+
+namespace Sln.{{App}}.Host.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class {{Entity}}sController : {{App}}ControllerBase
+{
+{{#if useGetAllDto}}
+    [HttpGet]
+    public async Task<IActionResult> GetAll([FromQuery] {{Entity}}GetAllRequest request)
+    {
+        return await RequestAsGet<{{Entity}}GetAllRequest, {{Entity}}GetAllResponse>(request);
+    }
+{{/if}}
+
+{{#if useGetDetailDto}}
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetDetail({{Entity}}GetDetailRequest request)
+    {
+        return await RequestAsGet<{{Entity}}GetDetailRequest, {{Entity}}GetDetailResponse>(request);
+    }
+{{/if}}
+
+{{#if useCreateDto}}
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] {{Entity}}CreateRequest requestBody)
+    {
+        return await RequestAsCreate<{{Entity}}CreateRequest, {{Entity}}CreateResponse>(requestBody);
+    }
+{{/if}}
+
+{{#if useUpdateDto}}
+    [HttpPatch("{id}")]
+    public async Task<IActionResult> Update(long id, [FromBody] {{Entity}}UpdateRequest requestBody)
+    {
+        if (id != requestBody.Id)
+        {
+            return BadRequest("RESOURCE_ID_MISMATCH");
+        }
+
+        return await RequestAsUpdate<{{Entity}}UpdateRequest, {{Entity}}UpdateResponse>(requestBody);
+    }
+{{/if}}
+
+{{#if useDeleteDto}}
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete({{Entity}}DeleteRequest request)
+    {
+        return await RequestAsDelete(request);
+    }
+{{/if}}
+}

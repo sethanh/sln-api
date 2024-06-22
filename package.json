@@ -1,0 +1,16 @@
+{
+  "name": "sln-api",
+  "repository": "https://github.com/sethanh/sln-api.git",
+  "author": "se-uit <thanhse1998@gmail.com>",
+  "license": "MIT",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "ef": "node ./Scripts/Ef/ef.js",
+    "gen": "fp gen ./Scripts/gen.js -o ."
+  },
+  "devDependencies": {
+    "inquirer": "^9.2.12",
+    "@fast-project/cli": "^0.5.8"
+  }
+}

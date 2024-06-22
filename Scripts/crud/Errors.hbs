@@ -1,0 +1,11 @@
+{{#meta}}
+output: Sln.{{App}}/Sln.{{App}}.Contract/Errors/{{Module}}s/{{Entity}}Errors.cs
+enable: {{useDomainService}}
+{{/meta}}
+namespace Sln.{{App}}.Contract.Errors.{{Module}}s;
+
+public class {{Entity}}Errors
+{
+    public const string {{ENTITY}}_NOT_FOUND = "{{ENTITY}}_NOT_FOUND";
+    public const string {{ENTITY}}_ALREADY_EXISTS = "{{ENTITY}}_ALREADY_EXISTS";
+}

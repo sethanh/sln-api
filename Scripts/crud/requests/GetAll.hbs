@@ -1,0 +1,22 @@
+{{#meta}}
+output: Sln.{{App}}/Sln.{{App}}.Contract/Requests/{{Module}}s/{{Entity}}GetAllRequest.cs
+enable: {{useGetAllDto}}
+{{/meta}}
+using Sln.Shared.Contract.Models;
+using MediatR;
+
+namespace Sln.{{App}}.Contract.Requests.{{Module}}s;
+
+public class {{Entity}}GetAllRequest : PaginationRequest, IRequest<{{Entity}}GetAllResponse>
+{
+}
+
+public class {{Entity}}GetAllResponse : PaginationResponse<{{Entity}}GetAllResponseItem>
+{
+}
+
+public class {{Entity}}GetAllResponseItem
+{
+    public required long Id { get; set; }
+    public required string Name { get; set; }
+}

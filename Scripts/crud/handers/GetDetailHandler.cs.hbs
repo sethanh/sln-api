@@ -1,0 +1,22 @@
+﻿{{#meta}}
+output: Sln.{{App}}/Sln.{{App}}.Host/RequestHandlers/{{Module}}s/{{Entity}}GetDetailHandler.cs
+enable: {{useGetDetailDto}}
+{{/meta}}
+using MediatR;
+using Sln.{{App}}.Contract.Requests.{{Module}}s;
+{{#if useApplicationService}}
+using Sln.{{App}}.Business.Services.{{Module}}s;
+{{/if}}
+{{#if useReportService}}
+using Sln.{{App}}.Business.ReportServices.{{Module}}s;
+{{/if}}
+
+namespace Sln.{{App}}.Host.RequestHandlers.{{Module}}s;
+
+public class {{Entity}}GetDetailHandler({{Entity}}Service {{entity}}Service) : IRequestHandler<{{Entity}}GetDetailRequest, {{Entity}}GetDetailResponse>
+{
+    public Task<{{Entity}}GetDetailResponse> Handle({{Entity}}GetDetailRequest request, CancellationToken cancellationToken)
+    {
+        return {{entity}}Service.GetDetail(request);
+    }
+}

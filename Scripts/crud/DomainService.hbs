@@ -1,0 +1,11 @@
+{{#meta}}
+output: Sln.{{App}}/Sln.{{App}}.Business/Managers/{{Module}}s/{{Entity}}Manager.cs
+enable: {{useDomainService}}
+{{/meta}}
+using Sln.Shared.Data.Abstractions;
+using Sln.{{App}}.Data.Entities;
+
+namespace Sln.{{App}}.Business.Managers.{{Module}}s;
+
+public class {{Entity}}Manager(IRepository<{{Entity}}> repository) 
+    : {{App}}DomainService<{{Entity}}>(repository);

@@ -1,0 +1,18 @@
+{{#meta}}
+output: Sln.{{App}}/Sln.{{App}}.Contract/Requests/{{Module}}s/{{Entity}}CreateRequest.cs
+enable: {{useCreateDto}}
+{{/meta}}
+using Sln.Shared.Contract.Models;
+using MediatR;
+
+namespace Sln.{{App}}.Contract.Requests.{{Module}}s;
+
+public class {{Entity}}CreateRequest : IRequest<{{Entity}}CreateResponse>
+{
+    public required string Name { get; set; }
+}
+
+public class {{Entity}}CreateResponse
+{
+    public required string Name { get; set; }
+}

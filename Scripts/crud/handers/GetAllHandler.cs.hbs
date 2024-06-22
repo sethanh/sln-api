@@ -1,0 +1,22 @@
+﻿{{#meta}}
+output: Sln.{{App}}/Sln.{{App}}.Host/RequestHandlers/{{Module}}s/{{Entity}}GetAllHandler.cs
+enable: {{useGetAllDto}}
+{{/meta}}
+using MediatR;
+using Sln.{{App}}.Contract.Requests.{{Module}}s;
+{{#if useApplicationService}}
+using Sln.{{App}}.Business.Services.{{Module}}s;
+{{/if}}
+{{#if useReportService}}
+using Sln.{{App}}.Business.ReportServices.{{Module}}s;
+{{/if}}
+
+namespace Sln.{{App}}.Host.RequestHandlers.{{Module}}s;
+
+public class {{Entity}}GetAllHandler({{Entity}}Service {{entity}}Service) : IRequestHandler<{{Entity}}GetAllRequest, {{Entity}}GetAllResponse>
+{
+    public Task<{{Entity}}GetAllResponse> Handle({{Entity}}GetAllRequest request, CancellationToken cancellationToken)
+    {
+        return {{entity}}Service.GetAll(request);
+    }
+}

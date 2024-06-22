@@ -1,0 +1,19 @@
+{{#meta}}
+output: Sln.{{App}}/Sln.{{App}}.Contract/Requests/{{Module}}s/{{Entity}}GetDetailRequest.cs
+enable: {{useGetDetailDto}}
+{{/meta}}
+using Sln.Shared.Contract.Models;
+using MediatR;
+
+namespace Sln.{{App}}.Contract.Requests.{{Module}}s;
+
+public class {{Entity}}GetDetailRequest : IRequest<{{Entity}}GetDetailResponse>
+{
+    public required long Id { get; set; }
+}
+
+public class {{Entity}}GetDetailResponse
+{
+    public required long Id { get; set; }
+    public required string Name { get; set; }
+}

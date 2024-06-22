@@ -7,7 +7,7 @@ namespace Sln.Shared.Data.Abstractions
 {
     public interface IUnitOfWork : IDisposable
     {
-        void SaveChange();
+        void SaveChanges();
         void BeginTransaction();
         void CommitTransaction();
         void RollbackTransaction();

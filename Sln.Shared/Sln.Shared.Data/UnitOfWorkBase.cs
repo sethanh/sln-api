@@ -34,7 +34,7 @@ namespace Sln.Shared.Data
             _context.Database.RollbackTransaction();
         }
 
-        public void SaveChange()
+        public void SaveChanges()
         {
             _context.SaveChanges();
         }

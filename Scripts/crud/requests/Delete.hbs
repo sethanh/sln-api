@@ -1,0 +1,13 @@
+{{#meta}}
+output: Sln.{{App}}/Sln.{{App}}.Contract/Requests/{{Module}}s/{{Entity}}DeleteRequest.cs
+enable: {{useDeleteDto}}
+{{/meta}}
+using Sln.Shared.Contract.Models;
+using MediatR;
+
+namespace Sln.{{App}}.Contract.Requests.{{Module}}s;
+
+public class {{Entity}}DeleteRequest: IRequest
+{
+    public long Id { get; set; }
+}

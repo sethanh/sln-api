@@ -1,0 +1,50 @@
+{{#meta}}
+output: Sln.{{App}}/Sln.{{App}}.Business/ReportServices/{{Module}}s/{{Entity}}Service.cs
+enable: {{useReportService}}
+{{/meta}}
+using Sln.{{App}}.Contract.Requests.{{Module}}s;
+using Sln.{{App}}.Data.Entities;
+
+namespace Sln.{{App}}.Business.ReportServices.{{Module}}s;
+
+public class {{Entity}}Service(IServiceProvider serviceProvider) : {{App}}ReportService(serviceProvider)
+{
+    {{#if useGetAllDto}}
+    public async Task<{{Entity}}GetAllResponse> GetAll({{Entity}}GetAllRequest request)
+    {
+        var result = new {{Entity}}GetAllResponse();
+        return Mapper.Map<{{Entity}}GetAllResponse>(result);
+    }
+    {{/if}}
+
+    {{#if useGetDetailDto}}
+    public async Task<{{Entity}}GetDetailResponse> GetDetail({{Entity}}GetDetailRequest request)
+    {
+        var result = new {{Entity}}GetDetailResponse();
+        return Mapper.Map<{{Entity}}GetDetailResponse>(result);
+    }
+    {{/if}}
+
+    {{#if useCreateDto}}
+    public async Task<{{Entity}}CreateResponse> Create({{Entity}}CreateRequest request)
+    {
+        var result = new {{Entity}}CreateResponse();
+        return Mapper.Map<{{Entity}}CreateResponse>(result);
+    }
+    {{/if}}
+
+    {{#if useUpdateDto}}
+    public async Task<{{Entity}}UpdateResponse> Update({{Entity}}UpdateRequest request)
+    {
+        var result = new {{Entity}}UpdateResponse();
+        return Mapper.Map<{{Entity}}UpdateResponse>(result);
+    }
+    {{/if}}
+
+    {{#if useDeleteDto}}
+    public async Task Delete({{Entity}}DeleteRequest request)
+    {
+        await UnitOfWork.SaveChangesAsync();
+    }
+    {{/if}}
+}

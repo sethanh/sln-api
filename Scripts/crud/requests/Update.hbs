@@ -1,0 +1,20 @@
+{{#meta}}
+output: Sln.{{App}}/Sln.{{App}}.Contract/Requests/{{Module}}s/{{Entity}}UpdateRequest.cs
+enable: {{useUpdateDto}}
+{{/meta}}
+using Sln.Shared.Contract.Models;
+using MediatR;
+
+namespace Sln.{{App}}.Contract.Requests.{{Module}}s;
+
+public class {{Entity}}UpdateRequest : IRequest<{{Entity}}UpdateResponse>
+{
+    public required long Id { get; set; }
+    public required string Name { get; set; }
+}
+
+public class {{Entity}}UpdateResponse
+{
+    public long Id { get; set; }
+    public required string Name { get; set; }
+}

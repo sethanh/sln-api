@@ -3,6 +3,7 @@
     <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Business\Sln.Shared.Business.csproj" />
     <ProjectReference Include="..\Sln.Management.Data\Sln.Management.Data.csproj" />
     <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Common\Sln.Shared.Common.csproj" />
+    <ProjectReference Include="..\Sln.Management.Contract\Sln.Management.Contract.csproj" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>

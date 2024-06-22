@@ -1,0 +1,95 @@
+{{#meta}}
+output: Sln.{{App}}/Sln.{{App}}.Business/Services/{{Module}}s/{{Entity}}Service.cs
+enable: {{useApplicationService}}
+{{/meta}}
+using Sln.{{App}}.Contract.Errors.{{Module}}s;
+using Sln.{{App}}.Contract.Requests.{{Module}}s;
+using Sln.{{App}}.Data.Entities;
+using Sln.{{App}}.Business.Managers.{{Module}}s;
+using Sln.Shared.Business.Abstractions;
+using Sln.Shared.Contract.Models;
+using Sln.Shared.Common.Exceptions;
+
+namespace Sln.{{App}}.Business.Services.{{Module}}s;
+
+public class {{Entity}}Service(IServiceProvider serviceProvider) : ManagementApplicationService(serviceProvider)
+{
+    private {{Entity}}Manager {{Entity}}Manager => GetService<{{Entity}}Manager>();
+
+    {{#if useGetAllDto}}
+    public Task<{{Entity}}GetAllResponse> GetAll({{Entity}}GetAllRequest request)
+    {
+        var {{Entity}} = {{Entity}}Manager.GetAll();
+
+        var paginationResponse = PaginationResponse<{{Entity}}>.Create(
+            {{Entity}},
+            request
+        );
+
+        return Task.FromResult(Mapper.Map<{{Entity}}GetAllResponse>(paginationResponse));
+    }
+    {{/if}}
+
+    {{#if useGetDetailDto}}
+    public Task<{{Entity}}GetDetailResponse> GetDetail({{Entity}}GetDetailRequest request)
+    {
+        var {{entity}} = {{Entity}}Manager.FirstOrDefault(o => o.Id == request.Id);
+
+        if ({{entity}} == null)
+        {
+            throw new HttpNotFound({{Entity}}Errors.{{ENTITY}}_NOT_FOUND);
+        }
+
+        return Task.FromResult(Mapper.Map<{{Entity}}GetDetailResponse>({{entity}}));
+    }
+    {{/if}}
+
+    {{#if useCreateDto}}
+    public Task<{{Entity}}CreateResponse> Create({{Entity}}CreateRequest request)
+    {
+        var {{entity}} = Mapper.Map<{{Entity}}>(request);
+
+        {{Entity}}Manager.Add({{entity}});
+
+        UnitOfWork.SaveChanges();
+
+        return Task.FromResult(Mapper.Map<{{Entity}}CreateResponse>({{entity}}));
+    }
+    {{/if}}
+
+    {{#if useUpdateDto}}
+    public Task<{{Entity}}UpdateResponse> Update({{Entity}}UpdateRequest request)
+    {
+        var {{entity}} = {{Entity}}Manager.FirstOrDefault(o => o.Id == request.Id);
+
+        if({{entity}} == null)
+        {
+            throw new HttpBadRequest({{Entity}}Errors.{{ENTITY}}_NOT_FOUND);
+        }
+
+        // TODO: Update {{entity}} properties
+
+        var updated{{Entity}} = {{Entity}}Manager.Update({{entity}});
+
+        UnitOfWork.SaveChanges();
+
+        return Task.FromResult(Mapper.Map<{{Entity}}UpdateResponse>(updated{{Entity}}));
+    }
+    {{/if}}
+
+    {{#if useDeleteDto}}
+    public Task Delete({{Entity}}DeleteRequest request)
+    {
+        var {{entity}} = {{Entity}}Manager.FirstOrDefault(o => o.Id == request.Id);
+
+        if ({{entity}} == null)
+        {
+            throw new HttpNotFound({{Entity}}Errors.{{ENTITY}}_NOT_FOUND);
+        }
+
+        {{Entity}}Manager.Delete({{entity}});
+
+        UnitOfWork.SaveChanges();
+    }
+    {{/if}}
+}

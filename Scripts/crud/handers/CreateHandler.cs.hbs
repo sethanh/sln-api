@@ -1,0 +1,22 @@
+﻿{{#meta}}
+output: Sln.{{App}}/Sln.{{App}}.Host/RequestHandlers/{{Module}}s/{{Entity}}CreateHandler.cs
+enable: {{useCreateDto}}
+{{/meta}}
+using MediatR;
+using Sln.{{App}}.Contract.Requests.{{Module}}s;
+{{#if useApplicationService}}
+using Sln.{{App}}.Business.Services.{{Module}}s;
+{{/if}}
+{{#if useReportService}}
+using Sln.{{App}}.Business.ReportServices.{{Module}}s;
+{{/if}}
+
+namespace Sln.{{App}}.Host.RequestHandlers.{{Module}}s;
+
+public class {{Entity}}CreateHandler({{Entity}}Service {{entity}}Service) : IRequestHandler<{{Entity}}CreateRequest, {{Entity}}CreateResponse>
+{
+    public Task<{{Entity}}CreateResponse> Handle({{Entity}}CreateRequest request, CancellationToken cancellationToken)
+    {
+        return {{entity}}Service.Create(request);
+    }
+}
