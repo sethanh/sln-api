@@ -1,0 +1,140 @@
+
+using System.Reflection;
+using System.Text;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Sln.Shared.Common.Services;
+using Sln.Shared.Host.Configurations;
+
+namespace Sln.Shared.Host.Extensions;
+
+public static class ServiceCollectionExtension
+{
+
+    public static IServiceCollection AddAssignInterfaceServices<TInterface>(
+        this IServiceCollection services,
+        string startFullNameAssembly
+        )
+    {
+        var assemblies = Assembly.GetCallingAssembly().GetReferencedAssemblies()
+            .Select(Assembly.Load)
+            .Where(a => a.FullName?.StartsWith(startFullNameAssembly) ?? false);
+        var types = assemblies.SelectMany(a => a.GetExportedTypes());
+        var applicationServices = types
+            .Where(t => t.IsAssignableTo(typeof(TInterface)) && !t.IsAbstract && !t.IsInterface)
+            .ToList();
+
+        foreach (var applicationService in applicationServices)
+        {
+            services.AddScoped(applicationService);
+        }
+
+        return services;
+    }
+
+    public static IServiceCollection AddRedisCache(this IServiceCollection services)
+    {
+        var redisConn = Environment.GetEnvironmentVariable("REDIS_CONNECTION");
+        var redisInstanceName = Environment.GetEnvironmentVariable("REDIS_INSTANCE_NAME");
+        services.AddStackExchangeRedisCache(options =>
+        {
+            options.Configuration = redisConn;
+            options.InstanceName = redisInstanceName;
+        });
+        return services;
+    }
+
+    public static IServiceCollection AddAuthenticationService(this IServiceCollection services)
+    {
+        var jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");
+
+        if (jwtSecret.IsNullOrEmpty()) { throw new Exception("JWT_SECRET is not set"); }
+
+        services.AddAuthentication(cfg =>
+        {
+            cfg.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            cfg.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            cfg.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+        }).AddJwtBearer(x =>
+        {
+            x.RequireHttpsMetadata = false;
+            x.SaveToken = false;
+            x.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(
+                    Encoding.UTF8
+                    .GetBytes(jwtSecret!)
+                ),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                ClockSkew = TimeSpan.Zero
+            };
+        }
+        ).AddScheme<AuthenticationSchemeOptions, InternalAuthenticationHandler>("InternalAuthentication", null);
+
+        return services;
+    }
+
+    public static IServiceCollection AddCurrentAccount(this IServiceCollection services)
+    {
+        services.AddScoped<CurrentAccount>();
+        return services;
+    }
+
+    public static IServiceCollection AddSwagger(this IServiceCollection services)
+    {
+        services.AddSwaggerGen(c =>
+        {
+            // Define the BearerAuth scheme
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                In = ParameterLocation.Header,
+                Description = "Please enter a valid token",
+                Name = "Authorization",
+                Type = SecuritySchemeType.Http,
+                BearerFormat = "JWT",
+                Scheme = "Bearer"
+            });
+
+            // Define the BasicAuth scheme
+            c.AddSecurityDefinition("Basic", new OpenApiSecurityScheme
+            {
+                Type = SecuritySchemeType.Http,
+                Scheme = "basic",
+                Description = "Input your username and password to access this API"
+            });
+
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new List<string>()
+                },
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Basic"
+                        }
+                    },
+                    new List<string>()
+                }
+            });
+        });
+
+        return services;
+    }
+}

@@ -1,14 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
-
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
+    <PackageReference Include="DotNetEnv" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.5" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
-
+  <ItemGroup>
+    <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Host\Sln.Shared.Host.csproj" />
+    <ProjectReference Include="..\Sln.Management.Data\Sln.Management.Data.csproj" />
+    <ProjectReference Include="..\Sln.Management.Business\Sln.Management.Business.csproj" />
+    <ProjectReference Include="..\Sln.Management.Contract\Sln.Management.Contract.csproj" />
+    <ProjectReference Include="..\Sln.Management.Common\Sln.Management.Common.csproj" />
+  </ItemGroup>
 </Project>
