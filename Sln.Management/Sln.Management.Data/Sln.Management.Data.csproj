@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
     <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Data\Sln.Shared.Data.csproj" />
+    <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Common\Sln.Shared.Common.csproj" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>

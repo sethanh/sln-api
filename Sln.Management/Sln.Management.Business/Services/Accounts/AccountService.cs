@@ -77,5 +77,6 @@ public class AccountService(IServiceProvider serviceProvider) : ManagementApplic
         AccountManager.Delete(account);
 
         UnitOfWork.SaveChanges();
+        return Task.FromResult("");
     }
 }

@@ -23,9 +23,8 @@ namespace Sln.Management.Host
             {
                 configs.RegisterServicesFromAssemblyContaining<Startup>();
             });
-            // services.AddScoped(typeof(IRepository<>), typeof(ManagementRepository<>));
-            // services.AddScoped<DapperQueryBase>();
-            // services.AddScoped<IUnitOfWork, ManagementUnitOfWork>();
+            services.AddScoped(typeof(IRepository<>), typeof(ManagementRepository<>));
+            services.AddScoped<IUnitOfWork, ManagementUnitOfWork>();
             services.AddMapster();
             // services.RegisterMapsterConfiguration();
             services.AddCurrentAccount();

@@ -8,7 +8,7 @@ using Sln.Shared.Data.Abstractions;
 
 namespace Sln.Shared.Business
 {
-    public class DomainServiceBase<TEntity>(IRepository<TEntity> repository) 
+    public abstract class DomainServiceBase<TEntity>(IRepository<TEntity> repository) 
         : IDomainService<TEntity> where TEntity : class
     {
         public readonly IRepository<TEntity> MainRepository = repository;
