@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Sln.Shared.Common.Constants.Envs;
 using Sln.Shared.Data;
 using Sln.Shared.Data.Extensions;
 
@@ -14,7 +15,7 @@ namespace Sln.Management.Data
 
         public static string GetConnectionString()
         {
-            var connectionName = "MANAGEMENT_CONNECTION";
+            var connectionName = EnvConstants.MANAGEMENT_CONNECTION;
             if (string.IsNullOrEmpty(connectionName))
             {
                 throw new Exception($"Connection name environment variable is not set.");

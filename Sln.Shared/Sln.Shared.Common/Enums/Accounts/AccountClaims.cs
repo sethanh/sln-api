@@ -9,7 +9,7 @@ namespace Sln.Shared.Common.Enums.Accounts
 
     public enum AccountTypeClaims
     {
-        SlnanizationId = 0
+        OrganizationId = 0
     }
 
 }

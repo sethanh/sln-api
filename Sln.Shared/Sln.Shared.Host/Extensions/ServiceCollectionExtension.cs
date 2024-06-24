@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Sln.Shared.Common.Constants.Envs;
 using Sln.Shared.Common.Services;
 using Sln.Shared.Host.Configurations;
 
@@ -49,7 +50,7 @@ public static class ServiceCollectionExtension
 
     public static IServiceCollection AddAuthenticationService(this IServiceCollection services)
     {
-        var jwtSecret = Environment.GetEnvironmentVariable("JWT_SECRET");
+        var jwtSecret = Environment.GetEnvironmentVariable(EnvConstants.JWT_SECRET);
 
         if (jwtSecret.IsNullOrEmpty()) { throw new Exception("JWT_SECRET is not set"); }
 

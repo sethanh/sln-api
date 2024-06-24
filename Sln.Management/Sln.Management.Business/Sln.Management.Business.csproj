@@ -4,6 +4,7 @@
     <ProjectReference Include="..\Sln.Management.Data\Sln.Management.Data.csproj" />
     <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Common\Sln.Shared.Common.csproj" />
     <ProjectReference Include="..\Sln.Management.Contract\Sln.Management.Contract.csproj" />
+    <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Host\Sln.Shared.Host.csproj" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>

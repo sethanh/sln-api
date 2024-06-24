@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Sln.Shared.Common.Constants.Envs;
 using Sln.Shared.Data;
 
 namespace Sln.Management.Business
@@ -15,7 +16,7 @@ namespace Sln.Management.Business
 
         public static string GetConnectionString()
         {
-            var connectionName = "MANAGEMENT_CONNECTION";
+            var connectionName = EnvConstants.MANAGEMENT_CONNECTION;
             if (string.IsNullOrEmpty(connectionName))
             {
                 throw new Exception($"Connection name environment variable is not set.");

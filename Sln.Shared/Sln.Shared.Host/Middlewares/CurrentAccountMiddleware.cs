@@ -29,14 +29,14 @@ namespace Sln.Shared.Host.Middlewares
                     accountId = parsedIdentifier;
                 }
 
-                var SlnanizationIdClaim = context.User.Claims.FirstOrDefault(c => c.Type == "SlnanizationId")?.Value;
-                long SlnanizationId = 0;
-                if (!string.IsNullOrEmpty(SlnanizationIdClaim) && long.TryParse(SlnanizationIdClaim, out var parsedSlnanizationId))
+                var OrganizationIdClaim = context.User.Claims.FirstOrDefault(c => c.Type == "OrganizationId")?.Value;
+                long OrganizationId = 0;
+                if (!string.IsNullOrEmpty(OrganizationIdClaim) && long.TryParse(OrganizationIdClaim, out var parsedOrganizationId))
                 {
-                    SlnanizationId = parsedSlnanizationId;
+                    OrganizationId = parsedOrganizationId;
                 }
 
-                currentAccount.SlnanizationId = SlnanizationId;
+                currentAccount.OrganizationId = OrganizationId;
                 currentAccount.Id = accountId;
                 currentAccount.Email = email;
                 currentAccount.Name = name;

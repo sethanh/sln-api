@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Mapster;
 using Sln.Management.Data;
 using Sln.Shared.Business.Abstractions;
+using Sln.Shared.Common.Constants.Envs;
 using Sln.Shared.Data.Abstractions;
 using Sln.Shared.Host.Extensions;
 
@@ -43,7 +44,7 @@ namespace Sln.Management.Host
         public void Configure(IApplicationBuilder app)
         {
             app.UseDeveloperExceptionPage();
-            var isProduction = Environment.GetEnvironmentVariable("IS_PRODUCTION");
+            var isProduction = Environment.GetEnvironmentVariable(EnvConstants.IS_PRODUCTION);
             if (isProduction == null)
             {
                 app.UseSwagger();
