@@ -2,15 +2,31 @@ using Sln.Management.Contract.Errors.Accounts;
 using Sln.Management.Contract.Requests.Accounts;
 using Sln.Management.Data.Entities;
 using Sln.Management.Business.Managers.Accounts;
-using Sln.Shared.Business.Abstractions;
 using Sln.Shared.Contract.Models;
 using Sln.Shared.Common.Exceptions;
+using Sln.Management.Business.Helpers.Accounts;
 
 namespace Sln.Management.Business.Services.Accounts;
 
 public class AccountService(IServiceProvider serviceProvider) : ManagementApplicationService(serviceProvider)
 {
     private AccountManager AccountManager => GetService<AccountManager>();
+    private AccountRefreshTokenManager AccountRefreshTokenManager => GetService<AccountRefreshTokenManager>();
+
+    public Task<AccountLoginResponse> Login(AccountLoginRequest request)
+    {
+        var account = AccountManager.GetAll()
+            .FirstOrDefault(c => c.Email == request.Email && c.Password == request.Password)
+            ?? throw new HttpNotFound(AccountErrors.ACCOUNT_NOT_FOUND);
+
+        var tokenValue = JwtHelpers.GenerateJWTTokens(account);
+        
+        AccountRefreshTokenManager.AddOrgAccountRefreshToken(account, tokenValue.RefreshToken);
+
+        UnitOfWork.SaveChanges();
+
+        return Task.FromResult(Mapper.Map<AccountLoginResponse>(tokenValue));
+    }
 
     public Task<AccountGetAllResponse> GetAll(AccountGetAllRequest request)
     {

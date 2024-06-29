@@ -19,6 +19,12 @@ public class AccountsController : ManagementControllerBase
         return await RequestAsGet<AccountGetDetailRequest, AccountGetDetailResponse>(request);
     }
 
+    [HttpPost("login")]
+    public async Task<IActionResult> Login([FromBody] AccountLoginRequest requestBody)
+    {
+        return await RequestAsCreate<AccountLoginRequest, AccountLoginResponse>(requestBody);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] AccountCreateRequest requestBody)
     {

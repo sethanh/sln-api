@@ -6,7 +6,7 @@ using Sln.Shared.Data.Models;
 
 namespace Sln.Management.Data.Models
 {
-    public abstract class ManagementAuditModel: AuditModel<long>
+    public abstract class ManagementAuditModel<TID>: AuditModel<TID> where TID : struct
     {
     }
 }
