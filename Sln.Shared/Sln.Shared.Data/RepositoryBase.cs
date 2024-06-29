@@ -8,12 +8,14 @@ using Sln.Shared.Data.Abstractions;
 
 namespace Sln.Shared.Data
 {
-    public abstract class RepositoryBase<TEntity>(long? accountId) : IRepository<TEntity> where TEntity : class
+    public abstract class RepositoryBase<TEntity,TID>(TID? accountId) : IRepository<TEntity> 
+        where TEntity : class
+        where TID : struct
     {
-        public long? AccountId { get; } = accountId;
+        public TID? AccountId { get; } = accountId;
         public void SetCreateAuditProperties(TEntity entity)
         {
-            if (entity is not ICreationAuditModel createAuditProperties)
+            if (entity is not ICreationAuditModel<TID> createAuditProperties)
             {
                 return;
             }
@@ -21,7 +23,7 @@ namespace Sln.Shared.Data
             createAuditProperties.CreationTime = DateTime.Now;
             createAuditProperties.CreatedId = AccountId;
 
-            if (entity is not IDeletionAuditModel deleteAuditProperties)
+            if (entity is not IDeletionAuditModel<TID> deleteAuditProperties)
             {
                 return;
             }
@@ -31,7 +33,7 @@ namespace Sln.Shared.Data
 
         public void SetUpdateAuditProperties(TEntity entity)
         {
-            if (entity is not IModificationAuditModel updateAuditProperties)
+            if (entity is not IModificationAuditModel<TID> updateAuditProperties)
             {
                 return;
             }
@@ -42,13 +44,14 @@ namespace Sln.Shared.Data
 
         public bool SetDeleteAuditProperties(TEntity entity)
         {
-            if (entity is not IDeletionAuditModel deleteAuditProperties)
+            if (entity is not IDeletionAuditModel<TID> deleteAuditProperties)
             {
                 return false;
             }
 
             deleteAuditProperties.DeletionTime = DateTime.Now;
             deleteAuditProperties.IsDeleted = true;
+            deleteAuditProperties.DeletedId = AccountId;
 
             return true;
         }

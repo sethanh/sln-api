@@ -7,7 +7,11 @@ namespace Sln.Shared.Data.Abstractions
 {
     public interface IModificationAuditModel
     {
+    }
+
+    public interface IModificationAuditModel<TID> : IModificationAuditModel where TID : struct
+    {
+        TID? LastModificationId { get; set; }
         DateTime? LastModificationTime { get; set; }
-        long? LastModificationId { get; set; }
     }
 }

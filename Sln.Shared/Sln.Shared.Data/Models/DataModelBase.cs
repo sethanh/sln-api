@@ -2,8 +2,8 @@
 
 namespace Sln.Shared.Data.Models
 {
-    public abstract class DataModelBase : IDataModel<long>
+    public abstract class DataModelBase<TID> : IDataModel<TID> where TID : struct
     {
-        public long Id { get; set; }
+        public required TID Id { get; set; }
     }
 }

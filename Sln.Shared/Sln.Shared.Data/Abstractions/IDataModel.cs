@@ -10,7 +10,7 @@ namespace Sln.Shared.Data.Abstractions
         
     }
 
-    public interface IDataModel<TID> : IDataModel
+    public interface IDataModel<TID> : IDataModel where TID : struct
     {
         TID Id { get; set; }
     }

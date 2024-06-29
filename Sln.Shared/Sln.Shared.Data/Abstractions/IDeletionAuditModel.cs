@@ -7,8 +7,12 @@ namespace Sln.Shared.Data.Abstractions
 {
     public interface IDeletionAuditModel
     {
-        DateTime? DeletionTime { get; set; }
-        long? DeletedId { get; set; }
         bool IsDeleted { get; set; }
+    }
+
+    public interface IDeletionAuditModel<TID> : IDeletionAuditModel where TID : struct
+    {
+        TID? DeletedId { get; set; }
+        DateTime? DeletionTime { get; set; }
     }
 }

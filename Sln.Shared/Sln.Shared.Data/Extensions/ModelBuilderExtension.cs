@@ -20,7 +20,9 @@ namespace Sln.Shared.Data.Extensions
 
             foreach (var entityType in entityTypes)
             {
-                if (entityType.IsAssignableTo(typeof(IDeletionAuditModel)))
+                var isAssignDeletionModel = entityType.IsAssignableTo(typeof(IDeletionAuditModel))||  entityType.IsAssignableTo(typeof(IDeletionAuditModel<>));
+                
+                if (isAssignDeletionModel)
                 {
                     modelBuilder.Entity(entityType).HasQueryFilter(QueryFilterLambdaExpression(entityType));
                 }

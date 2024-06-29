@@ -7,7 +7,11 @@ namespace Sln.Shared.Data.Abstractions
 {
     public interface ICreationAuditModel
     {
+    }
+
+    public interface ICreationAuditModel<TID> : ICreationAuditModel where TID : struct
+    {
+        TID? CreatedId {  get; set; }
         DateTime CreationTime { get; set; }
-        long? CreatedId {  get; set; }
     }
 }
