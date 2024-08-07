@@ -1,14 +1,16 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
-using Sln.Shared.Common.Services;
+using Sln.Management.Common.Models;
+using Sln.Shared.Host.Middlewares;
 
-namespace Sln.Shared.Host.Middlewares
+namespace Sln.Management.Business.Middlewares
 {
-    public class CurrentAccountMiddleware(RequestDelegate next)
+     public class CurrentAccountMiddleware(RequestDelegate next) 
+        : CurrentAccountMiddlewareBase<CurrentManagementAccount>(next)
     {
         private readonly RequestDelegate _next = next;
-
-        public async Task InvokeAsync(HttpContext context, CurrentAccount currentAccount)
+        
+        public override async Task InvokeAsync(HttpContext context, CurrentManagementAccount currentAccount)
         {
             var user = context.User;
             bool authorized = user != null && user.Identity != null && user.Identity.IsAuthenticated;
@@ -29,14 +31,14 @@ namespace Sln.Shared.Host.Middlewares
                     accountId = parsedIdentifier;
                 }
 
-                var OrganizationIdClaim = context.User.Claims.FirstOrDefault(c => c.Type == "OrganizationId")?.Value;
-                long OrganizationId = 0;
-                if (!string.IsNullOrEmpty(OrganizationIdClaim) && long.TryParse(OrganizationIdClaim, out var parsedOrganizationId))
+                var organizationIdClaim = context.User.Claims.FirstOrDefault(c => c.Type == "OrganizationId")?.Value;
+                long organizationId = 0;
+                if (!string.IsNullOrEmpty(organizationIdClaim) && long.TryParse(organizationIdClaim, out var parsedOrganizationId))
                 {
-                    OrganizationId = parsedOrganizationId;
+                    organizationId = parsedOrganizationId;
                 }
 
-                currentAccount.OrganizationId = OrganizationId;
+                currentAccount.OrganizationId = organizationId;
                 currentAccount.Id = accountId;
                 currentAccount.Email = email;
                 currentAccount.Name = name;
@@ -45,6 +47,5 @@ namespace Sln.Shared.Host.Middlewares
 
             await _next(context);
         }
-
     }
 }

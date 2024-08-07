@@ -24,11 +24,11 @@ namespace Sln.Management.Host
             {
                 configs.RegisterServicesFromAssemblyContaining<Startup>();
             });
+            services.AddCurrentAccount("Sln.Management");
             services.AddScoped(typeof(IRepository<>), typeof(ManagementRepository<>));
             services.AddScoped<IUnitOfWork, ManagementUnitOfWork>();
             services.AddMapster();
             // services.RegisterMapsterConfiguration();
-            services.AddCurrentAccount();
             services.AddHttpClient();
             services.AddRedisCache();
             services.AddAssignInterfaceServices<IDapperQuery>("Sln.Management");
@@ -64,7 +64,7 @@ namespace Sln.Management.Host
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCurrentAccount();
+            app.UseCurrentAccount("Sln.Management");
             app.UseGlobalExceptionHandler();
 
             app.UseEndpoints(endpoints =>

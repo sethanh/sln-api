@@ -1,6 +1,6 @@
-﻿using Sln.Management.Data.Attributes;
+﻿using Sln.Management.Common.Models;
+using Sln.Management.Data.Attributes;
 using Sln.Shared.Common.Extensions;
-using Sln.Shared.Common.Services;
 using Sln.Shared.Data;
 using Sln.Shared.Data.Abstractions;
 using System.Linq.Expressions;
@@ -9,7 +9,7 @@ namespace Sln.Management.Data
 {
     public class ManagementRepository<TEntity>(
         ManagementDbContext context,
-        CurrentAccount currentAccount
+        CurrentManagementAccount currentAccount
         ) : RepositoryBase<TEntity, long>(currentAccount.Id), IRepository<TEntity> where TEntity : class
     {
         private readonly ManagementDbContext _context = context;

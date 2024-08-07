@@ -80,9 +80,30 @@ public static class ServiceCollectionExtension
         return services;
     }
 
-    public static IServiceCollection AddCurrentAccount(this IServiceCollection services)
+    public static IServiceCollection AddCurrentAccount(
+        this IServiceCollection services,
+        string startFullNameAssembly
+        )
     {
-        services.AddScoped<CurrentAccount>();
+        var assemblies = AppDomain.CurrentDomain
+            .GetAssemblies()
+            .SelectMany(e => 
+                e.GetReferencedAssemblies().Select(s => s)
+            )
+            .Where(a => a.FullName?.StartsWith(startFullNameAssembly) ?? false)
+            .DistinctBy(e => e.FullName)
+    .       Select(Assembly.Load);
+        var types = assemblies.SelectMany(a => a.GetExportedTypes());
+        var currentAccountServices = types
+            .Where(t => t.IsAssignableTo(typeof(ICurrentAccount)) && !t.IsAbstract && !t.IsInterface)
+            .ToList();
+
+
+        foreach (var currentAccountService in currentAccountServices)
+        {
+            services.AddScoped(currentAccountService);
+        }
+
         return services;
     }
 

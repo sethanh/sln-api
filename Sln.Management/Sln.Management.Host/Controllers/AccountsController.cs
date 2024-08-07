@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sln.Management.Contract.Requests.Accounts;
 
@@ -8,12 +9,14 @@ namespace Sln.Management.Host.Controllers;
 public class AccountsController : ManagementControllerBase
 {
     [HttpGet]
+    [Authorize]
     public async Task<IActionResult> GetAll([FromQuery] AccountGetAllRequest request)
     {
         return await RequestAsGet<AccountGetAllRequest, AccountGetAllResponse>(request);
     }
 
     [HttpGet("{id}")]
+    [Authorize]
     public async Task<IActionResult> GetDetail(AccountGetDetailRequest request)
     {
         return await RequestAsGet<AccountGetDetailRequest, AccountGetDetailResponse>(request);
