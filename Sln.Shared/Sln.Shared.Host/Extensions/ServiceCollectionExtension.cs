@@ -16,13 +16,13 @@ public static class ServiceCollectionExtension
 {
 
     public static IServiceCollection AddAssignInterfaceServices<TInterface>(
-        this IServiceCollection services,
-        string startFullNameAssembly
+        this IServiceCollection services
         )
     {
+        var appName = Environment.GetEnvironmentVariable(EnvConstants.APP_NAME) ?? throw new Exception("App Name is not set.");
         var assemblies = Assembly.GetCallingAssembly().GetReferencedAssemblies()
             .Select(Assembly.Load)
-            .Where(a => a.FullName?.StartsWith(startFullNameAssembly) ?? false);
+            .Where(a => a.FullName?.StartsWith(appName) ?? false);
         var types = assemblies.SelectMany(a => a.GetExportedTypes());
         var applicationServices = types
             .Where(t => t.IsAssignableTo(typeof(TInterface)) && !t.IsAbstract && !t.IsInterface)
@@ -81,19 +81,22 @@ public static class ServiceCollectionExtension
     }
 
     public static IServiceCollection AddCurrentAccount(
-        this IServiceCollection services,
-        string startFullNameAssembly
+        this IServiceCollection services
         )
     {
+        var appName = Environment.GetEnvironmentVariable(EnvConstants.APP_NAME) ?? throw new Exception("App Name is not set.");
+
         var assemblies = AppDomain.CurrentDomain
             .GetAssemblies()
             .SelectMany(e => 
                 e.GetReferencedAssemblies().Select(s => s)
             )
-            .Where(a => a.FullName?.StartsWith(startFullNameAssembly) ?? false)
+            .Where(a => a.FullName?.StartsWith(appName) ?? false)
             .DistinctBy(e => e.FullName)
-    .       Select(Assembly.Load);
+            .Select(Assembly.Load);
+
         var types = assemblies.SelectMany(a => a.GetExportedTypes());
+
         var currentAccountServices = types
             .Where(t => t.IsAssignableTo(typeof(ICurrentAccount)) && !t.IsAbstract && !t.IsInterface)
             .ToList();

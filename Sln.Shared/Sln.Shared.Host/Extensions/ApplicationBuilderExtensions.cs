@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
+using Sln.Shared.Common.Constants.Envs;
 using Sln.Shared.Host.Abstractions;
 using Sln.Shared.Host.Middlewares;
 
@@ -19,16 +20,17 @@ namespace Sln.Shared.Host.Extensions
         }
 
         public static IApplicationBuilder UseCurrentAccount(
-            this IApplicationBuilder app,
-            string startFullNameAssembly
+            this IApplicationBuilder app
         )
         {
+            var appName = Environment.GetEnvironmentVariable(EnvConstants.APP_NAME) ?? throw new Exception("App Name is not set.");
+            
             var assemblies = AppDomain.CurrentDomain
                 .GetAssemblies()
                 .SelectMany(e => 
                     e.GetReferencedAssemblies().Select(s => s)
                 )
-                .Where(a => a.FullName?.StartsWith(startFullNameAssembly) ?? false)
+                .Where(a => a.FullName?.StartsWith(appName) ?? false)
                 .DistinctBy(e => e.FullName)
     .           Select(Assembly.Load);
 

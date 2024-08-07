@@ -10,6 +10,7 @@ namespace Sln.Shared.Common.Constants.Envs
         public readonly static string MANAGEMENT_CONNECTION = "MANAGEMENT_CONNECTION";
         public readonly static string JWT_SECRET = "JWT_SECRET";
         public readonly static string IS_PRODUCTION = "IS_PRODUCTION";
+        public readonly static string APP_NAME = "APP_NAME";
         
     }
 }

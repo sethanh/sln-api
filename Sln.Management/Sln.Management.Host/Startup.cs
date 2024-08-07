@@ -24,18 +24,18 @@ namespace Sln.Management.Host
             {
                 configs.RegisterServicesFromAssemblyContaining<Startup>();
             });
-            services.AddCurrentAccount("Sln.Management");
+            services.AddCurrentAccount();
             services.AddScoped(typeof(IRepository<>), typeof(ManagementRepository<>));
             services.AddScoped<IUnitOfWork, ManagementUnitOfWork>();
             services.AddMapster();
             // services.RegisterMapsterConfiguration();
             services.AddHttpClient();
             services.AddRedisCache();
-            services.AddAssignInterfaceServices<IDapperQuery>("Sln.Management");
-            services.AddAssignInterfaceServices<ICache>("Sln.Management");
-            services.AddAssignInterfaceServices<IApplicationService>("Sln.Management");
-            services.AddAssignInterfaceServices<IDomainService>("Sln.Management");
-            services.AddAssignInterfaceServices<IReportService>("Sln.Management");
+            services.AddAssignInterfaceServices<IDapperQuery>();
+            services.AddAssignInterfaceServices<ICache>();
+            services.AddAssignInterfaceServices<IApplicationService>();
+            services.AddAssignInterfaceServices<IDomainService>();
+            services.AddAssignInterfaceServices<IReportService>();
             services.AddAuthenticationService();
             services.AddEndpointsApiExplorer();
             services.AddSwagger();
@@ -64,7 +64,7 @@ namespace Sln.Management.Host
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseCurrentAccount("Sln.Management");
+            app.UseCurrentAccount();
             app.UseGlobalExceptionHandler();
 
             app.UseEndpoints(endpoints =>
