@@ -6,6 +6,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Cryptography;
 using System.Text;
 using Microsoft.IdentityModel.Tokens;
+using Sln.Shared.Common.Enums.Accounts;
 
 namespace Sln.Management.Business.Helpers.Accounts
 {
@@ -30,8 +31,7 @@ namespace Sln.Management.Business.Helpers.Accounts
                 new(ClaimTypes.NameIdentifier, Account.Id.ToString()),
                 new(ClaimTypes.Email, Account.Email),
                 new(ClaimTypes.Name, Account.Name),
-                // new(AccountTypeClaims.OrganizationId.ToString(), Account.OrganizationId.ToString()),
-                // new(ClaimTypes.Role, Account.RootAccount ? AccountRoleClaims.Management.ToString() : AccountRoleClaims.Member.ToString())
+                new(ClaimTypes.Role, Account.RootAccount ? AccountRoleClaims.Management.ToString() : AccountRoleClaims.Member.ToString())
             };
 
             var jwtSecret = Environment.GetEnvironmentVariable(EnvConstants.JWT_SECRET);

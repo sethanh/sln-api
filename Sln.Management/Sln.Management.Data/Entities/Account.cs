@@ -10,4 +10,5 @@ public class Account : ManagementAuditModel<long>
     [Column(TypeName = "varchar(100)")]
     public required string Email { get; set; }
     public required string Password { get; set; }
+    public bool RootAccount { get; set; } = false;
 }
