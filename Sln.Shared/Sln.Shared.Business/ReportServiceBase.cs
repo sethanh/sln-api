@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Sln.Shared.Business.Abstractions;
+using Sln.Shared.Business.Interfaces;
 
 namespace Sln.Shared.Business
 {

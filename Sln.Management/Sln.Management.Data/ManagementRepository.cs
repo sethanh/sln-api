@@ -2,7 +2,7 @@
 using Sln.Management.Data.Attributes;
 using Sln.Shared.Common.Extensions;
 using Sln.Shared.Data;
-using Sln.Shared.Data.Abstractions;
+using Sln.Shared.Data.Interfaces;
 using System.Linq.Expressions;
 
 namespace Sln.Management.Data

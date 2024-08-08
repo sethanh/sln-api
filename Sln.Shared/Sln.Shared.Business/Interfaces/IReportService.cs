@@ -1,4 +1,4 @@
-namespace Sln.Shared.Business.Abstractions;
+namespace Sln.Shared.Business.Interfaces;
 
 public interface IReportService
 {

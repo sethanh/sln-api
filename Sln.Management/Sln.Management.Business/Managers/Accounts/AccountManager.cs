@@ -1,4 +1,4 @@
-using Sln.Shared.Data.Abstractions;
+using Sln.Shared.Data.Interfaces;
 using Sln.Management.Data.Entities;
 
 namespace Sln.Management.Business.Managers.Accounts;

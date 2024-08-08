@@ -1,4 +1,4 @@
-﻿using Sln.Shared.Data.Abstractions;
+﻿using Sln.Shared.Data.Interfaces;
 
 namespace Sln.Shared.Data.Models
 {

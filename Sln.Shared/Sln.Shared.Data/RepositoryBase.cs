@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
-using Sln.Shared.Data.Abstractions;
+using Sln.Shared.Data.Interfaces;
 
 namespace Sln.Shared.Data
 {

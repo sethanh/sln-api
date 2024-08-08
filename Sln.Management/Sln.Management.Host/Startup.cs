@@ -4,9 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Mapster;
 using Sln.Management.Data;
-using Sln.Shared.Business.Abstractions;
+using Sln.Shared.Business.Interfaces;
 using Sln.Shared.Common.Constants.Envs;
-using Sln.Shared.Data.Abstractions;
+using Sln.Shared.Data.Interfaces;
 using Sln.Shared.Host.Extensions;
 
 namespace Sln.Management.Host

@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Sln.Shared.Common.Constants.Envs;
-using Sln.Shared.Host.Abstractions;
+using Sln.Shared.Host.Interfaces;
 using Sln.Shared.Host.Middlewares;
 
 namespace Sln.Shared.Host.Extensions

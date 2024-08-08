@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using MySqlConnector;
-using Sln.Shared.Data.Abstractions;
+using Sln.Shared.Data.Interfaces;
 
 namespace Sln.Shared.Data
 {

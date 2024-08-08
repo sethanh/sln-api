@@ -4,7 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
 
-namespace Sln.Shared.Data.Abstractions
+namespace Sln.Shared.Data.Interfaces
 {
     public interface IRepository { }
 

@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
-using Sln.Shared.Data.Abstractions;
+using Sln.Shared.Data.Interfaces;
 
 namespace Sln.Shared.Data.Extensions
 {

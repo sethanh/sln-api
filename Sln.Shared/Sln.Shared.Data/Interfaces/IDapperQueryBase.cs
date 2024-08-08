@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Dapper;
 using MySqlConnector;
 
-namespace Sln.Shared.Data.Abstractions
+namespace Sln.Shared.Data.Interfaces
 {
     public interface IDapperQuery
     {

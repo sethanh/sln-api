@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Http;
 using Sln.Shared.Common.Services;
-using Sln.Shared.Host.Abstractions;
+using Sln.Shared.Host.Interfaces;
 
 namespace Sln.Shared.Host.Middlewares
 {

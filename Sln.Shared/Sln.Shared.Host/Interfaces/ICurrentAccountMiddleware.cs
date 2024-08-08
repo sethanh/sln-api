@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Http;
 using Sln.Shared.Common.Services;
 
-namespace Sln.Shared.Host.Abstractions
+namespace Sln.Shared.Host.Interfaces
 {
     public interface ICurrentAccountMiddleware {
 
