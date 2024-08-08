@@ -1,4 +1,4 @@
-using Sln.Shared.Common.Services;
+using Sln.Shared.Common.Interfaces;
 
 namespace Sln.Management.Common.Models
 {

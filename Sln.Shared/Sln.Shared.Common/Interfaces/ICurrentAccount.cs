@@ -1,4 +1,4 @@
-namespace Sln.Shared.Common.Services
+namespace Sln.Shared.Common.Interfaces
 {
     public interface ICurrentAccount
     {

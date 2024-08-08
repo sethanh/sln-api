@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Http;
-using Sln.Shared.Common.Services;
+using Sln.Shared.Common.Interfaces;
 
 namespace Sln.Shared.Host.Interfaces
 {

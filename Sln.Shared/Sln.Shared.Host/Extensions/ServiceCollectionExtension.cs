@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Sln.Shared.Common.Constants.Envs;
-using Sln.Shared.Common.Services;
+using Sln.Shared.Common.Interfaces;
 using Sln.Shared.Host.Configurations;
 
 namespace Sln.Shared.Host.Extensions;
