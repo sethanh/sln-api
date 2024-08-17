@@ -22,10 +22,18 @@ public static class ServiceCollectionExtension
         )
     {
         var appName = Environment.GetEnvironmentVariable(EnvConstants.APP_NAME) ?? throw new Exception("App Name is not set.");
-        var assemblies = Assembly.GetCallingAssembly().GetReferencedAssemblies()
-            .Select(Assembly.Load)
-            .Where(a => a.FullName?.StartsWith(appName) ?? false);
+
+        var assemblies = AppDomain.CurrentDomain
+            .GetAssemblies()
+            .SelectMany(e => 
+                e.GetReferencedAssemblies().Select(s => s)
+            )
+            .Where(a => a.FullName?.StartsWith(appName) ?? false)
+            .DistinctBy(e => e.FullName)
+            .Select(Assembly.Load);
+
         var types = assemblies.SelectMany(a => a.GetExportedTypes());
+
         var applicationServices = types
             .Where(t => t.IsAssignableTo(typeof(TInterface)) && !t.IsAbstract && !t.IsInterface)
             .ToList();
