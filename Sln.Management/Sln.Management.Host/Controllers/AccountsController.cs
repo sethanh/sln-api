@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sln.Management.Contract.Requests.Accounts;
+using Sln.Management.Host.Attributes;
+using Sln.Management.Host.Filters;
 
 namespace Sln.Management.Host.Controllers;
 
@@ -10,6 +12,7 @@ public class AccountsController : ManagementControllerBase
 {
     [HttpGet]
     [Authorize]
+    [RoleAuthorize("Management")]
     public async Task<IActionResult> GetAll([FromQuery] AccountGetAllRequest request)
     {
         return await RequestAsGet<AccountGetAllRequest, AccountGetAllResponse>(request);
@@ -17,7 +20,7 @@ public class AccountsController : ManagementControllerBase
 
     [HttpGet("{id}")]
     [Authorize]
-    public async Task<IActionResult> GetDetail(AccountGetDetailRequest request)
+    public async Task<IActionResult> GetDetail([FromRoute]AccountGetDetailRequest request)
     {
         return await RequestAsGet<AccountGetDetailRequest, AccountGetDetailResponse>(request);
     }

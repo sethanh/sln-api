@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Sln.Shared.Business.Interfaces;
 using Sln.Shared.Common.Constants.Envs;
 using Sln.Shared.Common.Interfaces;
+using Sln.Shared.Data.Interfaces;
 using Sln.Shared.Host.Configurations;
 
 namespace Sln.Shared.Host.Extensions;
@@ -34,6 +36,31 @@ public static class ServiceCollectionExtension
         }
 
         return services;
+    }
+
+    public static IServiceCollection AddDapperService(this IServiceCollection services)
+    {
+        return services.AddAssignInterfaceServices<IDapperQuery>();
+    }
+
+    public static IServiceCollection AddDomainService(this IServiceCollection services)
+    {
+        return services.AddAssignInterfaceServices<IDomainService>();
+    }
+
+    public static IServiceCollection AddApplicationService(this IServiceCollection services)
+    {
+        return services.AddAssignInterfaceServices<IApplicationService>();
+    }
+
+    public static IServiceCollection AddCacheService(this IServiceCollection services)
+    {
+        return services.AddAssignInterfaceServices<ICache>();
+    }
+
+    public static IServiceCollection AddReportService(this IServiceCollection services)
+    {
+        return services.AddAssignInterfaceServices<IReportService>();
     }
 
     public static IServiceCollection AddRedisCache(this IServiceCollection services)
