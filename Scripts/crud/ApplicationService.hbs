@@ -90,6 +90,7 @@ public class {{Entity}}Service(IServiceProvider serviceProvider) : ManagementApp
         {{Entity}}Manager.Delete({{entity}});
 
         UnitOfWork.SaveChanges();
+        return Task.CompletedTask;
     }
     {{/if}}
 }
