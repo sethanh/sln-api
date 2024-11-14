@@ -8,6 +8,8 @@ RUN touch .env
 
 WORKDIR /src
 # Restore dependencies as distinct layers
+COPY ["Sln.Shared/Sln.Shared.Contract/Sln.Shared.Contract.csproj", "Sln.Shared/Sln.Shared.Contract/"]
+RUN dotnet restore "Sln.Shared/Sln.Shared.Contract"
 COPY ["Sln.Shared/Sln.Shared.Common/Sln.Shared.Common.csproj", "Sln.Shared/Sln.Shared.Common/"]
 RUN dotnet restore "Sln.Shared/Sln.Shared.Common"
 COPY ["Sln.Shared/Sln.Shared.Data/Sln.Shared.Data.csproj", "Sln.Shared/Sln.Shared.Data/"]
@@ -16,18 +18,18 @@ COPY ["Sln.Shared/Sln.Shared.Business/Sln.Shared.Business.csproj", "Sln.Shared/S
 RUN dotnet restore "Sln.Shared/Sln.Shared.Business"
 COPY ["Sln.Shared/Sln.Shared.Host/Sln.Shared.Host.csproj", "Sln.Shared/Sln.Shared.Host/"]
 RUN dotnet restore "Sln.Shared/Sln.Shared.Host"
-COPY ["Sln.Shared/Sln.Shared.Contract/Sln.Shared.Contract.csproj", "Sln.Shared/Sln.Shared.Contract/"]
-RUN dotnet restore "Sln.Shared/Sln.Shared.Contract"
 
 
+
+COPY ["Sln.Management/Sln.Management.Contract/Sln.Management.Contract.csproj", "Sln.Management/Sln.Management.Contract/"]
+RUN dotnet restore "Sln.Management/Sln.Management.Contract"
 COPY ["Sln.Management/Sln.Management.Common/Sln.Management.Common.csproj", "Sln.Management/Sln.Management.Common/"]
 RUN dotnet restore "Sln.Management/Sln.Management.Common"
 COPY ["Sln.Management/Sln.Management.Data/Sln.Management.Data.csproj", "Sln.Management/Sln.Management.Data/"]
 RUN dotnet restore "Sln.Management/Sln.Management.Data"
 COPY ["Sln.Management/Sln.Management.Business/Sln.Management.Business.csproj", "Sln.Management/Sln.Management.Business/"]
 RUN dotnet restore "Sln.Management/Sln.Management.Business"
-COPY ["Sln.Management/Sln.Management.Contract/Sln.Management.Contract.csproj", "Sln.Management/Sln.Management.Contract/"]
-RUN dotnet restore "Sln.Management/Sln.Management.Contract"
+
 COPY ["Sln.Management/Sln.Management.Host/Sln.Management.Host.csproj", "Sln.Management/Sln.Management.Host/"]
 RUN dotnet restore "Sln.Management/Sln.Management.Host"
 
