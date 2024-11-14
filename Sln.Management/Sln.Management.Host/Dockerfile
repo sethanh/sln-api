@@ -45,10 +45,14 @@ COPY ["Sln.Shared/Sln.Shared.Business/", "Sln.Shared/Sln.Shared.Business"]
 RUN dotnet build "Sln.Shared/Sln.Shared.Business/Sln.Shared.Business.csproj" -c Release
 COPY ["Sln.Shared/Sln.Shared.Host/", "Sln.Shared/Sln.Shared.Host"]
 RUN dotnet build "Sln.Shared/Sln.Shared.Host/Sln.Shared.Host.csproj" -c Release
-COPY ["Sln.Management/Sln.Management.Data/", "Sln.Management/Sln.Management.Data"]
-RUN dotnet build "Sln.Management/Sln.Management.Data/Sln.Management.Data.csproj" -c Release
+
 COPY ["Sln.Management/Sln.Management.Contract/", "Sln.Management/Sln.Management.Contract"]
 RUN dotnet build "Sln.Management/Sln.Management.Contract/Sln.Management.Contract.csproj" -c Release
+COPY ["Sln.Management/Sln.Management.Common/", "Sln.Management/Sln.Management.Common"]
+RUN dotnet build "Sln.Management/Sln.Management.Common/Sln.Management.Common.csproj" -c Release
+
+COPY ["Sln.Management/Sln.Management.Data/", "Sln.Management/Sln.Management.Data"]
+RUN dotnet build "Sln.Management/Sln.Management.Data/Sln.Management.Data.csproj" -c Release
 COPY ["Sln.Management/Sln.Management.Business/", "Sln.Management/Sln.Management.Business"]
 RUN dotnet build "Sln.Management/Sln.Management.Business/Sln.Management.Business.csproj" -c Release
 COPY ["Sln.Management/Sln.Management.Host/", "Sln.Management/Sln.Management.Host"]
