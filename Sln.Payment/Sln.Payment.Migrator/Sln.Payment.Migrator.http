@@ -1,0 +1,6 @@
+@Sln.Payment.Migrator_HostAddress = http://localhost:5009
+
+GET {{Sln.Payment.Migrator_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
