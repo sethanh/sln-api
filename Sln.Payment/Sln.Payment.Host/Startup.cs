@@ -32,9 +32,9 @@ namespace Sln.Payment.Host
             services.AddMapster();
             // services.RegisterMapsterConfiguration();
             services.AddHttpClient();
-            // services.AddRedisCache();
+            services.AddRedisCache();
             services.AddDapperService();
-            // services.AddCacheService();
+            services.AddCacheService();
             services.AddApplicationService();
             services.AddDomainService();
             services.AddReportService();
@@ -51,14 +51,12 @@ namespace Sln.Payment.Host
 
         public void Configure(IApplicationBuilder app)
         {
-            // app.UseDeveloperExceptionPage();
             var isProduction = Environment.GetEnvironmentVariable(EnvConstants.IS_PRODUCTION);
             if (isProduction == null)
             {
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
-            // app.UseExceptionHandler(options => { });
 
             app.UseCors(builder => builder
                 .AllowAnyOrigin()

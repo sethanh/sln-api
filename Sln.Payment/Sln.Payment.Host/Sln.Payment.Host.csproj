@@ -12,5 +12,6 @@
     <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Host\Sln.Shared.Host.csproj" />
     <ProjectReference Include="..\Sln.Payment.Data\Sln.Payment.Data.csproj" />
     <ProjectReference Include="..\Sln.Payment.Contract\Sln.Payment.Contract.csproj" />
+    <ProjectReference Include="..\Sln.Payment.Business\Sln.Payment.Business.csproj" />
   </ItemGroup>
 </Project>
