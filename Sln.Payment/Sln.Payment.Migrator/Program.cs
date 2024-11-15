@@ -1,44 +1,33 @@
-var builder = WebApplication.CreateBuilder(args);
+using DotNetEnv;
+using Sln.Payment.Data;
+using Sln.Shared.Migrator;
 
-// Add services to the container.
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+namespace Sln.Payment.Migrator
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    public class Program
+    {
+        public static async Task<int> Main(string[] args)
+        {
+            var force = true;
+            var host = CreateHostBuilder(args).Build();
+            await DbMigrator<PaymentDbContext>.Run(host, force);
+            return 0;
+        }
 
-app.UseHttpsRedirection();
+        public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
+        {
+            services.AddHttpContextAccessor();
+            services.AddHostedService<DatabaseStartup<PaymentDbContext>>();
+            services.AddDbContext<PaymentDbContext>();
+        }
 
-var summaries = new[]
-{
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
+        public static IHostBuilder CreateHostBuilder(string[] args)
+        {
+            Env.Load();
 
-app.MapGet("/weatherforecast", () =>
-{
-    var forecast =  Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
-})
-.WithName("GetWeatherForecast")
-.WithOpenApi();
-
-app.Run();
-
-record WeatherForecast(DateOnly Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+            return Host.CreateDefaultBuilder(args)
+                .UseConsoleLifetime()
+                .ConfigureServices(ConfigureServices);
+        }
+    }
 }

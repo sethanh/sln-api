@@ -15,7 +15,7 @@ namespace Sln.Payment.Data
 
         public static string GetConnectionString()
         {
-            var connectionName = EnvConstants.MANAGEMENT_CONNECTION;
+            var connectionName = EnvConstants.PAYMENT_CONNECTION;
             if (string.IsNullOrEmpty(connectionName))
             {
                 throw new Exception($"Connection name environment variable is not set.");

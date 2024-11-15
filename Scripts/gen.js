@@ -1,5 +1,6 @@
 const apps = [
     'Management',
+    'Payment'
 ];
 
 const genTypes = [
