@@ -64,11 +64,11 @@ namespace Sln.Management.Host
                 .AllowAnyOrigin()
                 .AllowAnyHeader()
                 .AllowAnyMethod());
-            // app.UseStaticFiles(new StaticFileOptions
-            // {
-            //     FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Files")),
-            //     RequestPath = "/Files"
-            // });
+            app.UseStaticFiles(new StaticFileOptions
+            {
+                FileProvider = new PhysicalFileProvider(Path.Combine(Directory.GetCurrentDirectory(), "Files")),
+                RequestPath = "/Files"
+            });
 
             app.UseHealthChecks("/healthz");
 
