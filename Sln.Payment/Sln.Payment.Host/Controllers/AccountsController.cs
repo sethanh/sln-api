@@ -22,8 +22,14 @@ public class AccountsController : PaymentControllerBase
         return await RequestAsGet<AccountGetDetailRequest, AccountGetDetailResponse>(request);
     }
 
+    [HttpPost("google-login")]
+    public async Task<IActionResult> Login([FromBody] AccountGoogleLoginRequest requestBody)
+    {
+        return await RequestAsCreate<AccountGoogleLoginRequest, AccountLoginResponse>(requestBody);
+    }
+
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] AccountLoginRequest requestBody)
+    public async Task<IActionResult> LoginWithGoogle([FromBody] AccountLoginRequest requestBody)
     {
         return await RequestAsCreate<AccountLoginRequest, AccountLoginResponse>(requestBody);
     }

@@ -43,6 +43,7 @@ namespace Sln.Payment.Host
             services.AddAuthenticationService();
             services.AddEndpointsApiExplorer();
             services.AddSwagger();
+            services.AddGoogleAuthServices();
             // services.AddControllers(options =>
             // {
             //     options.Filters.Add<>();

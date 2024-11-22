@@ -5,6 +5,7 @@ using Sln.Payment.Business.Managers.Accounts;
 using Sln.Shared.Contract.Models;
 using Sln.Shared.Common.Exceptions;
 using Sln.Payment.Business.Helpers.Accounts;
+using Sln.Shared.Business.Services;
 
 namespace Sln.Payment.Business.Services.Accounts;
 
@@ -12,6 +13,35 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
 {
     private AccountManager AccountManager => GetService<AccountManager>();
     private AccountRefreshTokenManager AccountRefreshTokenManager => GetService<AccountRefreshTokenManager>();
+    private GoogleTokenValidatorService GoogleTokenValidatorService => GetService<GoogleTokenValidatorService>();
+
+    public async Task<AccountLoginResponse> GoogleLogin(AccountGoogleLoginRequest request)
+    {
+        var payload = await GoogleTokenValidatorService.ValidateTokenAsync(request.IdToken) ?? throw new HttpUnauthorized("Invalid Google token" );
+        var account = AccountManager.GetAll()
+            .FirstOrDefault(c => c.Email == payload.Email);
+
+        if (account == null)
+        {
+            account = new Account
+            {
+                Email = payload.Email,
+                Name = payload.Name,
+                Password = "ABCDEF"
+            };
+
+            AccountManager.Add(account);
+        }
+
+        var tokenValue = JwtHelpers.GenerateJWTTokens(account);
+
+        AccountRefreshTokenManager.AddOrgAccountRefreshToken(account, tokenValue.RefreshToken);
+
+        UnitOfWork.SaveChanges();
+
+        return Mapper.Map<AccountLoginResponse>(tokenValue);
+    }
+
 
     public Task<AccountLoginResponse> Login(AccountLoginRequest request)
     {

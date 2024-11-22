@@ -7,6 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Sln.Shared.Business.Interfaces;
+using Sln.Shared.Business.Services;
 using Sln.Shared.Common.Constants.Envs;
 using Sln.Shared.Common.Interfaces;
 using Sln.Shared.Data.Interfaces;
@@ -194,6 +195,17 @@ public static class ServiceCollectionExtension
                 }
             });
         });
+
+        return services;
+    }
+
+    public static IServiceCollection AddGoogleAuthServices(
+        this IServiceCollection services
+        )
+    {
+        var googleClientId = Environment.GetEnvironmentVariable(EnvConstants.GOOGLE_CLIENT_ID) ?? throw new Exception($"{EnvConstants.GOOGLE_CLIENT_ID}  is not set.");
+
+        services.AddSingleton(new GoogleTokenValidatorService(googleClientId));
 
         return services;
     }

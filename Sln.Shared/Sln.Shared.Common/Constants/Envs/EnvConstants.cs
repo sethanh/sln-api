@@ -12,6 +12,6 @@ namespace Sln.Shared.Common.Constants.Envs
         public readonly static string JWT_SECRET = "JWT_SECRET";
         public readonly static string IS_PRODUCTION = "IS_PRODUCTION";
         public readonly static string APP_NAME = "APP_NAME";
-        
+        public readonly static string GOOGLE_CLIENT_ID = "GOOGLE_CLIENT_ID";
     }
 }

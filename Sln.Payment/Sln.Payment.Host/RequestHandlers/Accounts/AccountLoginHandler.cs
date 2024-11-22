@@ -17,4 +17,14 @@ namespace Sln.Payment.Host.RequestHandlers.Accounts
             return accountService.Login(request);
         }
     }
+
+    public class AccountGoogleLoginHandler(
+        AccountService accountService
+        ) : IRequestHandler<AccountGoogleLoginRequest, AccountLoginResponse>
+    {
+        public Task<AccountLoginResponse> Handle(AccountGoogleLoginRequest request, CancellationToken cancellationToken)
+        {
+            return accountService.GoogleLogin(request);
+        }
+    }
 }

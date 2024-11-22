@@ -8,9 +8,15 @@ namespace Sln.Payment.Contract.Requests.Accounts
         public required string Password { get; set; }
     }
 
+    public class AccountGoogleLoginRequest: IRequest<AccountLoginResponse>
+    {
+        public string IdToken { get; set; } = string.Empty;
+    }
+
     public class AccountLoginResponse
     {
         public required string AccessToken { get; set; }
         public required string RefreshToken { get; set; }
     }
+        
 }
