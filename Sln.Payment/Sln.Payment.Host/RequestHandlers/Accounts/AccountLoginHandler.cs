@@ -18,6 +18,16 @@ namespace Sln.Payment.Host.RequestHandlers.Accounts
         }
     }
 
+    public class AccountGoogleVerifyHandler(
+        AccountService accountService
+        ) : IRequestHandler<AccountGoogleVerifyRequest, AccountLoginResponse>
+    {
+        public Task<AccountLoginResponse> Handle(AccountGoogleVerifyRequest request, CancellationToken cancellationToken)
+        {
+            return accountService.GoogleVerifyLogin(request);
+        }
+    }
+
     public class AccountGoogleLoginHandler(
         AccountService accountService
         ) : IRequestHandler<AccountGoogleLoginRequest, AccountLoginResponse>

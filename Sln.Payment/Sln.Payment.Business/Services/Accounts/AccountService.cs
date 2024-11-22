@@ -6,16 +6,20 @@ using Sln.Shared.Contract.Models;
 using Sln.Shared.Common.Exceptions;
 using Sln.Payment.Business.Helpers.Accounts;
 using Sln.Shared.Business.Services;
+using System.Text.Json;
+using Sln.Payment.Business.Managers.s;
 
 namespace Sln.Payment.Business.Services.Accounts;
 
 public class AccountService(IServiceProvider serviceProvider) : PaymentApplicationService(serviceProvider)
 {
+    private const string UserInfoEndpoint = "https://www.googleapis.com/oauth2/v3/userinfo";
     private AccountManager AccountManager => GetService<AccountManager>();
     private AccountRefreshTokenManager AccountRefreshTokenManager => GetService<AccountRefreshTokenManager>();
     private GoogleTokenValidatorService GoogleTokenValidatorService => GetService<GoogleTokenValidatorService>();
+    private GoogleAccountManager GoogleAccountManager => GetService<GoogleAccountManager>();
 
-    public async Task<AccountLoginResponse> GoogleLogin(AccountGoogleLoginRequest request)
+    public async Task<AccountLoginResponse> GoogleVerifyLogin(AccountGoogleVerifyRequest request)
     {
         var payload = await GoogleTokenValidatorService.ValidateTokenAsync(request.IdToken) ?? throw new HttpUnauthorized("Invalid Google token" );
         var account = AccountManager.GetAll()
@@ -31,6 +35,72 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
             };
 
             AccountManager.Add(account);
+        }
+
+        var tokenValue = JwtHelpers.GenerateJWTTokens(account);
+
+        AccountRefreshTokenManager.AddOrgAccountRefreshToken(account, tokenValue.RefreshToken);
+
+        UnitOfWork.SaveChanges();
+
+        return Mapper.Map<AccountLoginResponse>(tokenValue);
+    }
+
+    public async Task<AccountLoginResponse> GoogleLogin(AccountGoogleLoginRequest request)
+    {
+        using var httpClient = new HttpClient();
+
+        httpClient.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", request.AccessToken);
+
+        var response = await httpClient.GetAsync(UserInfoEndpoint);
+
+
+        if (!response.IsSuccessStatusCode)
+        {
+            throw new HttpUnauthorized("Invalid Google token" );
+        }
+
+        var jsonResponse = await response.Content.ReadAsStringAsync();
+
+        var googleAccount = JsonSerializer.Deserialize<AccountGoogleInfo>(jsonResponse);
+
+        if(googleAccount?.email == null)
+        {
+            throw new HttpUnauthorized("Invalid Google token" );
+        }
+        
+        var account = AccountManager.GetAll()
+            .FirstOrDefault(c => c.Email == googleAccount.email);
+        
+        var oldGoogleAccount = GoogleAccountManager.GetAll()
+            .FirstOrDefault(c => c.Email == googleAccount.email);
+
+        if (account == null)
+        {
+            account = new Account
+            {
+                Email = googleAccount.email,
+                Name = googleAccount?.name ?? "Unknown",
+                Password = googleAccount?.sub ?? Guid.NewGuid().ToString()
+            };
+
+            AccountManager.Add(account);
+            UnitOfWork.SaveChanges();
+        }
+        
+        if (oldGoogleAccount == null)
+        {
+            var newGoogleAccount = new GoogleAccount
+            {
+                Email = googleAccount?.email,
+                Name = googleAccount?.name,
+                Picture = googleAccount?.picture,
+                Sub = googleAccount?.sub,
+                AccountId = account.Id
+            };
+
+            GoogleAccountManager.Add(newGoogleAccount);
+            UnitOfWork.SaveChanges();
         }
 
         var tokenValue = JwtHelpers.GenerateJWTTokens(account);
