@@ -140,6 +140,12 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
         return Task.FromResult(Mapper.Map<AccountGetAllResponse>(paginationResponse));
     }
 
+    public Task<AccountGetDetailResponse> GetCurrentAccount(CurrentAccountGetDetailRequest request)
+    {
+        var account = AccountManager.FirstOrDefault(o => o.Id == CurrentAccount.Id) ?? throw new HttpNotFound(AccountErrors.ACCOUNT_NOT_FOUND);
+        return Task.FromResult(Mapper.Map<AccountGetDetailResponse>(account));
+    }
+
     public Task<AccountGetDetailResponse> GetDetail(AccountGetDetailRequest request)
     {
         var account = AccountManager.FirstOrDefault(o => o.Id == request.Id);

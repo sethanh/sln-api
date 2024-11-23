@@ -13,3 +13,9 @@ public class AccountGetDetailResponse
     public required long Id { get; set; }
     public required string Name { get; set; }
 }
+
+
+public class CurrentAccountGetDetailRequest : IRequest<AccountGetDetailResponse>
+{
+}
+

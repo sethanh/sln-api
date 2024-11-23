@@ -11,3 +11,11 @@ public class AccountGetDetailHandler(AccountService accountService) : IRequestHa
         return accountService.GetDetail(request);
     }
 }
+
+public class CurrentAccountGetDetailHandler(AccountService accountService) : IRequestHandler<CurrentAccountGetDetailRequest, AccountGetDetailResponse>
+{
+    public Task<AccountGetDetailResponse> Handle(CurrentAccountGetDetailRequest request, CancellationToken cancellationToken)
+    {
+        return accountService.GetCurrentAccount(request);
+    }
+}

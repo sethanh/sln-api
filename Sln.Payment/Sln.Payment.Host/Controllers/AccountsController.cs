@@ -15,6 +15,14 @@ public class AccountsController : PaymentControllerBase
         return await RequestAsGet<AccountGetAllRequest, AccountGetAllResponse>(request);
     }
 
+    [HttpGet("me")]
+    [Authorize]
+    public async Task<IActionResult> GetCurrentAccount([FromRoute]CurrentAccountGetDetailRequest request)
+    {
+        return await RequestAsGet<CurrentAccountGetDetailRequest, AccountGetDetailResponse>(request);
+    }
+
+
     [HttpGet("{id}")]
     [Authorize]
     public async Task<IActionResult> GetDetail([FromRoute]AccountGetDetailRequest request)
