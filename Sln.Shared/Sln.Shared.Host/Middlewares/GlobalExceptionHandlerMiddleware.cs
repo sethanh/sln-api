@@ -46,12 +46,18 @@ namespace Sln.Shared.Host.Middlewares
                 return context.Response.WriteAsync(JsonSerializer.Serialize(httpResponse));
             }
 
-            var responseServerError = new {
-                code = (int)HttpStatusCode.InternalServerError,
-                message = exception.Message
+            context.Response.Clear();
+            context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+            context.Response.ContentType = "application/json";
+
+            var errorResponse = new
+            {
+                StatusCode = context.Response.StatusCode,
+                Message = "An unexpected error occurred.",
+                Details = exception.Message
             };
 
-            return context.Response.WriteAsync(JsonSerializer.Serialize(responseServerError));
+            return context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
         }
     }
 }
