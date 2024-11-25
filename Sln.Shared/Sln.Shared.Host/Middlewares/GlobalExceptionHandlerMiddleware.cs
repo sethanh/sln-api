@@ -46,7 +46,12 @@ namespace Sln.Shared.Host.Middlewares
                 return context.Response.WriteAsync(JsonSerializer.Serialize(httpResponse));
             }
 
-            return Task.CompletedTask;
+            var responseServerError = new {
+                code = (int)HttpStatusCode.InternalServerError,
+                message = exception.Message
+            };
+
+            return context.Response.WriteAsync(JsonSerializer.Serialize(responseServerError));
         }
     }
 }
