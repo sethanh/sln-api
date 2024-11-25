@@ -52,7 +52,7 @@ namespace Sln.Shared.Host.Middlewares
 
             var errorResponse = new
             {
-                StatusCode = context.Response.StatusCode,
+                code = context.Response.StatusCode,
                 Message = "An unexpected error occurred.",
                 Details = exception.Message
             };
