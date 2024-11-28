@@ -70,13 +70,14 @@ namespace Sln.Payment.Host
             // });
 
             app.UseHealthChecks("/healthz");
-
-            app.UseCurrentAccount();
             app.UseGlobalExceptionHandler();
 
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
+            
+            app.UseCurrentAccount();
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
