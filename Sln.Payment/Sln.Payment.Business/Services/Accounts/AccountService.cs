@@ -143,7 +143,21 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
     public Task<AccountGetDetailResponse> GetCurrentAccount(CurrentAccountGetDetailRequest request)
     {
         var account = AccountManager.FirstOrDefault(o => o.Id == CurrentAccount.Id) ?? throw new HttpNotFound(AccountErrors.ACCOUNT_NOT_FOUND);
-        return Task.FromResult(Mapper.Map<AccountGetDetailResponse>(account));
+
+        var googleAccount = GoogleAccountManager.FirstOrDefault(c => c.AccountId == CurrentAccount.Id);
+
+        var result = new AccountGetDetailResponse {
+            Name = account.Name,
+            Id = account.Id,
+            GoogleAccount = googleAccount != null ? new GoogleAccountGetDetailResponse{
+                Id = googleAccount!.Id,
+                Email = googleAccount.Email,
+                Picture = googleAccount.Picture
+                
+            } : null
+        };
+
+        return Task.FromResult(result);
     }
 
     public Task<AccountGetDetailResponse> GetDetail(AccountGetDetailRequest request)
