@@ -12,7 +12,7 @@ using Sln.Shared.Common.Exceptions;
 
 namespace Sln.{{App}}.Business.Services.{{Module}}s;
 
-public class {{Entity}}Service(IServiceProvider serviceProvider) : ManagementApplicationService(serviceProvider)
+public class {{Entity}}Service(IServiceProvider serviceProvider) : {{App}}ApplicationService(serviceProvider)
 {
     private {{Entity}}Manager {{Entity}}Manager => GetService<{{Entity}}Manager>();
 

@@ -112,7 +112,7 @@ module.exports = async (plugin) => {
     if (genType === 'Crud') {
         const answers = await askCrudQuestions();
         let moduleName;
-        if (answers.app === 'Management') {
+        if (answers.app === 'Management' || answers.app === 'Payment') {
             const { module } = await askModules();
             moduleName = module;
         } 
