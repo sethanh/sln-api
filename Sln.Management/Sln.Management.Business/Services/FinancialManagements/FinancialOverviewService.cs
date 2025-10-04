@@ -36,18 +36,18 @@ public class FinancialOverviewService(IServiceProvider serviceProvider) : Manage
         return Task.FromResult(Mapper.Map<FinancialOverviewGetDetailResponse>(financialOverview));
     }
 
-    public Task<FinancialOverviewCreateResponse> Create(FinancialOverviewCreateRequest request)
+    public async Task<FinancialOverviewCreateResponse> Create(FinancialOverviewCreateRequest request)
     {
         var financialOverview = Mapper.Map<FinancialOverview>(request);
 
         FinancialOverviewManager.Add(financialOverview);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<FinancialOverviewCreateResponse>(financialOverview));
+        return Mapper.Map<FinancialOverviewCreateResponse>(financialOverview);
     }
 
-    public Task<FinancialOverviewUpdateResponse> Update(FinancialOverviewUpdateRequest request)
+    public async Task<FinancialOverviewUpdateResponse> Update(FinancialOverviewUpdateRequest request)
     {
         var financialOverview = FinancialOverviewManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -60,12 +60,12 @@ public class FinancialOverviewService(IServiceProvider serviceProvider) : Manage
 
         var updatedFinancialOverview = FinancialOverviewManager.Update(financialOverview);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<FinancialOverviewUpdateResponse>(updatedFinancialOverview));
+        return Mapper.Map<FinancialOverviewUpdateResponse>(updatedFinancialOverview);
     }
 
-    public Task Delete(FinancialOverviewDeleteRequest request)
+    public async Task Delete(FinancialOverviewDeleteRequest request)
     {
         var financialOverview = FinancialOverviewManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -76,7 +76,7 @@ public class FinancialOverviewService(IServiceProvider serviceProvider) : Manage
 
         FinancialOverviewManager.Delete(financialOverview);
 
-        UnitOfWork.SaveChanges();
-        return Task.CompletedTask;
+        await UnitOfWork.SaveChangesAsync();
+        return ;
     }
 }

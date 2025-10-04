@@ -36,18 +36,18 @@ public class PriorityTaskService(IServiceProvider serviceProvider) : ManagementA
         return Task.FromResult(Mapper.Map<PriorityTaskGetDetailResponse>(priorityTask));
     }
 
-    public Task<PriorityTaskCreateResponse> Create(PriorityTaskCreateRequest request)
+    public async Task<PriorityTaskCreateResponse> Create(PriorityTaskCreateRequest request)
     {
         var priorityTask = Mapper.Map<PriorityTask>(request);
 
         PriorityTaskManager.Add(priorityTask);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<PriorityTaskCreateResponse>(priorityTask));
+        return Mapper.Map<PriorityTaskCreateResponse>(priorityTask);
     }
 
-    public Task<PriorityTaskUpdateResponse> Update(PriorityTaskUpdateRequest request)
+    public async Task<PriorityTaskUpdateResponse> Update(PriorityTaskUpdateRequest request)
     {
         var priorityTask = PriorityTaskManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -60,12 +60,12 @@ public class PriorityTaskService(IServiceProvider serviceProvider) : ManagementA
 
         var updatedPriorityTask = PriorityTaskManager.Update(priorityTask);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<PriorityTaskUpdateResponse>(updatedPriorityTask));
+        return Mapper.Map<PriorityTaskUpdateResponse>(updatedPriorityTask);
     }
 
-    public Task Delete(PriorityTaskDeleteRequest request)
+    public async Task Delete(PriorityTaskDeleteRequest request)
     {
         var priorityTask = PriorityTaskManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -76,7 +76,7 @@ public class PriorityTaskService(IServiceProvider serviceProvider) : ManagementA
 
         PriorityTaskManager.Delete(priorityTask);
 
-        UnitOfWork.SaveChanges();
-        return Task.CompletedTask;
+        await UnitOfWork.SaveChangesAsync();
+        return ;
     }
 }

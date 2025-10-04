@@ -36,18 +36,18 @@ public class FinancialEpicService(IServiceProvider serviceProvider) : Management
         return Task.FromResult(Mapper.Map<FinancialEpicGetDetailResponse>(financialEpic));
     }
 
-    public Task<FinancialEpicCreateResponse> Create(FinancialEpicCreateRequest request)
+    public async Task<FinancialEpicCreateResponse> Create(FinancialEpicCreateRequest request)
     {
         var financialEpic = Mapper.Map<FinancialEpic>(request);
 
         FinancialEpicManager.Add(financialEpic);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<FinancialEpicCreateResponse>(financialEpic));
+        return Mapper.Map<FinancialEpicCreateResponse>(financialEpic);
     }
 
-    public Task<FinancialEpicUpdateResponse> Update(FinancialEpicUpdateRequest request)
+    public async Task<FinancialEpicUpdateResponse> Update(FinancialEpicUpdateRequest request)
     {
         var financialEpic = FinancialEpicManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -60,12 +60,12 @@ public class FinancialEpicService(IServiceProvider serviceProvider) : Management
 
         var updatedFinancialEpic = FinancialEpicManager.Update(financialEpic);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<FinancialEpicUpdateResponse>(updatedFinancialEpic));
+        return Mapper.Map<FinancialEpicUpdateResponse>(updatedFinancialEpic);
     }
 
-    public Task Delete(FinancialEpicDeleteRequest request)
+    public async Task Delete(FinancialEpicDeleteRequest request)
     {
         var financialEpic = FinancialEpicManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -76,7 +76,7 @@ public class FinancialEpicService(IServiceProvider serviceProvider) : Management
 
         FinancialEpicManager.Delete(financialEpic);
 
-        UnitOfWork.SaveChanges();
-        return Task.CompletedTask;
+        await UnitOfWork.SaveChangesAsync();
+        return ;
     }
 }

@@ -36,18 +36,18 @@ public class FinancialExpenditureService(IServiceProvider serviceProvider) : Man
         return Task.FromResult(Mapper.Map<FinancialExpenditureGetDetailResponse>(financialExpenditure));
     }
 
-    public Task<FinancialExpenditureCreateResponse> Create(FinancialExpenditureCreateRequest request)
+    public async Task<FinancialExpenditureCreateResponse> Create(FinancialExpenditureCreateRequest request)
     {
         var financialExpenditure = Mapper.Map<FinancialExpenditure>(request);
 
         FinancialExpenditureManager.Add(financialExpenditure);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<FinancialExpenditureCreateResponse>(financialExpenditure));
+        return Mapper.Map<FinancialExpenditureCreateResponse>(financialExpenditure);
     }
 
-    public Task<FinancialExpenditureUpdateResponse> Update(FinancialExpenditureUpdateRequest request)
+    public async Task<FinancialExpenditureUpdateResponse> Update(FinancialExpenditureUpdateRequest request)
     {
         var financialExpenditure = FinancialExpenditureManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -60,12 +60,12 @@ public class FinancialExpenditureService(IServiceProvider serviceProvider) : Man
 
         var updatedFinancialExpenditure = FinancialExpenditureManager.Update(financialExpenditure);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<FinancialExpenditureUpdateResponse>(updatedFinancialExpenditure));
+        return Mapper.Map<FinancialExpenditureUpdateResponse>(updatedFinancialExpenditure);
     }
 
-    public Task Delete(FinancialExpenditureDeleteRequest request)
+    public async Task Delete(FinancialExpenditureDeleteRequest request)
     {
         var financialExpenditure = FinancialExpenditureManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -76,7 +76,7 @@ public class FinancialExpenditureService(IServiceProvider serviceProvider) : Man
 
         FinancialExpenditureManager.Delete(financialExpenditure);
 
-        UnitOfWork.SaveChanges();
-        return Task.CompletedTask;
+        await UnitOfWork.SaveChangesAsync();
+        return;
     }
 }

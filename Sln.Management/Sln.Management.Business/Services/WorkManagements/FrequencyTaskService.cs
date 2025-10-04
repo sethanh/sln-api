@@ -36,18 +36,18 @@ public class FrequencyTaskService(IServiceProvider serviceProvider) : Management
         return Task.FromResult(Mapper.Map<FrequencyTaskGetDetailResponse>(frequencyTask));
     }
 
-    public Task<FrequencyTaskCreateResponse> Create(FrequencyTaskCreateRequest request)
+    public async Task<FrequencyTaskCreateResponse> Create(FrequencyTaskCreateRequest request)
     {
         var frequencyTask = Mapper.Map<FrequencyTask>(request);
 
         FrequencyTaskManager.Add(frequencyTask);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<FrequencyTaskCreateResponse>(frequencyTask));
+        return Mapper.Map<FrequencyTaskCreateResponse>(frequencyTask);
     }
 
-    public Task<FrequencyTaskUpdateResponse> Update(FrequencyTaskUpdateRequest request)
+    public async Task<FrequencyTaskUpdateResponse> Update(FrequencyTaskUpdateRequest request)
     {
         var frequencyTask = FrequencyTaskManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -60,12 +60,12 @@ public class FrequencyTaskService(IServiceProvider serviceProvider) : Management
 
         var updatedFrequencyTask = FrequencyTaskManager.Update(frequencyTask);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<FrequencyTaskUpdateResponse>(updatedFrequencyTask));
+        return Mapper.Map<FrequencyTaskUpdateResponse>(updatedFrequencyTask);
     }
 
-    public Task Delete(FrequencyTaskDeleteRequest request)
+    public async Task Delete(FrequencyTaskDeleteRequest request)
     {
         var frequencyTask = FrequencyTaskManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -76,7 +76,7 @@ public class FrequencyTaskService(IServiceProvider serviceProvider) : Management
 
         FrequencyTaskManager.Delete(frequencyTask);
 
-        UnitOfWork.SaveChanges();
-        return Task.CompletedTask;
+        await UnitOfWork.SaveChangesAsync();
+        return ;
     }
 }

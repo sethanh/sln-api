@@ -2,41 +2,102 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Sln.Shared.Common.Helpers;
 using Sln.Shared.Data.Interfaces;
+using Sln.Shared.Data.Models;
+using Sln.Shared.Data.Requests;
 
 namespace Sln.Shared.Data
 {
     public abstract class UnitOfWorkBase<TContext>(
-        TContext context
+        TContext context,
+        IPublisher publisher
     ) : IUnitOfWork where TContext : DbContext
     {
-        private readonly TContext _context = context;
 
-        public void BeginTransaction()
+        public async Task BeginTransactionAsync()
         {
-            _context.Database.BeginTransaction();
+            await context.Database.BeginTransactionAsync();
         }
 
-        public void CommitTransaction()
+        public async Task CommitTransactionAsync()
         {
-            _context.Database.CommitTransaction();
+            await context.Database.CommitTransactionAsync();
         }
 
         public virtual void Dispose()
         {
-            _context.Database.CurrentTransaction?.Dispose();
+            context.Database.CurrentTransaction?.Dispose();
             GC.SuppressFinalize(this);
         }
 
-        public void RollbackTransaction()
+        public async Task RollbackTransactionAsync()
         {
-            _context.Database.RollbackTransaction();
+            await context.Database.RollbackTransactionAsync();
         }
 
-        public void SaveChanges()
+        public async Task SaveChangesAsync()
         {
-            _context.SaveChanges();
+            var states = new[] { EntityState.Added, EntityState.Deleted, EntityState.Modified };
+            var changeEntities = context.ChangeTracker
+                .Entries().Where(e => states.Contains(e.State))
+                .ToList();
+            var changeIModelEntities = changeEntities.Where(e => e.Entity is IDataModel)
+            .Select(e => new ChangeIModelEntity
+            {
+                State = e.State,
+                Entity = e.CurrentValues.ToObject(),
+                DataChanges = EntityHelper.GetDataChanges(e)
+            })
+            .ToList();
+
+            await context.SaveChangesAsync();
+
+            await AfterSaveChangeAsync(
+                changeIModelEntities
+            );
         }
+
+         private async Task AfterSaveChangeAsync(
+        List<ChangeIModelEntity> changeIModelEntities
+        )
+    {
+        try
+        {
+            foreach (var entity in changeIModelEntities)
+            {
+                var DeleterId = entity.DataChanges?.FirstOrDefault(e => e.Field == "DeleterId")?.ChangedValue;
+
+                if(entity.State == EntityState.Added)
+                {
+                    await publisher.Publish(new ModelCreateEventRequest<IDataModel>() { 
+                        Data = (IDataModel)entity.Entity, 
+                        DataChanges = entity.DataChanges
+                    });
+                }
+                else if(entity.State == EntityState.Deleted || DeleterId != null)
+                {
+                    await publisher.Publish(new ModelDeleteEventRequest<IDataModel>() { 
+                        Data = (IDataModel)entity.Entity,
+                        DataChanges = entity.DataChanges
+                    });
+                }
+                else if(entity.State == EntityState.Modified && DeleterId == null)
+                {
+                    await publisher.Publish(new ModelModifyEventRequest<IDataModel>() { 
+                        Data = (IDataModel)entity.Entity,
+                        DataChanges = entity.DataChanges
+                    });
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+        }
+        
+    }
     }
 }

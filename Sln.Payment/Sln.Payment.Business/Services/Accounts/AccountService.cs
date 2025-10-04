@@ -41,7 +41,7 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
 
         AccountRefreshTokenManager.AddOrgAccountRefreshToken(account, tokenValue.RefreshToken);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
         return Mapper.Map<AccountLoginResponse>(tokenValue);
     }
@@ -85,7 +85,7 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
             };
 
             AccountManager.Add(account);
-            UnitOfWork.SaveChanges();
+            await UnitOfWork.SaveChangesAsync();
         }
         
         if (oldGoogleAccount == null)
@@ -100,20 +100,20 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
             };
 
             GoogleAccountManager.Add(newGoogleAccount);
-            UnitOfWork.SaveChanges();
+            await UnitOfWork.SaveChangesAsync();
         }
 
         var tokenValue = JwtHelpers.GenerateJWTTokens(account);
 
         AccountRefreshTokenManager.AddOrgAccountRefreshToken(account, tokenValue.RefreshToken);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
         return Mapper.Map<AccountLoginResponse>(tokenValue);
     }
 
 
-    public Task<AccountLoginResponse> Login(AccountLoginRequest request)
+    public async Task<AccountLoginResponse> Login(AccountLoginRequest request)
     {
         var account = AccountManager.GetAll()
             .FirstOrDefault(c => c.Email == request.Email && c.Password == request.Password)
@@ -123,9 +123,9 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
         
         AccountRefreshTokenManager.AddOrgAccountRefreshToken(account, tokenValue.RefreshToken);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<AccountLoginResponse>(tokenValue));
+        return Mapper.Map<AccountLoginResponse>(tokenValue);
     }
 
     public Task<AccountGetAllResponse> GetAll(AccountGetAllRequest request)
@@ -172,18 +172,18 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
         return Task.FromResult(Mapper.Map<AccountGetDetailResponse>(account));
     }
 
-    public Task<AccountCreateResponse> Create(AccountCreateRequest request)
+    public async Task<AccountCreateResponse> Create(AccountCreateRequest request)
     {
         var account = Mapper.Map<Account>(request);
 
         AccountManager.Add(account);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<AccountCreateResponse>(account));
+        return Mapper.Map<AccountCreateResponse>(account);
     }
 
-    public Task<AccountUpdateResponse> Update(AccountUpdateRequest request)
+    public async Task<AccountUpdateResponse> Update(AccountUpdateRequest request)
     {
         var account = AccountManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -196,12 +196,12 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
 
         var updatedAccount = AccountManager.Update(account);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<AccountUpdateResponse>(updatedAccount));
+        return Mapper.Map<AccountUpdateResponse>(updatedAccount);
     }
 
-    public Task Delete(AccountDeleteRequest request)
+    public async Task Delete(AccountDeleteRequest request)
     {
         var account = AccountManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -212,7 +212,7 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
 
         AccountManager.Delete(account);
 
-        UnitOfWork.SaveChanges();
-        return Task.FromResult("");
+        await UnitOfWork.SaveChangesAsync();
+        return ;
     }
 }

@@ -36,18 +36,18 @@ public class BoardTaskService(IServiceProvider serviceProvider) : ManagementAppl
         return Task.FromResult(Mapper.Map<BoardTaskGetDetailResponse>(boardTask));
     }
 
-    public Task<BoardTaskCreateResponse> Create(BoardTaskCreateRequest request)
+    public async Task<BoardTaskCreateResponse> Create(BoardTaskCreateRequest request)
     {
         var boardTask = Mapper.Map<BoardTask>(request);
 
         BoardTaskManager.Add(boardTask);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<BoardTaskCreateResponse>(boardTask));
+        return Mapper.Map<BoardTaskCreateResponse>(boardTask);
     }
 
-    public Task<BoardTaskUpdateResponse> Update(BoardTaskUpdateRequest request)
+    public async Task<BoardTaskUpdateResponse> Update(BoardTaskUpdateRequest request)
     {
         var boardTask = BoardTaskManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -60,12 +60,12 @@ public class BoardTaskService(IServiceProvider serviceProvider) : ManagementAppl
 
         var updatedBoardTask = BoardTaskManager.Update(boardTask);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<BoardTaskUpdateResponse>(updatedBoardTask));
+        return Mapper.Map<BoardTaskUpdateResponse>(updatedBoardTask);
     }
 
-    public Task Delete(BoardTaskDeleteRequest request)
+    public async Task Delete(BoardTaskDeleteRequest request)
     {
         var boardTask = BoardTaskManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -76,7 +76,7 @@ public class BoardTaskService(IServiceProvider serviceProvider) : ManagementAppl
 
         BoardTaskManager.Delete(boardTask);
 
-        UnitOfWork.SaveChanges();
-        return Task.CompletedTask;
+        await UnitOfWork.SaveChangesAsync();
+        return ;
     }
 }

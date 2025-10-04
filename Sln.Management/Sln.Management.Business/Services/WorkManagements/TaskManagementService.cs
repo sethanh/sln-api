@@ -36,18 +36,18 @@ public class TaskManagementService(IServiceProvider serviceProvider) : Managemen
         return Task.FromResult(Mapper.Map<TaskManagementGetDetailResponse>(taskManagement));
     }
 
-    public Task<TaskManagementCreateResponse> Create(TaskManagementCreateRequest request)
+    public async Task<TaskManagementCreateResponse> Create(TaskManagementCreateRequest request)
     {
         var taskManagement = Mapper.Map<TaskManagement>(request);
 
         TaskManagementManager.Add(taskManagement);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<TaskManagementCreateResponse>(taskManagement));
+        return Mapper.Map<TaskManagementCreateResponse>(taskManagement);
     }
 
-    public Task<TaskManagementUpdateResponse> Update(TaskManagementUpdateRequest request)
+    public async Task<TaskManagementUpdateResponse> Update(TaskManagementUpdateRequest request)
     {
         var taskManagement = TaskManagementManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -60,12 +60,12 @@ public class TaskManagementService(IServiceProvider serviceProvider) : Managemen
 
         var updatedTaskManagement = TaskManagementManager.Update(taskManagement);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<TaskManagementUpdateResponse>(updatedTaskManagement));
+        return Mapper.Map<TaskManagementUpdateResponse>(updatedTaskManagement);
     }
 
-    public Task Delete(TaskManagementDeleteRequest request)
+    public async Task Delete(TaskManagementDeleteRequest request)
     {
         var taskManagement = TaskManagementManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -76,8 +76,8 @@ public class TaskManagementService(IServiceProvider serviceProvider) : Managemen
 
         TaskManagementManager.Delete(taskManagement);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.CompletedTask;
+        return ;
     }
 }

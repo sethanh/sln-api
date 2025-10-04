@@ -51,7 +51,7 @@ public class {{Entity}}Service(IServiceProvider serviceProvider) : {{App}}Applic
 
         {{Entity}}Manager.Add({{entity}});
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
         return Task.FromResult(Mapper.Map<{{Entity}}CreateResponse>({{entity}}));
     }
@@ -71,7 +71,7 @@ public class {{Entity}}Service(IServiceProvider serviceProvider) : {{App}}Applic
 
         var updated{{Entity}} = {{Entity}}Manager.Update({{entity}});
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
         return Task.FromResult(Mapper.Map<{{Entity}}UpdateResponse>(updated{{Entity}}));
     }
@@ -89,7 +89,7 @@ public class {{Entity}}Service(IServiceProvider serviceProvider) : {{App}}Applic
 
         {{Entity}}Manager.Delete({{entity}});
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
         return Task.CompletedTask;
     }
     {{/if}}

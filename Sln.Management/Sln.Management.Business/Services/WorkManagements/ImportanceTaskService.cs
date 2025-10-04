@@ -36,18 +36,18 @@ public class ImportanceTaskService(IServiceProvider serviceProvider) : Managemen
         return Task.FromResult(Mapper.Map<ImportanceTaskGetDetailResponse>(importanceTask));
     }
 
-    public Task<ImportanceTaskCreateResponse> Create(ImportanceTaskCreateRequest request)
+    public async Task<ImportanceTaskCreateResponse> Create(ImportanceTaskCreateRequest request)
     {
         var importanceTask = Mapper.Map<ImportanceTask>(request);
 
         ImportanceTaskManager.Add(importanceTask);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<ImportanceTaskCreateResponse>(importanceTask));
+        return Mapper.Map<ImportanceTaskCreateResponse>(importanceTask);
     }
 
-    public Task<ImportanceTaskUpdateResponse> Update(ImportanceTaskUpdateRequest request)
+    public async Task<ImportanceTaskUpdateResponse> Update(ImportanceTaskUpdateRequest request)
     {
         var importanceTask = ImportanceTaskManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -60,12 +60,12 @@ public class ImportanceTaskService(IServiceProvider serviceProvider) : Managemen
 
         var updatedImportanceTask = ImportanceTaskManager.Update(importanceTask);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<ImportanceTaskUpdateResponse>(updatedImportanceTask));
+        return Mapper.Map<ImportanceTaskUpdateResponse>(updatedImportanceTask);
     }
 
-    public Task Delete(ImportanceTaskDeleteRequest request)
+    public async Task Delete(ImportanceTaskDeleteRequest request)
     {
         var importanceTask = ImportanceTaskManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -76,7 +76,7 @@ public class ImportanceTaskService(IServiceProvider serviceProvider) : Managemen
 
         ImportanceTaskManager.Delete(importanceTask);
 
-        UnitOfWork.SaveChanges();
-        return Task.CompletedTask;
+        await UnitOfWork.SaveChangesAsync();
+        return ;
     }
 }

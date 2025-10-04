@@ -36,18 +36,18 @@ public class SectionTaskService(IServiceProvider serviceProvider) : ManagementAp
         return Task.FromResult(Mapper.Map<SectionTaskGetDetailResponse>(sectionTask));
     }
 
-    public Task<SectionTaskCreateResponse> Create(SectionTaskCreateRequest request)
+    public async Task<SectionTaskCreateResponse> Create(SectionTaskCreateRequest request)
     {
         var sectionTask = Mapper.Map<SectionTask>(request);
 
         SectionTaskManager.Add(sectionTask);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<SectionTaskCreateResponse>(sectionTask));
+        return Mapper.Map<SectionTaskCreateResponse>(sectionTask);
     }
 
-    public Task<SectionTaskUpdateResponse> Update(SectionTaskUpdateRequest request)
+    public async Task<SectionTaskUpdateResponse> Update(SectionTaskUpdateRequest request)
     {
         var sectionTask = SectionTaskManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -60,12 +60,12 @@ public class SectionTaskService(IServiceProvider serviceProvider) : ManagementAp
 
         var updatedSectionTask = SectionTaskManager.Update(sectionTask);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<SectionTaskUpdateResponse>(updatedSectionTask));
+        return Mapper.Map<SectionTaskUpdateResponse>(updatedSectionTask);
     }
 
-    public Task Delete(SectionTaskDeleteRequest request)
+    public async Task Delete(SectionTaskDeleteRequest request)
     {
         var sectionTask = SectionTaskManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -76,7 +76,7 @@ public class SectionTaskService(IServiceProvider serviceProvider) : ManagementAp
 
         SectionTaskManager.Delete(sectionTask);
 
-        UnitOfWork.SaveChanges();
-        return Task.CompletedTask;
+        await UnitOfWork.SaveChangesAsync();
+        return ;
     }
 }

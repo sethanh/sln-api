@@ -36,18 +36,18 @@ public class SubTaskService(IServiceProvider serviceProvider) : ManagementApplic
         return Task.FromResult(Mapper.Map<SubTaskGetDetailResponse>(subTask));
     }
 
-    public Task<SubTaskCreateResponse> Create(SubTaskCreateRequest request)
+    public async Task<SubTaskCreateResponse> Create(SubTaskCreateRequest request)
     {
         var subTask = Mapper.Map<SubTask>(request);
 
         SubTaskManager.Add(subTask);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<SubTaskCreateResponse>(subTask));
+        return Mapper.Map<SubTaskCreateResponse>(subTask);
     }
 
-    public Task<SubTaskUpdateResponse> Update(SubTaskUpdateRequest request)
+    public async Task<SubTaskUpdateResponse> Update(SubTaskUpdateRequest request)
     {
         var subTask = SubTaskManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -60,12 +60,12 @@ public class SubTaskService(IServiceProvider serviceProvider) : ManagementApplic
 
         var updatedSubTask = SubTaskManager.Update(subTask);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<SubTaskUpdateResponse>(updatedSubTask));
+        return Mapper.Map<SubTaskUpdateResponse>(updatedSubTask);
     }
 
-    public Task Delete(SubTaskDeleteRequest request)
+    public async Task Delete(SubTaskDeleteRequest request)
     {
         var subTask = SubTaskManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -76,7 +76,7 @@ public class SubTaskService(IServiceProvider serviceProvider) : ManagementApplic
 
         SubTaskManager.Delete(subTask);
 
-        UnitOfWork.SaveChanges();
-        return Task.CompletedTask;
+        await UnitOfWork.SaveChangesAsync();
+        return ;
     }
 }

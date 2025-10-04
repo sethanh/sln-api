@@ -36,18 +36,18 @@ public class EpicTaskService(IServiceProvider serviceProvider) : ManagementAppli
         return Task.FromResult(Mapper.Map<EpicTaskGetDetailResponse>(epicTask));
     }
 
-    public Task<EpicTaskCreateResponse> Create(EpicTaskCreateRequest request)
+    public async Task<EpicTaskCreateResponse> Create(EpicTaskCreateRequest request)
     {
         var epicTask = Mapper.Map<EpicTask>(request);
 
         EpicTaskManager.Add(epicTask);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<EpicTaskCreateResponse>(epicTask));
+        return Mapper.Map<EpicTaskCreateResponse>(epicTask);
     }
 
-    public Task<EpicTaskUpdateResponse> Update(EpicTaskUpdateRequest request)
+    public async Task<EpicTaskUpdateResponse> Update(EpicTaskUpdateRequest request)
     {
         var epicTask = EpicTaskManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -60,12 +60,12 @@ public class EpicTaskService(IServiceProvider serviceProvider) : ManagementAppli
 
         var updatedEpicTask = EpicTaskManager.Update(epicTask);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<EpicTaskUpdateResponse>(updatedEpicTask));
+        return Mapper.Map<EpicTaskUpdateResponse>(updatedEpicTask);
     }
 
-    public Task Delete(EpicTaskDeleteRequest request)
+    public async Task Delete(EpicTaskDeleteRequest request)
     {
         var epicTask = EpicTaskManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -76,7 +76,7 @@ public class EpicTaskService(IServiceProvider serviceProvider) : ManagementAppli
 
         EpicTaskManager.Delete(epicTask);
 
-        UnitOfWork.SaveChanges();
-        return Task.CompletedTask;
+        await UnitOfWork.SaveChangesAsync();
+        return ;
     }
 }

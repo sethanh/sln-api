@@ -36,18 +36,18 @@ public class RangeTaskService(IServiceProvider serviceProvider) : ManagementAppl
         return Task.FromResult(Mapper.Map<RangeTaskGetDetailResponse>(rangeTask));
     }
 
-    public Task<RangeTaskCreateResponse> Create(RangeTaskCreateRequest request)
+    public async Task<RangeTaskCreateResponse> Create(RangeTaskCreateRequest request)
     {
         var rangeTask = Mapper.Map<RangeTask>(request);
 
         RangeTaskManager.Add(rangeTask);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<RangeTaskCreateResponse>(rangeTask));
+        return Mapper.Map<RangeTaskCreateResponse>(rangeTask);
     }
 
-    public Task<RangeTaskUpdateResponse> Update(RangeTaskUpdateRequest request)
+    public async Task<RangeTaskUpdateResponse> Update(RangeTaskUpdateRequest request)
     {
         var rangeTask = RangeTaskManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -60,12 +60,12 @@ public class RangeTaskService(IServiceProvider serviceProvider) : ManagementAppl
 
         var updatedRangeTask = RangeTaskManager.Update(rangeTask);
 
-        UnitOfWork.SaveChanges();
+        await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<RangeTaskUpdateResponse>(updatedRangeTask));
+        return Mapper.Map<RangeTaskUpdateResponse>(updatedRangeTask);
     }
 
-    public Task Delete(RangeTaskDeleteRequest request)
+    public async Task Delete(RangeTaskDeleteRequest request)
     {
         var rangeTask = RangeTaskManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -76,7 +76,7 @@ public class RangeTaskService(IServiceProvider serviceProvider) : ManagementAppl
 
         RangeTaskManager.Delete(rangeTask);
 
-        UnitOfWork.SaveChanges();
-        return Task.CompletedTask;
+        await UnitOfWork.SaveChangesAsync();
+        return ;
     }
 }
