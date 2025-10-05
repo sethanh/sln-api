@@ -1,0 +1,6 @@
+@Sln.Publisher.Host_HostAddress = http://localhost:5103
+
+GET {{Sln.Publisher.Host_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

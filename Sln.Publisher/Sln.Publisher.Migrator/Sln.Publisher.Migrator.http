@@ -1,0 +1,6 @@
+@Sln.Publisher.Migrator_HostAddress = http://localhost:5062
+
+GET {{Sln.Publisher.Migrator_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
