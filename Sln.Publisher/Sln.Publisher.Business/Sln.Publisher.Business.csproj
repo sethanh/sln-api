@@ -1,11 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <ItemGroup>
-    <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Common\Sln.Shared.Common.csproj" />
     <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Business\Sln.Shared.Business.csproj" />
     <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Host\Sln.Shared.Host.csproj" />
     <ProjectReference Include="..\Sln.Publisher.Contract\Sln.Publisher.Contract.csproj" />
     <ProjectReference Include="..\Sln.Publisher.Data\Sln.Publisher.Data.csproj" />
     <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Data\Sln.Shared.Data.csproj" />
+    <ProjectReference Include="..\Sln.Publisher.Common\Sln.Publisher.Common.csproj" />
   </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
