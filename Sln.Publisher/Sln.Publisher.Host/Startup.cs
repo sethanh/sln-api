@@ -7,6 +7,7 @@ using Sln.Shared.Data.Interfaces;
 using Sln.Shared.Host.Extensions;
 using Sln.Publisher.Business.Services.Realtime;
 using Sln.Publisher.Host.Extensions;
+using Sln.Shared.Common.Constants.Envs;
 
 namespace Sln.Publisher.Host;
 
@@ -35,12 +36,7 @@ public record Startup(IConfiguration Configuration)
         );
 
         // cache define
-        services.AddRedisCache(
-            "REDIS_CACHE_CONNECTION",
-            "REDIS_CACHE_INSTANCE_NAME",
-            "REDIS_CACHE_CHANNEL_PREFIX",
-            database: 1
-        );
+        services.AddRedisCache();
         services.AddMemoryCacheService();
         services.AddDynamicCacheService();
 
@@ -49,9 +45,9 @@ public record Startup(IConfiguration Configuration)
             // Config redis backplane for SignalR using for multiple instance behind load balanacer
             .AddStackExchangeRedis(options =>
             {
-                var redisHost = Environment.GetEnvironmentVariable("PUBLISHER_REDIS_CONNECTION") ?? "";
-                var redisPort = int.Parse(Environment.GetEnvironmentVariable("PUBLISHER_REDIS_PORT") ?? "6379");
-                var redisChannel = Environment.GetEnvironmentVariable("PUBLISHER_REDIS_CHANNEL") ?? "Publisher_Hub";
+                var redisHost = Environment.GetEnvironmentVariable(EnvConstants.PUBLISHER_REDIS_CONNECTION) ?? "";
+                var redisPort = int.Parse(Environment.GetEnvironmentVariable(EnvConstants.PUBLISHER_REDIS_PORT) ?? "6379");
+                var redisChannel = Environment.GetEnvironmentVariable(EnvConstants.PUBLISHER_REDIS_CHANNEL) ?? "Publisher_Hub";
                 options.Configuration.ChannelPrefix = RedisChannel.Literal(redisChannel);
                 options.Configuration.DefaultDatabase = 1;
                 options.ConnectionFactory = async writer =>

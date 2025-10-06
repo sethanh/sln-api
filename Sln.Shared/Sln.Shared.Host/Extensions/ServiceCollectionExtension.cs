@@ -72,17 +72,17 @@ public static class ServiceCollectionExtension
         return services.AddAssignInterfaceServices<IReportService>();
     }
 
-    public static IServiceCollection AddRedisCache(this IServiceCollection services)
-    {
-        var redisConn = Environment.GetEnvironmentVariable("REDIS_CONNECTION");
-        var redisInstanceName = Environment.GetEnvironmentVariable("REDIS_INSTANCE_NAME");
-        services.AddStackExchangeRedisCache(options =>
-        {
-            options.Configuration = redisConn;
-            options.InstanceName = redisInstanceName;
-        });
-        return services;
-    }
+    // public static IServiceCollection AddRedisCache(this IServiceCollection services)
+    // {
+    //     var redisConn = Environment.GetEnvironmentVariable("REDIS_CONNECTION");
+    //     var redisInstanceName = Environment.GetEnvironmentVariable("REDIS_INSTANCE_NAME");
+    //     services.AddStackExchangeRedisCache(options =>
+    //     {
+    //         options.Configuration = redisConn;
+    //         options.InstanceName = redisInstanceName;
+    //     });
+    //     return services;
+    // }
 
     public static IServiceCollection AddAuthenticationService(this IServiceCollection services)
     {

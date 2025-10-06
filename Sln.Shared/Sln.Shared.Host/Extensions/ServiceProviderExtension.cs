@@ -9,6 +9,7 @@ using MongoDB.Driver.Linq;
 using StackExchange.Redis;
 using Sln.Shared.Business.Interfaces;
 using Sln.Shared.Common.Interfaces;
+using Sln.Shared.Common.Constants.Envs;
 
 namespace Sln.Shared.Host.Extensions;
 
@@ -112,12 +113,23 @@ public static class ServiceProviderExtension
         return services;
     }
 
+    public static IServiceCollection AddRedisCache(this IServiceCollection services)
+    {
+        return services.AddRedisCache(
+            Environment.GetEnvironmentVariable(EnvConstants.REDIS_CACHE_CONNECTION) ?? "",
+            Environment.GetEnvironmentVariable(EnvConstants.REDIS_CACHE_INSTANCE_NAME) ?? "",
+            Environment.GetEnvironmentVariable(EnvConstants.REDIS_CACHE_CHANNEL_PREFIX) ?? "",
+            database: 1
+        );
+    }
+
     public static IServiceCollection AddRedisCache(this IServiceCollection services,
         string connection,
         string instanceName = "default",
         string channelPrefix = "RedisCache",
         int database = 0)
     {
+
         services.AddStackExchangeRedisCache(options =>
         {
             options.InstanceName = instanceName;
