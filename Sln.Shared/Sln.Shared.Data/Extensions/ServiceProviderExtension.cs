@@ -80,7 +80,7 @@ namespace Sln.Shared.Data.Extensions
             string migrationAssembly
             ) where TContext : DbContext
         {
-            // this.MigrationsAssembly = "Esg.Management.Migrator";
+            // this.MigrationsAssembly = "Sln.Management.Migrator";
             services.AddDbContext<TContext>(optionsBuilder =>
             {
                 optionsBuilder.UseSnakeCaseNamingConvention();

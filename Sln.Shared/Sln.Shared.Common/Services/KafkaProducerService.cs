@@ -1,5 +1,5 @@
 using Confluent.Kafka;
-using Sln.Shared.Common.Abstractions;
+using Sln.Shared.Common.Constants.Envs;
 using Sln.Shared.Common.Interfaces;
 using Sln.Shared.Common.Values;
 
@@ -9,7 +9,7 @@ public class KafkaProducerService : KafkaConnectionChecker, IKafkaProducerServic
 {
     private ProducerConfig _configProducer = new()
     {
-        BootstrapServers = Environment.GetEnvironmentVariable("KAFKA_BOOTSTRAP_SERVERS"),
+        BootstrapServers = Environment.GetEnvironmentVariable(EnvConstants.KAFKA_BOOTSTRAP_SERVER),
         MessageMaxBytes = 1000000,
         ReceiveMessageMaxBytes = 5000000, // Increase this value as needed
     };
@@ -21,7 +21,7 @@ public class KafkaProducerService : KafkaConnectionChecker, IKafkaProducerServic
 
     public Task PushMessageToTopic<T>(string topic, T data)
     {
-        var topicPrefix = Environment.GetEnvironmentVariable("KAFKA_TOPIC_PREFIX") ?? throw new ArgumentNullException("KAFKA_TOPIC_PREFIX");
+        var topicPrefix = Environment.GetEnvironmentVariable(EnvConstants.KAFKA_TOPIC_PREFIX) ?? throw new ArgumentNullException("KAFKA_TOPIC_PREFIX");
         var topicName = $"{topicPrefix}{topic}";
         
         if(!IsKafkaAvailable(_configProducer.BootstrapServers))

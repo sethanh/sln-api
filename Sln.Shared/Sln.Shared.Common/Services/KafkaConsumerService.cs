@@ -1,5 +1,6 @@
 using Confluent.Kafka;
 using Sln.Shared.Common.Abstractions;
+using Sln.Shared.Common.Constants.Envs;
 using Sln.Shared.Common.Interfaces;
 using Sln.Shared.Common.Values;
 
@@ -9,8 +10,8 @@ public class KafkaConsumerService : KafkaConnectionChecker, IKafkaConsumerServic
 {
     private ConsumerConfig _configConsumer = new()
     {
-        BootstrapServers = Environment.GetEnvironmentVariable("KAFKA_BOOTSTRAP_SERVERS"),
-        GroupId = Environment.GetEnvironmentVariable("KAFKA_GROUP_ID"),
+        BootstrapServers = Environment.GetEnvironmentVariable(EnvConstants.KAFKA_BOOTSTRAP_SERVER),
+        GroupId = Environment.GetEnvironmentVariable(EnvConstants.KAFKA_GROUP_ID),
         AutoOffsetReset = AutoOffsetReset.Earliest,
     };
 
@@ -21,7 +22,7 @@ public class KafkaConsumerService : KafkaConnectionChecker, IKafkaConsumerServic
 
     public Task SubscribeTopic<T>(string topic, Action<T> callback, CancellationToken cancellationToken)
     {
-        var topicPrefix = Environment.GetEnvironmentVariable("KAFKA_TOPIC_PREFIX") ?? throw new ArgumentNullException("KAFKA_TOPIC_PREFIX");
+        var topicPrefix = Environment.GetEnvironmentVariable(EnvConstants.KAFKA_TOPIC_PREFIX) ?? throw new ArgumentNullException("KAFKA_TOPIC_PREFIX");
         var topicName = $"{topicPrefix}{topic}";
 
         try

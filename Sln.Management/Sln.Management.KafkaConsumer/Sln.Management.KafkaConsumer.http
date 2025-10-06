@@ -1,0 +1,6 @@
+@Sln.Management.KafkaConsumer_HostAddress = http://localhost:5087
+
+GET {{Sln.Management.KafkaConsumer_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -21,5 +21,9 @@ namespace Sln.Shared.Common.Constants.Envs
         public readonly static string PUBLISHER_REDIS_CHANNEL = "PUBLISHER_REDIS_CHANNEL";
         public readonly static string PUBLISHER_CONNECTION = "PUBLISHER_CONNECTION";
         public readonly static string PUBLISHER_MONGODB = "PUBLISHER_MONGODB";
+        public readonly static string PUBLISHER_REALTIME_SERVER = "PUBLISHER_REALTIME_SERVER";
+        public readonly static string KAFKA_GROUP_ID = "KAFKA_GROUP_ID";
+        public readonly static string KAFKA_BOOTSTRAP_SERVER = "KAFKA_BOOTSTRAP_SERVER";
+        public readonly static string KAFKA_TOPIC_PREFIX = "KAFKA_TOPIC_PREFIX";
     }
 }
