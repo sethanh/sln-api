@@ -66,18 +66,17 @@ docker compose ps
 docker compose logs -f
 ```
 
-### Default endpoints
-### MongoDB: localhost:27017
-### Redis: localhost:6379
-### Zookeeper: localhost:2181
-### Kafka UI: http://localhost:8082
-### Kafka Mgnt: http://localhost:8088
-### Elasticsearch: http://localhost:9200
-### Kibana: http://localhost:5601
-### MySQL: localhost:3306
-### Jenkins: http://localhost:8080
-### Docker Registry: http://localhost:5001
-
-### ⚠️ Edit .env in InfrastructureServices before running to adjust passwords/ports
+- Default endpoints
+- MongoDB: localhost:27017
+- Redis: localhost:6379
+- Zookeeper: localhost:2181
+- Kafka UI: http://localhost:8082
+- Kafka Mgnt: http://localhost:8088
+- Elasticsearch: http://localhost:9200
+- Kibana: http://localhost:5601
+- MySQL: localhost:3306
+- Jenkins: http://localhost:8080
+- Docker Registry: http://localhost:5001
+- ⚠️ Edit .env in InfrastructureServices before running to adjust passwords/ports
 
 # sln-api
