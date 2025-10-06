@@ -5,7 +5,8 @@ const addMigration = require('./addMigration');
 
 const apps = [
     'Management',
-    'Payment'
+    'Payment',
+    'Scheduler'
 ];
 
 const askQuestions = async () => {

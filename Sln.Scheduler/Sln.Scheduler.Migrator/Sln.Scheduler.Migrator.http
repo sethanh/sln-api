@@ -1,0 +1,6 @@
+@Sln.Scheduler.Migrator_HostAddress = http://localhost:5293
+
+GET {{Sln.Scheduler.Migrator_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

@@ -1,9 +1,19 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net9.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Migrator\Sln.Shared.Migrator.csproj" />
+    <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Host\Sln.Shared.Host.csproj" />
+    <ProjectReference Include="..\Sln.Scheduler.Data\Sln.Scheduler.Data.csproj" />
+  </ItemGroup>
 
 </Project>
