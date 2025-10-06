@@ -25,5 +25,6 @@ namespace Sln.Shared.Common.Constants.Envs
         public readonly static string KAFKA_GROUP_ID = "KAFKA_GROUP_ID";
         public readonly static string KAFKA_BOOTSTRAP_SERVER = "KAFKA_BOOTSTRAP_SERVER";
         public readonly static string KAFKA_TOPIC_PREFIX = "KAFKA_TOPIC_PREFIX";
+        public readonly static string SCHEDULER_CONNECTION = "SCHEDULER_CONNECTION";
     }
 }

@@ -13,6 +13,26 @@ namespace Sln.Shared.Data.Extensions
 {
     public static class ModelBuilderExtension
     {
+        public static void RegisterRelationEntities(this ModelBuilder modelBuilder)
+        {
+            var types = Assembly.GetCallingAssembly().GetExportedTypes()
+                .Where(t => t.IsPublic && !t.IsAbstract && !t.IsInterface);
+
+            var enitityTypes = types.Where(t => t.IsAssignableTo(typeof(IRelationEntityModel)));
+
+            foreach (var type in enitityTypes)
+            {
+                if (type.IsAssignableTo(typeof(IDeletionAuditModel)))
+                {
+                    modelBuilder.Entity(type).HasQueryFilter(QueryFilterLambdaExpression(type));
+                }
+                else
+                {
+                    modelBuilder.Entity(type);
+                }
+            }
+        }
+
         public static void RegisterAllEntities(this ModelBuilder modelBuilder)
         {
             var assemblyTypes = Assembly.GetCallingAssembly().GetExportedTypes()

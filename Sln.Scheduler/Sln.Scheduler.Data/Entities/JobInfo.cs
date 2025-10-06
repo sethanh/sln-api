@@ -1,0 +1,22 @@
+
+using Sln.Scheduler.Data.Enums;
+using Sln.Shared.Data.Abstractions;
+using Sln.Shared.Data.Models;
+using Microsoft.EntityFrameworkCore;
+using Sln.Shared.Common.Enums.Jobs;
+
+namespace Sln.Scheduler.Data.Entities;
+
+[Index(nameof(TransactionId))]
+[Index(nameof(ObjectId))]
+public class JobInfo : DataModelBase<long>, IRelationEntityModel
+{
+    public string? JobId { get; set; }
+    public JobEvent JobEvent { get; set; }
+    public string? JobType { get; set; }
+    public long? ObjectId { get; set; }
+    public long? TransactionId { get; set; }
+    public JobStatus? JobStatus { get; set; }
+    public string? Data { get; set; }
+    public DateTime? SendTime { get; set; }
+}

@@ -1,0 +1,89 @@
+using Sln.Scheduler.Business.Managers;
+using Sln.Scheduler.Business.Requests;
+using Sln.Scheduler.Data.Entities;
+using Sln.Scheduler.Data.Enums;
+using Mapster;
+using Microsoft.EntityFrameworkCore;
+using Sln.Shared.Business;
+using Microsoft.Extensions.DependencyInjection;
+using Sln.Shared.Common.Enums.Jobs;
+
+namespace Sln.Scheduler.Business.Services;
+
+public class JobInfoService(IServiceProvider serviceProvider) : ApplicationServiceBase(serviceProvider)
+{
+    private readonly  JobInfoManager JobInfoManager = serviceProvider.GetRequiredService<JobInfoManager>();
+
+    public JobInfo GetJobInfo(long id)
+    {
+        var jobInfo = JobInfoManager.GetAll().FirstOrDefault(c => c.Id == id);
+        if (jobInfo == null)
+        {
+            throw new Exception($"JobInfo with id {id} not found");
+        }
+        return jobInfo;
+    }
+
+    public async Task<CreateJobInfoResponse> CreateJobInfoAsync(CreateJobInfoRequest request)
+    {
+        var jobInfo = Mapper.Map<JobInfo>(request);
+
+        JobInfoManager.Add(jobInfo);
+
+        await UnitOfWork.SaveChangesAsync();
+
+        return Mapper.Map<CreateJobInfoResponse>(jobInfo);
+    }
+
+    public async Task<UpdateJobInfoResponse> UpdateJobInfoAsync(long id, UpdateJobInfoRequest request)
+    {
+        var jobInfo = GetJobInfo(id);
+        
+        var jobUpdated = request.Adapt(jobInfo);
+        JobInfoManager.Update(jobInfo);
+
+        await UnitOfWork.SaveChangesAsync();
+
+        return Mapper.Map<UpdateJobInfoResponse>(jobUpdated);
+    }
+
+    public async Task<JobInfo?> DeleteByJobTypeAsync(long? objectId, JobEvent? jobEvent)
+    {
+        var jobInfoQuery = JobInfoManager.GetAll()
+            .Where(x => x.JobStatus != JobStatus.Deleted)
+            .Where(x => x.ObjectId == objectId);
+        if (jobEvent != null)
+        {
+            jobInfoQuery = jobInfoQuery.Where(c => c.JobEvent == jobEvent);
+        };   
+        
+        var jobInfo =  jobInfoQuery
+            .FirstOrDefault();
+
+        if(jobInfo != null)
+        {
+            jobInfo.JobStatus = JobStatus.Deleted;
+            JobInfoManager.Update(jobInfo);
+            await UnitOfWork.SaveChangesAsync();
+        }
+
+        return jobInfo;
+    }
+    public async Task<List<JobInfo>> DeleteMultipleByJobTypeAsync(Guid objectId)
+    {
+        var jobInfos = await JobInfoManager.GetAll()
+            .Where(x => x.JobStatus != JobStatus.Deleted)
+            .ToListAsync();
+        if(jobInfos != null)
+        {
+            foreach (var jobInfo in jobInfos)
+            {
+                jobInfo.JobStatus = JobStatus.Deleted;
+            }
+            
+        }
+        JobInfoManager.UpdateRange(jobInfos ?? []);
+        await UnitOfWork.SaveChangesAsync();
+        return jobInfos ?? [];
+    }
+}

@@ -1,0 +1,6 @@
+@Sln.Scheduler.Host_HostAddress = http://localhost:5137
+
+GET {{Sln.Scheduler.Host_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
