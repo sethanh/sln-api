@@ -1,0 +1,212 @@
+services:
+  mongodb:
+    image: mongodb/mongodb-community-server:latest
+    restart: always
+    container_name: mongodb
+    ports:
+      - 27017:27017
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: BGlCYZHM1eQM
+      MONGO_INITDB_DATABASE: EsgNoSql
+    volumes:
+      - /home/sln/data/mongodb:/data/db
+
+  redis:
+    image: 'redis:alpine'
+    ports:
+      - '6379:6379'
+    restart: always
+    container_name: redis
+    command: ["redis-server", "--appendonly", "yes"]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - /home/sln/data/redis:/data
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    hostname: zookeeper
+    container_name: zookeeper
+    restart: always
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "2181:2181"
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_SERVER_ID: 1
+      ZOOKEEPER_SERVERS: zookeeper:2888:3888
+    volumes:
+      - /home/sln/data/zookeeper/log:/var/lib/zookeeper/log
+      - /home/sln/data/zookeeper/data:/var/lib/zookeeper/data
+
+  kafka:
+    image: confluentinc/cp-kafka:7.2.1
+    hostname: kafka
+    container_name: kafka
+    restart: always
+    ports:
+      - "9092:9092"
+      - "9999:9999"
+      - "19092:19092"
+      - "29092:29092"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    volumes:
+      - /home/sln/data/kafka:/var/lib/kafka/data
+    environment:
+      KAFKA_LISTENERS: INTERNAL://:19092,OUTSIDE://:29092,EXTERNAL://:9092
+      KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:19092,OUTSIDE://localhost:29092,EXTERNAL://${KAFKA_PUBLIC_IP}:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: INTERNAL:PLAINTEXT,EXTERNAL:PLAINTEXT,DOCKER:PLAINTEXT,OUTSIDE:PLAINTEXT
+      KAFKA_INTER_BROKER_LISTENER_NAME: INTERNAL
+      KAFKA_ZOOKEEPER_CONNECT: "zookeeper:2181"
+      KAFKA_BROKER_ID: 1
+      KAFKA_LOG4J_LOGGERS: "kafka.controller=INFO,kafka.producer.async.DefaultEventHandler=INFO,state.change.logger=INFO"
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_JMX_PORT: 9999
+      KAFKA_JMX_HOSTNAME: ${DOCKER_HOST_IP:-127.0.0.1}
+      KAFKA_AUTHORIZER_CLASS_NAME: kafka.security.authorizer.AclAuthorizer
+      KAFKA_ALLOW_EVERYONE_IF_NO_ACL_FOUND: "true"
+    depends_on:
+      - zookeeper
+
+  kafka-ui:
+    container_name: kafka-ui
+    image: provectuslabs/kafka-ui:latest
+    restart: always
+    ports:
+      - 8082:8080
+    depends_on:
+      - kafka
+    volumes:
+      - /home/sln/data/kafka-ui:/etc/kafkaui
+    environment:
+      DYNAMIC_CONFIG_ENABLED: 'true'
+      KAFKA_CLUSTERS_0_NAME: kafka_sln
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:19092
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  kafka-ui-mgnt:
+    container_name: kafka-ui-mgnt
+    image: consdata/kouncil:latest
+    restart: always
+    ports:
+      - 8088:8080
+    depends_on:
+      - kafka
+    environment:
+      bootstrapServers: kafka:19092
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:${STACK_VERSION}
+    volumes:
+      - /home/sln/data/esdata:/usr/share/elasticsearch/data
+    ports:
+      - ${ES_PORT}:9200
+      - 9200:9200
+    environment:
+      - cluster.name=${CLUSTER_NAME}
+      - node.name=elasticsearch
+      - "discovery.type=single-node"
+      - ELASTIC_PASSWORD=${ELASTIC_PASSWORD}
+      - xpack.security.enabled=true
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+    restart: always
+
+  kibana:
+    container_name: kibana
+    depends_on: ['elasticsearch']
+    image: docker.elastic.co/kibana/kibana:${STACK_VERSION}
+    volumes:
+      - /home/sln/data/kbdata:/usr/share/kibana/data
+      - /home/sln/kibana.yml:/usr/share/kibana/config/kibana.yml
+    ports:
+      - ${KIBANA_PORT}:5601
+    environment:
+      - SERVERNAME=kibana
+      - ELASTICSEARCH_HOSTS=http://elasticsearch:9200
+      - ELASTICSEARCH_USERNAME=kibana_system
+      - ELASTICSEARCH_PASSWORD=${KIBANA_PASSWORD}
+      - xpack.encryptedSavedObjects.encryptionKey="dAyLaKeYThAtLaDaI"
+      - xpack.reporting.csv.maxSizeBytes=209715200
+    restart: always
+
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    volumes:
+      - /home/sln/data/mysql:/var/lib/mysql
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+
+  registry:
+    image: registry:2
+    container_name: registry
+    restart: always
+    ports:
+      - "5001:5000"
+    volumes:
+      - /home/sln/data/registry:/var/lib/registry
+    environment:
+      REGISTRY_STORAGE_DELETE_ENABLED: "true"
+
+  # ---- JENKINS ----
+  jenkins-docker:
+    image: docker:dind
+    container_name: jenkins-docker
+    restart: always
+    privileged: true
+    networks:
+      - jenkins
+    environment:
+      DOCKER_TLS_CERTDIR: /certs
+    volumes:
+      - /home/sln/data/jenkins-docker-certs:/certs/client
+      - /home/sln/data/jenkins_home:/var/jenkins_home
+    ports:
+      - 2376:2376
+    command: --storage-driver overlay2
+
+  jenkins:
+    image: jenkins/jenkins:lts
+    container_name: jenkins
+    restart: always
+    networks:
+      - jenkins
+    depends_on:
+      - jenkins-docker
+    environment:
+      DOCKER_HOST: tcp://docker:2376
+      DOCKER_CERT_PATH: /certs/client
+      DOCKER_TLS_VERIFY: 1
+    volumes:
+      - /home/sln/data/jenkins_home:/var/jenkins_home
+      - /home/sln/data/jenkins-docker-certs:/certs/client:ro
+      - /var/run/docker.sock:/var/run/docker.sock
+      - /usr/bin/docker:/usr/bin/docker
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+
+networks:
+  jenkins:
+    driver: bridge
