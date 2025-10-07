@@ -45,7 +45,7 @@ public class {{Entity}}Service(IServiceProvider serviceProvider) : {{App}}Applic
     {{/if}}
 
     {{#if useCreateDto}}
-    public Task<{{Entity}}CreateResponse> Create({{Entity}}CreateRequest request)
+    public async Task<{{Entity}}CreateResponse> Create({{Entity}}CreateRequest request)
     {
         var {{entity}} = Mapper.Map<{{Entity}}>(request);
 
@@ -53,12 +53,12 @@ public class {{Entity}}Service(IServiceProvider serviceProvider) : {{App}}Applic
 
         await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<{{Entity}}CreateResponse>({{entity}}));
+        return Mapper.Map<{{Entity}}CreateResponse>({{entity}});
     }
     {{/if}}
 
     {{#if useUpdateDto}}
-    public Task<{{Entity}}UpdateResponse> Update({{Entity}}UpdateRequest request)
+    public async Task<{{Entity}}UpdateResponse> Update({{Entity}}UpdateRequest request)
     {
         var {{entity}} = {{Entity}}Manager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -73,12 +73,12 @@ public class {{Entity}}Service(IServiceProvider serviceProvider) : {{App}}Applic
 
         await UnitOfWork.SaveChangesAsync();
 
-        return Task.FromResult(Mapper.Map<{{Entity}}UpdateResponse>(updated{{Entity}}));
+        return Mapper.Map<{{Entity}}UpdateResponse>(updated{{Entity}});
     }
     {{/if}}
 
     {{#if useDeleteDto}}
-    public Task Delete({{Entity}}DeleteRequest request)
+    public async Task Delete({{Entity}}DeleteRequest request)
     {
         var {{entity}} = {{Entity}}Manager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -90,7 +90,7 @@ public class {{Entity}}Service(IServiceProvider serviceProvider) : {{App}}Applic
         {{Entity}}Manager.Delete({{entity}});
 
         await UnitOfWork.SaveChangesAsync();
-        return Task.CompletedTask;
+        return;
     }
     {{/if}}
 }
