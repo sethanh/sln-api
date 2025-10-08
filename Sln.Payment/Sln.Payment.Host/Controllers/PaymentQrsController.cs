@@ -22,7 +22,7 @@ public class PaymentQrsController : PaymentControllerBase
     }
     [AllowAnonymous]
     [HttpGet("qr")]
-    public async Task<IActionResult> GetQr(PaymentQrGetQrRequest request)
+    public async Task<IActionResult> GetQr([FromQuery] PaymentQrGetQrRequest request)
     {
         return await RequestAsGet<PaymentQrGetQrRequest, PaymentQrGetQrResponse>(request);
     }
