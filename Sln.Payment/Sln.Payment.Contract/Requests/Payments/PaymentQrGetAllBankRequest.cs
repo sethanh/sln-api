@@ -8,7 +8,7 @@ public class PaymentQrGetAllBankRequest : PaginationRequest, IRequest<PaymentQrG
 {
 }
 
-public class PaymentQrGetAllBankResponse : PaginationResponse<PaymentQrGetAllResponseItem>
+public class PaymentQrGetAllBankResponse : PaginationResponse<PaymentQrGetAllBankResponseItem>
 {
 }
 
