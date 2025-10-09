@@ -63,6 +63,7 @@ namespace Sln.Payment.Host
             //     RequestPath = "/Files"
             // });
 
+            app.UseStaticFiles();
             app.UseHealthChecks("/healthz");
             app.UseGlobalExceptionHandler();
 
