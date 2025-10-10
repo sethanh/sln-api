@@ -10,6 +10,9 @@ public class PhotoGetDetailRequest : IRequest<PhotoGetDetailResponse>
 
 public class PhotoGetDetailResponse
 {
-    public required long Id { get; set; }
-    public required string Name { get; set; }
+    public long Id { get; set; }
+    public string? FileName { get; set; }
+    public string? RelativePath { get; set; }
+    public decimal? Size { get; set; }
+    public string? ContentType { get; set; }
 }

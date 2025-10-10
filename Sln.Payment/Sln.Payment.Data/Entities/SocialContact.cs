@@ -1,5 +1,5 @@
-using Sln.Payment.Common.Enums;
 using Sln.Payment.Data.Models;
+using Sln.Payment.Contract.Enums;
 
 namespace Sln.Payment.Data.Entities;
 

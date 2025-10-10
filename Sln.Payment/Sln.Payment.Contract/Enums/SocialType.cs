@@ -1,4 +1,4 @@
-namespace Sln.Payment.Common.Enums
+namespace Sln.Payment.Contract.Enums
 {
     public enum SocialType
     {
