@@ -5,6 +5,7 @@ using Sln.Payment.Business.Managers.CardHolders;
 using Sln.Shared.Business.Interfaces;
 using Sln.Shared.Contract.Models;
 using Sln.Shared.Common.Exceptions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Sln.Payment.Business.Services.CardHolders;
 
@@ -15,6 +16,8 @@ public class ContactService(IServiceProvider serviceProvider) : PaymentApplicati
     public Task<ContactGetAllResponse> GetAll(ContactGetAllRequest request)
     {
         var ContactQuery = ContactManager.GetAll()
+            .Include(c => c.Photo)
+            .Include(c => c.SocialContacts)
             .Where(c => c.CreatedId == CurrentAccount.Id);
 
         var paginationResponse = PaginationResponse<Contact>.Create(
