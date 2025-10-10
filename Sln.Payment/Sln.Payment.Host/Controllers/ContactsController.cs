@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sln.Payment.Contract.Requests.CardHolders;
 
@@ -5,6 +6,7 @@ namespace Sln.Payment.Host.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize]
 public class ContactsController : PaymentControllerBase
 {
     [HttpGet]

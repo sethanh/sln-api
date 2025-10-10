@@ -2,6 +2,7 @@
 output: Sln.{{App}}/Sln.{{App}}.Host/Controllers/{{Entity}}sController.cs
 enable: {{useController}}
 {{/meta}}
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sln.{{App}}.Contract.Requests.{{Module}}s;
 
@@ -9,6 +10,7 @@ namespace Sln.{{App}}.Host.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize]
 public class {{Entity}}sController : {{App}}ControllerBase
 {
 {{#if useGetAllDto}}

@@ -14,10 +14,11 @@ public class ContactService(IServiceProvider serviceProvider) : PaymentApplicati
 
     public Task<ContactGetAllResponse> GetAll(ContactGetAllRequest request)
     {
-        var Contact = ContactManager.GetAll();
+        var ContactQuery = ContactManager.GetAll()
+            .Where(c => c.CreatedId == CurrentAccount.Id);
 
         var paginationResponse = PaginationResponse<Contact>.Create(
-            Contact,
+            ContactQuery,
             request
         );
 
