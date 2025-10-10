@@ -11,3 +11,11 @@ public class ContactGetDetailHandler(ContactService contactService) : IRequestHa
         return contactService.GetDetail(request);
     }
 }
+
+public class ContactGetByProfileNameHandler(ContactService contactService) : IRequestHandler<ContactGetByProfileNameRequest, ContactGetDetailResponse>
+{
+    public Task<ContactGetDetailResponse> Handle(ContactGetByProfileNameRequest request, CancellationToken cancellationToken)
+    {
+        return contactService.GetByProfileName(request);
+    }
+}

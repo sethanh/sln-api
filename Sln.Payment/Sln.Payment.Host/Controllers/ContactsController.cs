@@ -21,6 +21,13 @@ public class ContactsController : PaymentControllerBase
         return await RequestAsGet<ContactGetDetailRequest, ContactGetDetailResponse>(request);
     }
 
+    [AllowAnonymous]
+    [HttpGet("by-profile-name")]
+    public async Task<IActionResult> GetByProfileName([FromQuery]ContactGetByProfileNameRequest request)
+    {
+        return await RequestAsGet<ContactGetByProfileNameRequest, ContactGetDetailResponse>(request);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] ContactCreateRequest requestBody)
     {

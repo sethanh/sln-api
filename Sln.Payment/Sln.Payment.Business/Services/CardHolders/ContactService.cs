@@ -93,4 +93,20 @@ public class ContactService(IServiceProvider serviceProvider) : PaymentApplicati
         await UnitOfWork.SaveChangesAsync();
         return;
     }
+
+    public Task<ContactGetDetailResponse> GetByProfileName(ContactGetByProfileNameRequest request)
+    {
+        var contact = ContactManager
+            .GetAll()
+            .Include(c => c.Photo)
+            .Include(c => c.SocialContacts)
+            .FirstOrDefault(o => o.ProfileName == request.ProfileName);
+
+        if (contact == null)
+        {
+            throw new HttpNotFound(ContactErrors.CONTACT_NOT_FOUND);
+        }
+
+        return Task.FromResult(Mapper.Map<ContactGetDetailResponse>(contact));
+    }
 }

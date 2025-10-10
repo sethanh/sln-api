@@ -9,6 +9,11 @@ public class ContactGetDetailRequest : IRequest<ContactGetDetailResponse>
     public required long Id { get; set; }
 }
 
+public class ContactGetByProfileNameRequest : IRequest<ContactGetDetailResponse>
+{
+    public required string ProfileName { get; set; }
+}
+
 public class ContactGetDetailResponse
 {
     public required long Id { get; set; }
@@ -19,5 +24,5 @@ public class ContactGetDetailResponse
     public long? PhotoId { get; set; }
     public string? ProfileName { get; set; }
     public List<SocialContactGetDetailResponse>? SocialContacts { get; set; }
-    public PhotoGetDetailResponse? Photo { get; set;}
+    public PhotoGetDetailResponse? Photo { get; set; }
 }
