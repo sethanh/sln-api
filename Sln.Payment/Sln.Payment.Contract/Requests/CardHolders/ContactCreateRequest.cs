@@ -11,6 +11,7 @@ public class ContactCreateRequest : IRequest<ContactCreateResponse>
     public string? PhoneNumber { get; set; }
     public string? Email { get; set; }
     public long? PhotoId { get; set; }
+    public string? ProfileName { get; set; }
     public List<SocialContactCreateRequest>? SocialContacts { get; set; }
 }
 

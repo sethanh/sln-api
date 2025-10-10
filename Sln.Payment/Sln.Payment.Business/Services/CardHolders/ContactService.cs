@@ -44,6 +44,11 @@ public class ContactService(IServiceProvider serviceProvider) : PaymentApplicati
     {
         var contact = Mapper.Map<Contact>(request);
 
+        if (string.IsNullOrEmpty(request.ProfileName))
+        {
+            contact.ProfileName = Guid.NewGuid().ToString();
+        }
+
         ContactManager.Add(contact);
 
         await UnitOfWork.SaveChangesAsync();
@@ -54,8 +59,13 @@ public class ContactService(IServiceProvider serviceProvider) : PaymentApplicati
     public async Task<ContactUpdateResponse> Update(ContactUpdateRequest request)
     {
         var contact = ContactManager.FirstOrDefault(o => o.Id == request.Id);
+        
+        if (string.IsNullOrEmpty(request.ProfileName))
+        {
+            contact.ProfileName = Guid.NewGuid().ToString();
+        }
 
-        if(contact == null)
+        if (contact == null)
         {
             throw new HttpBadRequest(ContactErrors.CONTACT_NOT_FOUND);
         }

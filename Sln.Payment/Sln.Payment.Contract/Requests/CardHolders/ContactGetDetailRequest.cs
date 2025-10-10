@@ -17,6 +17,7 @@ public class ContactGetDetailResponse
     public string? PhoneNumber { get; set; }
     public string? Email { get; set; }
     public long? PhotoId { get; set; }
+    public string? ProfileName { get; set; }
     public List<SocialContactGetDetailResponse>? SocialContacts { get; set; }
     public PhotoGetDetailResponse? Photo { get; set;}
 }

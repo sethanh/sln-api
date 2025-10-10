@@ -1,7 +1,10 @@
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 using Sln.Payment.Data.Models;
 
 namespace Sln.Payment.Data.Entities;
 
+[Index(nameof(ProfileName), IsUnique = true)]
 public class Contact : PaymentAuditModel<long>
 {
     public required string Name { get; set; }
@@ -10,5 +13,7 @@ public class Contact : PaymentAuditModel<long>
     public string? Email { get; set; }
     public long? PhotoId { get; set; }
     public ICollection<SocialContact>? SocialContacts { get; set; }
-    public virtual Photo? Photo { get; set;}
+    public virtual Photo? Photo { get; set; }
+    [Column(TypeName = "varchar(88)")]
+    public string? ProfileName { get; set; }
 }
