@@ -11,8 +11,7 @@ public class ContactGetAllResponse : PaginationResponse<ContactGetAllResponseIte
 {
 }
 
-public class ContactGetAllResponseItem
+public class ContactGetAllResponseItem: ContactGetDetailResponse
 {
-    public required long Id { get; set; }
-    public required string Name { get; set; }
+
 }
