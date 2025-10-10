@@ -20,7 +20,7 @@ public class PhotosController : PaymentControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create([FromBody] PhotoCreateRequest requestBody)
+    public async Task<IActionResult> Create([FromForm] PhotoCreateRequest requestBody)
     {
         return await RequestAsCreate<PhotoCreateRequest, PhotoCreateResponse>(requestBody);
     }
