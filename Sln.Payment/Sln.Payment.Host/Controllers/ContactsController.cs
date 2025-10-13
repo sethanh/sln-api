@@ -35,7 +35,7 @@ public class ContactsController : PaymentControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(long id, [FromBody] ContactUpdateRequest requestBody)
+    public async Task<IActionResult> Update([FromRoute]long id, [FromBody] ContactUpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {

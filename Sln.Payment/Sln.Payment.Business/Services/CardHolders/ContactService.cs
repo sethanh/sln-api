@@ -2,10 +2,10 @@ using Sln.Payment.Contract.Errors.CardHolders;
 using Sln.Payment.Contract.Requests.CardHolders;
 using Sln.Payment.Data.Entities;
 using Sln.Payment.Business.Managers.CardHolders;
-using Sln.Shared.Business.Interfaces;
 using Sln.Shared.Contract.Models;
 using Sln.Shared.Common.Exceptions;
 using Microsoft.EntityFrameworkCore;
+using Mapster;
 
 namespace Sln.Payment.Business.Services.CardHolders;
 
@@ -71,12 +71,13 @@ public class ContactService(IServiceProvider serviceProvider) : PaymentApplicati
         }
 
         // TODO: Update contact properties
+        var updateContact = request.Adapt(contact);
 
-        var updatedContact = ContactManager.Update(contact);
+        ContactManager.Update(updateContact);
 
         await UnitOfWork.SaveChangesAsync();
 
-        return Mapper.Map<ContactUpdateResponse>(updatedContact);
+        return Mapper.Map<ContactUpdateResponse>(updateContact);
     }
 
     public async Task Delete(ContactDeleteRequest request)

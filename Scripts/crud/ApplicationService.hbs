@@ -69,7 +69,9 @@ public class {{Entity}}Service(IServiceProvider serviceProvider) : {{App}}Applic
 
         // TODO: Update {{entity}} properties
 
-        var updated{{Entity}} = {{Entity}}Manager.Update({{entity}});
+        var update{{Entity}} = request.Adapt({{entity}});
+
+        {{Entity}}Manager.Update(update{{Entity}});
 
         await UnitOfWork.SaveChangesAsync();
 
