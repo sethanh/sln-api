@@ -8,6 +8,7 @@ namespace Sln.Payment.Contract.Enums
         Instagram = 3,
         Spotify = 4,
         Tiktok = 5,
-        Youtube = 6
+        Youtube = 6,
+        Linkedin = 7
     }
 }
