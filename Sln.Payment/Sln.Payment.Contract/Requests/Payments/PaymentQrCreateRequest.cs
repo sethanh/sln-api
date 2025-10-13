@@ -5,10 +5,12 @@ namespace Sln.Payment.Contract.Requests.Payments;
 
 public class PaymentQrCreateRequest : IRequest<PaymentQrCreateResponse>
 {
-    public required string Name { get; set; }
+    public string? BinCode { get; set; }
+    public string? AccountNo { get; set; }
+    public string? AccountName { get; set; }
+    public string? Description { get; set; }
 }
 
-public class PaymentQrCreateResponse
+public class PaymentQrCreateResponse: PaymentQrGetDetailResponse
 {
-    public required string Name { get; set; }
 }

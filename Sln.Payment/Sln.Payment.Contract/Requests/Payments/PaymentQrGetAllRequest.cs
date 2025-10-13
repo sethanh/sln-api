@@ -11,8 +11,6 @@ public class PaymentQrGetAllResponse : PaginationResponse<PaymentQrGetAllRespons
 {
 }
 
-public class PaymentQrGetAllResponseItem
+public class PaymentQrGetAllResponseItem : PaymentQrGetDetailResponse
 {
-    public required long Id { get; set; }
-    public required string Name { get; set; }
 }

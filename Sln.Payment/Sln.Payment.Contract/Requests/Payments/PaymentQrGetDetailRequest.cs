@@ -11,5 +11,8 @@ public class PaymentQrGetDetailRequest : IRequest<PaymentQrGetDetailResponse>
 public class PaymentQrGetDetailResponse
 {
     public required long Id { get; set; }
-    public required string Name { get; set; }
+    public string? BinCode { get; set; }
+    public string? AccountNo { get; set; }
+    public string? AccountName { get; set; }
+    public string? Description { get; set; }
 }

@@ -6,6 +6,7 @@ using Sln.Shared.Contract.Models;
 using Sln.Shared.Common.Exceptions;
 using Newtonsoft.Json;
 using Sln.Payment.Contract.Values.VietQr;
+using Mapster;
 
 namespace Sln.Payment.Business.Services.Payments;
 
@@ -15,7 +16,8 @@ public class PaymentQrService(IServiceProvider serviceProvider) : PaymentApplica
 
     public Task<PaymentQrGetAllResponse> GetAll(PaymentQrGetAllRequest request)
     {
-        var PaymentQr = PaymentQrManager.GetAll();
+        var PaymentQr = PaymentQrManager.GetAll()
+            .Where(c => c.CreatedId == CurrentAccount.Id);
 
         var paginationResponse = PaginationResponse<PaymentQr>.Create(
             PaymentQr,
@@ -59,7 +61,8 @@ public class PaymentQrService(IServiceProvider serviceProvider) : PaymentApplica
 
         // TODO: Update paymentQr properties
 
-        var updatedPaymentQr = PaymentQrManager.Update(paymentQr);
+        var updatedPaymentQr = request.Adapt(paymentQr);
+        PaymentQrManager.Update(updatedPaymentQr);
 
         await UnitOfWork.SaveChangesAsync();
 
@@ -135,7 +138,7 @@ public class PaymentQrService(IServiceProvider serviceProvider) : PaymentApplica
             return null;
         }
 
-        var imageUrl = $"https://img.vietqr.io/image/{request.BinCode}-{request.AccountNo}-compact.png?amount={request.Amount}&addInfo={request.Description}&accountName={request.AccountName}";
+        var imageUrl = $"https://img.vietqr.io/image/{request.BinCode}-{request.AccountNo}-compact2.png?amount={request.Amount}&addInfo={request.Description}&accountName={request.AccountName}";
 
         return imageUrl;
     }
