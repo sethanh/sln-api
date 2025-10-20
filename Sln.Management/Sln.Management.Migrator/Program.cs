@@ -1,5 +1,6 @@
 using DotNetEnv;
 using Sln.Management.Data;
+using Sln.Management.Data.Entities;
 using Sln.Shared.Migrator;
 
 namespace Sln.Management.Migrator
@@ -11,6 +12,7 @@ namespace Sln.Management.Migrator
             var force = true;
             var host = CreateHostBuilder(args).Build();
             await DbMigrator<ManagementDbContext>.Run(host, force);
+            await DbSeeder.Run<ManagementDbContext, SeederHistory, long>(host, force);
             return 0;
         }
 

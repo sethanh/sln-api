@@ -1,5 +1,6 @@
 using DotNetEnv;
 using Sln.Payment.Data;
+using Sln.Payment.Data.Entities;
 using Sln.Shared.Migrator;
 
 namespace Sln.Payment.Migrator
@@ -11,6 +12,7 @@ namespace Sln.Payment.Migrator
             var force = true;
             var host = CreateHostBuilder(args).Build();
             await DbMigrator<PaymentDbContext>.Run(host, force);
+            await DbSeeder.Run<PaymentDbContext, SeederHistory, long>(host, force);
             return 0;
         }
 
