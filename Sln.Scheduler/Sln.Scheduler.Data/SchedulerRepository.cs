@@ -103,9 +103,4 @@ public class SchedulerRepository<TEntity>(SchedulerDbContext context) : ISchedul
     {
         throw new NotImplementedException();
     }
-
-    public TEntity Remove(Guid id)
-    {
-        throw new NotImplementedException();
-    }
 }
