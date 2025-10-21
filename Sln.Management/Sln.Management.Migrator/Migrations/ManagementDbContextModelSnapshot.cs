@@ -24,19 +24,19 @@ namespace Sln.Management.Migrator.Migrations
 
             modelBuilder.Entity("Sln.Management.Data.Entities.Account", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<Guid>("Id"));
 
-                    b.Property<long?>("CreatedId")
+                    b.Property<Guid?>("CreatedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long?>("DeletedId")
+                    b.Property<Guid?>("DeletedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("DeletionTime")
@@ -49,7 +49,7 @@ namespace Sln.Management.Migrator.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<long?>("LastModificationId")
+                    b.Property<Guid?>("LastModificationId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -57,11 +57,11 @@ namespace Sln.Management.Migrator.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("Guidtext");
 
                     b.Property<string>("Password")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("Guidtext");
 
                     b.Property<bool>("RootAccount")
                         .HasColumnType("tinyint(1)");
@@ -73,26 +73,26 @@ namespace Sln.Management.Migrator.Migrations
 
             modelBuilder.Entity("Sln.Management.Data.Entities.AccountRefreshToken", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<Guid>("Id"));
 
-                    b.Property<long>("AccountId")
+                    b.Property<Guid>("AccountId")
                         .HasColumnType("bigint");
 
                     b.Property<string>("AccountName")
                         .IsRequired()
                         .HasColumnType("varchar(100)");
 
-                    b.Property<long?>("CreatedId")
+                    b.Property<Guid?>("CreatedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long?>("DeletedId")
+                    b.Property<Guid?>("DeletedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("DeletionTime")
@@ -107,7 +107,7 @@ namespace Sln.Management.Migrator.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<long?>("LastModificationId")
+                    b.Property<Guid?>("LastModificationId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -126,19 +126,19 @@ namespace Sln.Management.Migrator.Migrations
 
             modelBuilder.Entity("Sln.Management.Data.Entities.BoardTask", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<Guid>("Id"));
 
-                    b.Property<long?>("CreatedId")
+                    b.Property<Guid?>("CreatedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long?>("DeletedId")
+                    b.Property<Guid?>("DeletedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("DeletionTime")
@@ -147,7 +147,7 @@ namespace Sln.Management.Migrator.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<long?>("LastModificationId")
+                    b.Property<Guid?>("LastModificationId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -155,7 +155,7 @@ namespace Sln.Management.Migrator.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("Guidtext");
 
                     b.Property<decimal>("Total")
                         .HasColumnType("decimal(65,30)");
@@ -167,19 +167,19 @@ namespace Sln.Management.Migrator.Migrations
 
             modelBuilder.Entity("Sln.Management.Data.Entities.EpicTask", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<Guid>("Id"));
 
-                    b.Property<long?>("CreatedId")
+                    b.Property<Guid?>("CreatedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long?>("DeletedId")
+                    b.Property<Guid?>("DeletedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("DeletionTime")
@@ -188,7 +188,7 @@ namespace Sln.Management.Migrator.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<long?>("LastModificationId")
+                    b.Property<Guid?>("LastModificationId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -196,7 +196,7 @@ namespace Sln.Management.Migrator.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("Guidtext");
 
                     b.HasKey("Id");
 
@@ -205,19 +205,19 @@ namespace Sln.Management.Migrator.Migrations
 
             modelBuilder.Entity("Sln.Management.Data.Entities.FinancialEpic", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<Guid>("Id"));
 
-                    b.Property<long?>("CreatedId")
+                    b.Property<Guid?>("CreatedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long?>("DeletedId")
+                    b.Property<Guid?>("DeletedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("DeletionTime")
@@ -226,7 +226,7 @@ namespace Sln.Management.Migrator.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<long?>("LastModificationId")
+                    b.Property<Guid?>("LastModificationId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -234,7 +234,7 @@ namespace Sln.Management.Migrator.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("Guidtext");
 
                     b.HasKey("Id");
 
@@ -243,19 +243,19 @@ namespace Sln.Management.Migrator.Migrations
 
             modelBuilder.Entity("Sln.Management.Data.Entities.FinancialExpenditure", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<Guid>("Id"));
 
-                    b.Property<long?>("CreatedId")
+                    b.Property<Guid?>("CreatedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long?>("DeletedId")
+                    b.Property<Guid?>("DeletedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("DeletionTime")
@@ -264,7 +264,7 @@ namespace Sln.Management.Migrator.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<long?>("LastModificationId")
+                    b.Property<Guid?>("LastModificationId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -272,7 +272,7 @@ namespace Sln.Management.Migrator.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("Guidtext");
 
                     b.HasKey("Id");
 
@@ -281,19 +281,19 @@ namespace Sln.Management.Migrator.Migrations
 
             modelBuilder.Entity("Sln.Management.Data.Entities.FinancialOverview", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<Guid>("Id"));
 
-                    b.Property<long?>("CreatedId")
+                    b.Property<Guid?>("CreatedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long?>("DeletedId")
+                    b.Property<Guid?>("DeletedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("DeletionTime")
@@ -302,7 +302,7 @@ namespace Sln.Management.Migrator.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<long?>("LastModificationId")
+                    b.Property<Guid?>("LastModificationId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -310,7 +310,7 @@ namespace Sln.Management.Migrator.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("Guidtext");
 
                     b.HasKey("Id");
 
@@ -319,19 +319,19 @@ namespace Sln.Management.Migrator.Migrations
 
             modelBuilder.Entity("Sln.Management.Data.Entities.FrequencyTask", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<Guid>("Id"));
 
-                    b.Property<long?>("CreatedId")
+                    b.Property<Guid?>("CreatedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long?>("DeletedId")
+                    b.Property<Guid?>("DeletedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("DeletionTime")
@@ -340,7 +340,7 @@ namespace Sln.Management.Migrator.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<long?>("LastModificationId")
+                    b.Property<Guid?>("LastModificationId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -348,7 +348,7 @@ namespace Sln.Management.Migrator.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("Guidtext");
 
                     b.HasKey("Id");
 
@@ -357,19 +357,19 @@ namespace Sln.Management.Migrator.Migrations
 
             modelBuilder.Entity("Sln.Management.Data.Entities.ImportanceTask", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<Guid>("Id"));
 
-                    b.Property<long?>("CreatedId")
+                    b.Property<Guid?>("CreatedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long?>("DeletedId")
+                    b.Property<Guid?>("DeletedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("DeletionTime")
@@ -378,7 +378,7 @@ namespace Sln.Management.Migrator.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<long?>("LastModificationId")
+                    b.Property<Guid?>("LastModificationId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -386,7 +386,7 @@ namespace Sln.Management.Migrator.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("Guidtext");
 
                     b.HasKey("Id");
 
@@ -395,19 +395,19 @@ namespace Sln.Management.Migrator.Migrations
 
             modelBuilder.Entity("Sln.Management.Data.Entities.PriorityTask", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<Guid>("Id"));
 
-                    b.Property<long?>("CreatedId")
+                    b.Property<Guid?>("CreatedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long?>("DeletedId")
+                    b.Property<Guid?>("DeletedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("DeletionTime")
@@ -416,7 +416,7 @@ namespace Sln.Management.Migrator.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<long?>("LastModificationId")
+                    b.Property<Guid?>("LastModificationId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -424,7 +424,7 @@ namespace Sln.Management.Migrator.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("Guidtext");
 
                     b.HasKey("Id");
 
@@ -433,19 +433,19 @@ namespace Sln.Management.Migrator.Migrations
 
             modelBuilder.Entity("Sln.Management.Data.Entities.RangeTask", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<Guid>("Id"));
 
-                    b.Property<long?>("CreatedId")
+                    b.Property<Guid?>("CreatedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long?>("DeletedId")
+                    b.Property<Guid?>("DeletedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("DeletionTime")
@@ -454,7 +454,7 @@ namespace Sln.Management.Migrator.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<long?>("LastModificationId")
+                    b.Property<Guid?>("LastModificationId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -462,7 +462,7 @@ namespace Sln.Management.Migrator.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("Guidtext");
 
                     b.HasKey("Id");
 
@@ -471,19 +471,19 @@ namespace Sln.Management.Migrator.Migrations
 
             modelBuilder.Entity("Sln.Management.Data.Entities.SectionTask", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<Guid>("Id"));
 
-                    b.Property<long?>("CreatedId")
+                    b.Property<Guid?>("CreatedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long?>("DeletedId")
+                    b.Property<Guid?>("DeletedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("DeletionTime")
@@ -492,7 +492,7 @@ namespace Sln.Management.Migrator.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<long?>("LastModificationId")
+                    b.Property<Guid?>("LastModificationId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -500,7 +500,7 @@ namespace Sln.Management.Migrator.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("Guidtext");
 
                     b.HasKey("Id");
 
@@ -509,19 +509,19 @@ namespace Sln.Management.Migrator.Migrations
 
             modelBuilder.Entity("Sln.Management.Data.Entities.SubTask", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<Guid>("Id"));
 
-                    b.Property<long?>("CreatedId")
+                    b.Property<Guid?>("CreatedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long?>("DeletedId")
+                    b.Property<Guid?>("DeletedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("DeletionTime")
@@ -530,7 +530,7 @@ namespace Sln.Management.Migrator.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<long?>("LastModificationId")
+                    b.Property<Guid?>("LastModificationId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -538,7 +538,7 @@ namespace Sln.Management.Migrator.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("Guidtext");
 
                     b.HasKey("Id");
 
@@ -547,19 +547,19 @@ namespace Sln.Management.Migrator.Migrations
 
             modelBuilder.Entity("Sln.Management.Data.Entities.TaskManagement", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<Guid>("Id"));
 
-                    b.Property<long?>("CreatedId")
+                    b.Property<Guid?>("CreatedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("CreationTime")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<long?>("DeletedId")
+                    b.Property<Guid?>("DeletedId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("DeletionTime")
@@ -568,7 +568,7 @@ namespace Sln.Management.Migrator.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<long?>("LastModificationId")
+                    b.Property<Guid?>("LastModificationId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime?>("LastModificationTime")
@@ -576,7 +576,7 @@ namespace Sln.Management.Migrator.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("longtext");
+                        .HasColumnType("Guidtext");
 
                     b.HasKey("Id");
 
@@ -585,11 +585,11 @@ namespace Sln.Management.Migrator.Migrations
 
             modelBuilder.Entity("Sln.Management.Data.Models.ManagementDataModel", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bigint");
 
-                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<long>("Id"));
+                    MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<Guid>("Id"));
 
                     b.HasKey("Id");
 

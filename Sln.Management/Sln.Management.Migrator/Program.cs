@@ -12,7 +12,7 @@ namespace Sln.Management.Migrator
             var force = true;
             var host = CreateHostBuilder(args).Build();
             await DbMigrator<ManagementDbContext>.Run(host, force);
-            await DbSeeder.Run<ManagementDbContext, SeederHistory, long>(host, force);
+            await DbSeeder.Run<ManagementDbContext, SeederHistory, Guid>(host, force);
             return 0;
         }
 

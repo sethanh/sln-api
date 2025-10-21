@@ -5,11 +5,11 @@ namespace Sln.Payment.Contract.Requests.Payments;
 
 public class PaymentQrTransactionGetDetailRequest : IRequest<PaymentQrTransactionGetDetailResponse>
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
 }
 
 public class PaymentQrTransactionGetDetailResponse
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
     public required string Name { get; set; }
 }

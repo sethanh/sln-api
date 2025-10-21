@@ -26,7 +26,7 @@ public class TaskManagementsController : ManagementControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(long id, [FromBody] TaskManagementUpdateRequest requestBody)
+    public async Task<IActionResult> Update(Guid id, [FromBody] TaskManagementUpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {

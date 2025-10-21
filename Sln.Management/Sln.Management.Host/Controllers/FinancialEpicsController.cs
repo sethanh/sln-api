@@ -26,7 +26,7 @@ public class FinancialEpicsController : ManagementControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(long id, [FromBody] FinancialEpicUpdateRequest requestBody)
+    public async Task<IActionResult> Update(Guid id, [FromBody] FinancialEpicUpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {

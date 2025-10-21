@@ -2,7 +2,7 @@ using Sln.Management.Data.Models;
 
 namespace Sln.Management.Data.Entities;
 
-public class SubTask : ManagementAuditModel<long>
+public class SubTask : ManagementAuditModel<Guid>
 {
     public required string Name { get; set; }
 }

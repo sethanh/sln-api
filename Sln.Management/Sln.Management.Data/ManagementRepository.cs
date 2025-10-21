@@ -7,7 +7,7 @@ namespace Sln.Management.Data
     public class ManagementRepository<TEntity>(
         ManagementDbContext context,
         CurrentManagementAccount currentAccount
-        ) : RepositoryBase<TEntity, long>(context, currentAccount.Id), IRepository<TEntity> where TEntity : class
+        ) : RepositoryBase<TEntity, Guid>(context, currentAccount.Id), IRepository<TEntity> where TEntity : class
     {
     }
 

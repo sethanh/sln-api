@@ -10,7 +10,7 @@ namespace Sln.Payment.Data
     public class PaymentRepository<TEntity>(
         PaymentDbContext context,
         CurrentPaymentAccount currentAccount
-        ) : RepositoryBase<TEntity, long>(context, currentAccount.Id), IRepository<TEntity> where TEntity : class
+        ) : RepositoryBase<TEntity, Guid>(context, currentAccount.Id), IRepository<TEntity> where TEntity : class
     {
     }
 

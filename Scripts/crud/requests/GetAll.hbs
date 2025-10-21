@@ -15,8 +15,6 @@ public class {{Entity}}GetAllResponse : PaginationResponse<{{Entity}}GetAllRespo
 {
 }
 
-public class {{Entity}}GetAllResponseItem
+public class {{Entity}}GetAllResponseItem : {{Entity}}GetDetailResponse
 {
-    public required long Id { get; set; }
-    public required string Name { get; set; }
 }

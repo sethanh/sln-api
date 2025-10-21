@@ -28,7 +28,7 @@ public class PhotosController : PaymentControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(long id, [FromBody] PhotoUpdateRequest requestBody)
+    public async Task<IActionResult> Update(Guid id, [FromBody] PhotoUpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {

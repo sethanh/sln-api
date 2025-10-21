@@ -5,5 +5,5 @@ namespace Sln.Management.Contract.Requests.WorkManagements;
 
 public class TaskManagementDeleteRequest: IRequest
 {
-    public long Id { get; set; }
+    public Guid Id { get; set; }
 }

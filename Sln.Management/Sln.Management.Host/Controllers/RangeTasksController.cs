@@ -26,7 +26,7 @@ public class RangeTasksController : ManagementControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(long id, [FromBody] RangeTaskUpdateRequest requestBody)
+    public async Task<IActionResult> Update(Guid id, [FromBody] RangeTaskUpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {

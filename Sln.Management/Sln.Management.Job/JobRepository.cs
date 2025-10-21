@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Sln.Management.Job;
 
 public class JobRepository<TEntity>(ManagementDbContext context)
-    : RepositoryBase<TEntity, long>(context, null), IJobRepository<TEntity>
+    : RepositoryBase<TEntity, Guid>(context, null), IJobRepository<TEntity>
     where TEntity : class
 {
     private readonly DbContextBase _context = context;
@@ -25,7 +25,7 @@ public class JobRepository<TEntity>(ManagementDbContext context)
         return entity;
     }
 
-    Task<TEntity> IRepository<TEntity, long>.Update(TEntity entity)
+    Task<TEntity> IRepository<TEntity, Guid>.Update(TEntity entity)
     {
         SetUpdateAuditProperties(entity);
         _context.Set<TEntity>().Update(entity);
@@ -37,29 +37,29 @@ public class JobRepository<TEntity>(ManagementDbContext context)
         await  _context.Set<TEntity>().AddRangeAsync(entities);
     }
 
-    void IRepository<TEntity, long>.UpdateRange(List<TEntity> entities)
+    void IRepository<TEntity, Guid>.UpdateRange(List<TEntity> entities)
     {
         _context.Set<TEntity>().UpdateRange(entities);
     }
 
-    void IRepository<TEntity, long>.AddRange(List<TEntity> entities)
+    void IRepository<TEntity, Guid>.AddRange(List<TEntity> entities)
     {
         _context.Set<TEntity>().AddRange(entities);
     }
 
-    void IRepository<TEntity, long>.RemoveRange(List<TEntity> entities)
+    void IRepository<TEntity, Guid>.RemoveRange(List<TEntity> entities)
     {
         _context.Set<TEntity>().RemoveRange(entities);
     }
 
-    public async Task<TEntity?> FindAsync(long id)
+    public async Task<TEntity?> FindAsync(Guid id)
     {
         var data = await _context.Set<TEntity>().FindAsync(id);
 
         return data;
     }
 
-    public TEntity Remove(long id)
+    public TEntity Remove(Guid id)
     {
         var entity = _context.Set<TEntity>().Find(id);
 

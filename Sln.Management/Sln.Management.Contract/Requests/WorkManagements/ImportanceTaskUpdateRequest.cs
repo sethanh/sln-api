@@ -5,12 +5,12 @@ namespace Sln.Management.Contract.Requests.WorkManagements;
 
 public class ImportanceTaskUpdateRequest : IRequest<ImportanceTaskUpdateResponse>
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
     public required string Name { get; set; }
 }
 
 public class ImportanceTaskUpdateResponse
 {
-    public long Id { get; set; }
+    public Guid Id { get; set; }
     public required string Name { get; set; }
 }

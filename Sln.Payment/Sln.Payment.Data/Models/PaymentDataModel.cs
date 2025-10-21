@@ -6,7 +6,7 @@ using Sln.Shared.Data.Models;
 
 namespace Sln.Payment.Data.Models
 {
-    public class PaymentDataModel: DataModelBase<long>
+    public class PaymentDataModel: DataModelBase<Guid>
     {
         
     }

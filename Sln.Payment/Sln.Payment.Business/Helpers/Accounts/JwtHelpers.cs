@@ -51,10 +51,10 @@ namespace Sln.Payment.Business.Helpers.Accounts
             return new JwtSecurityTokenHandler().WriteToken(jwtToken);
         }
 
-        public static string GenerateRefreshToken(long AccountId)
+        public static string GenerateRefreshToken(Guid AccountId)
         {
             byte[] nowValue = BitConverter.GetBytes(DateTime.Now.Ticks);
-            byte[] accountIdValue = BitConverter.GetBytes(AccountId);
+            byte[] accountIdValue = AccountId.ToByteArray();
 
             string dateTimeBase64 = Convert.ToBase64String(nowValue);
             string accountIdBase64 = Convert.ToBase64String(accountIdValue);
@@ -69,16 +69,17 @@ namespace Sln.Payment.Business.Helpers.Accounts
             return accountIdBase64 + "_pfl%" + dateTimeBase64 + randomBase64;
         }
 
-        public static long GetAccountIdInRefreshToken(string refreshToken)
+        public static Guid GetAccountIdInRefreshToken(string refreshToken)
         {
             string[] values = refreshToken.Split("_pfl%");
 
             var accountValue = values[0];
             var accountIdByte = Convert.FromBase64String(accountValue);
-            long accountId = 0;
+            Guid accountId = Guid.Empty;
             try
             {
-                accountId = BitConverter.ToInt64(accountIdByte, 0);
+                if (accountIdByte.Length == 16)
+                    accountId = new Guid(accountIdByte);
             }
             catch
             { }

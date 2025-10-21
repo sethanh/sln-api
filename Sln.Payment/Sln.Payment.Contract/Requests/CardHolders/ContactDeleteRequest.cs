@@ -5,5 +5,5 @@ namespace Sln.Payment.Contract.Requests.CardHolders;
 
 public class ContactDeleteRequest: IRequest
 {
-    public long Id { get; set; }
+    public Guid Id { get; set; }
 }

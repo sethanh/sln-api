@@ -4,7 +4,7 @@ using Sln.Shared.Data.Models;
 
 namespace Sln.Management.Data.Entities;
 
-public class Account : ManagementAuditModel<long>
+public class Account : ManagementAuditModel<Guid>
 {
     public required string Name { get; set; }
     [Column(TypeName = "varchar(100)")]

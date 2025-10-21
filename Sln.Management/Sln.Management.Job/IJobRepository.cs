@@ -3,6 +3,6 @@ using Sln.Shared.Data.Abstractions;
 
 namespace Sln.Management.Job;
 
-public interface IJobRepository<TEntity> : IRelationDbRepository<TEntity, long> where TEntity : class
+public interface IJobRepository<TEntity> : IRelationDbRepository<TEntity, Guid> where TEntity : class
 {
 }

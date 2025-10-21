@@ -12,7 +12,7 @@ namespace Sln.Payment.Migrator
             var force = true;
             var host = CreateHostBuilder(args).Build();
             await DbMigrator<PaymentDbContext>.Run(host, force);
-            await DbSeeder.Run<PaymentDbContext, SeederHistory, long>(host, force);
+            await DbSeeder.Run<PaymentDbContext, SeederHistory, Guid>(host, force);
             return 0;
         }
 

@@ -13,6 +13,6 @@ public class RangeTaskGetAllResponse : PaginationResponse<RangeTaskGetAllRespons
 
 public class RangeTaskGetAllResponseItem
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
     public required string Name { get; set; }
 }

@@ -55,7 +55,7 @@ public class AccountsController : PaymentControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(long id, [FromBody] AccountUpdateRequest requestBody)
+    public async Task<IActionResult> Update(Guid id, [FromBody] AccountUpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {

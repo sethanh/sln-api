@@ -6,7 +6,7 @@ using Sln.Shared.Data.Models;
 
 namespace Sln.Management.Data.Models
 {
-    public class ManagementDataModel: DataModelBase<long>
+    public class ManagementDataModel: DataModelBase<Guid>
     {
         
     }

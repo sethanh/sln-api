@@ -25,15 +25,15 @@ namespace Sln.Management.Business.Middlewares
                 var name = claimsPrincipal.FindFirst(ClaimTypes.Name)?.Value;
                 var role = claimsPrincipal.FindFirst(ClaimTypes.Role)?.Value;
 
-                long accountId = 0;
-                if (!string.IsNullOrEmpty(identifier) && long.TryParse(identifier, out var parsedIdentifier))
+                Guid accountId = Guid.NewGuid();
+                if (!string.IsNullOrEmpty(identifier) && Guid.TryParse(identifier, out var parsedIdentifier))
                 {
                     accountId = parsedIdentifier;
                 }
 
                 var organizationIdClaim = context.User.Claims.FirstOrDefault(c => c.Type == "OrganizationId")?.Value;
-                long organizationId = 0;
-                if (!string.IsNullOrEmpty(organizationIdClaim) && long.TryParse(organizationIdClaim, out var parsedOrganizationId))
+                Guid organizationId = Guid.NewGuid();
+                if (!string.IsNullOrEmpty(organizationIdClaim) && Guid.TryParse(organizationIdClaim, out var parsedOrganizationId))
                 {
                     organizationId = parsedOrganizationId;
                 }

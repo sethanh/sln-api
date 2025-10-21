@@ -13,7 +13,7 @@ public class AccountGetAllResponse : PaginationResponse<AccountGetAllResponseIte
 
 public class AccountGetAllResponseItem
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
     public required string Name { get; set; }
     public required DateTime CreationTime { get; set; }
 }

@@ -26,7 +26,7 @@ public class BoardTasksController : ManagementControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(long id, [FromBody] BoardTaskUpdateRequest requestBody)
+    public async Task<IActionResult> Update(Guid id, [FromBody] BoardTaskUpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {

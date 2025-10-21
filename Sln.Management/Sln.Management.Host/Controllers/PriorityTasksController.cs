@@ -26,7 +26,7 @@ public class PriorityTasksController : ManagementControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(long id, [FromBody] PriorityTaskUpdateRequest requestBody)
+    public async Task<IActionResult> Update(Guid id, [FromBody] PriorityTaskUpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {

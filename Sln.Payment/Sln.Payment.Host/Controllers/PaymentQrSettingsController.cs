@@ -26,7 +26,7 @@ public class PaymentQrSettingsController : PaymentControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(long id, [FromBody] PaymentQrSettingUpdateRequest requestBody)
+    public async Task<IActionResult> Update(Guid id, [FromBody] PaymentQrSettingUpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {

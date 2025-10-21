@@ -9,12 +9,10 @@ namespace Sln.{{App}}.Contract.Requests.{{Module}}s;
 
 public class {{Entity}}UpdateRequest : IRequest<{{Entity}}UpdateResponse>
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
     public required string Name { get; set; }
 }
 
-public class {{Entity}}UpdateResponse
+public class {{Entity}}UpdateResponse :{{Entity}}GetDetailResponse
 {
-    public long Id { get; set; }
-    public required string Name { get; set; }
 }

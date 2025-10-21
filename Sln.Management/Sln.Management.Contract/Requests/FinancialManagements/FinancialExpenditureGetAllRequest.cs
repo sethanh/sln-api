@@ -13,6 +13,6 @@ public class FinancialExpenditureGetAllResponse : PaginationResponse<FinancialEx
 
 public class FinancialExpenditureGetAllResponseItem
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
     public required string Name { get; set; }
 }

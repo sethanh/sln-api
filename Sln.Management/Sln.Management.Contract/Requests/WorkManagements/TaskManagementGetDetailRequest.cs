@@ -5,11 +5,11 @@ namespace Sln.Management.Contract.Requests.WorkManagements;
 
 public class TaskManagementGetDetailRequest : IRequest<TaskManagementGetDetailResponse>
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
 }
 
 public class TaskManagementGetDetailResponse
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
     public required string Name { get; set; }
 }

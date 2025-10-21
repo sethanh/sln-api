@@ -7,17 +7,17 @@ namespace Sln.Payment.Contract.Values.VietQr
 {
     public class BankInfoValue
     {
-        public long Id { get; set; }
+        public Guid Id { get; set; }
         public string? Name { get; set; }
         public string? Code { get; set; }
         public string? Bin { get; set; }
         public string? ShortName { get; set; }
         public string? Logo { get; set; }
-        public long TransferSupported { get; set; }
-        public long LookupSupported { get; set; }
+        public Guid TransferSupported { get; set; }
+        public Guid LookupSupported { get; set; }
         public string? Short_name { get; set; }
-        public long Support { get; set; }
-        public long IsTransfer { get; set; }
+        public Guid Support { get; set; }
+        public Guid IsTransfer { get; set; }
         public string? Swift_code { get; set; }
     }
     public class BankInfoResponse

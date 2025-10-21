@@ -14,7 +14,7 @@ public class JobInfoService(IServiceProvider serviceProvider) : ApplicationServi
 {
     private readonly  JobInfoManager JobInfoManager = serviceProvider.GetRequiredService<JobInfoManager>();
 
-    public JobInfo GetJobInfo(long id)
+    public JobInfo GetJobInfo(Guid id)
     {
         var jobInfo = JobInfoManager.GetAll().FirstOrDefault(c => c.Id == id);
         if (jobInfo == null)
@@ -35,7 +35,7 @@ public class JobInfoService(IServiceProvider serviceProvider) : ApplicationServi
         return Mapper.Map<CreateJobInfoResponse>(jobInfo);
     }
 
-    public async Task<UpdateJobInfoResponse> UpdateJobInfoAsync(long id, UpdateJobInfoRequest request)
+    public async Task<UpdateJobInfoResponse> UpdateJobInfoAsync(Guid id, UpdateJobInfoRequest request)
     {
         var jobInfo = GetJobInfo(id);
         
@@ -47,7 +47,7 @@ public class JobInfoService(IServiceProvider serviceProvider) : ApplicationServi
         return Mapper.Map<UpdateJobInfoResponse>(jobUpdated);
     }
 
-    public async Task<JobInfo?> DeleteByJobTypeAsync(long? objectId, JobEvent? jobEvent)
+    public async Task<JobInfo?> DeleteByJobTypeAsync(Guid? objectId, JobEvent? jobEvent)
     {
         var jobInfoQuery = JobInfoManager.GetAll()
             .Where(x => x.JobStatus != JobStatus.Deleted)

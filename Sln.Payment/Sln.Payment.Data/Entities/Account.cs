@@ -4,7 +4,7 @@ using Sln.Shared.Data.Models;
 
 namespace Sln.Payment.Data.Entities;
 
-public class Account : PaymentAuditModel<long>
+public class Account : PaymentAuditModel<Guid>
 {
     public required string Name { get; set; }
     [Column(TypeName = "varchar(100)")]

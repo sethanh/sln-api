@@ -13,6 +13,6 @@ public class SectionTaskGetAllResponse : PaginationResponse<SectionTaskGetAllRes
 
 public class SectionTaskGetAllResponseItem
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
     public required string Name { get; set; }
 }

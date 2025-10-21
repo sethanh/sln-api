@@ -16,16 +16,16 @@ namespace Sln.Management.Migrator.Migrations
                 name: "BoardTask",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<Guid>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "Guidtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreationTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CreatedId = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedId = table.Column<Guid>(type: "bigint", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    LastModificationId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationId = table.Column<Guid>(type: "bigint", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    DeletedId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletedId = table.Column<Guid>(type: "bigint", nullable: true),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
@@ -38,16 +38,16 @@ namespace Sln.Management.Migrator.Migrations
                 name: "EpicTask",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<Guid>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "Guidtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreationTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CreatedId = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedId = table.Column<Guid>(type: "bigint", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    LastModificationId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationId = table.Column<Guid>(type: "bigint", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    DeletedId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletedId = table.Column<Guid>(type: "bigint", nullable: true),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
@@ -60,16 +60,16 @@ namespace Sln.Management.Migrator.Migrations
                 name: "FinancialEpic",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<Guid>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "Guidtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreationTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CreatedId = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedId = table.Column<Guid>(type: "bigint", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    LastModificationId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationId = table.Column<Guid>(type: "bigint", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    DeletedId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletedId = table.Column<Guid>(type: "bigint", nullable: true),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
@@ -82,16 +82,16 @@ namespace Sln.Management.Migrator.Migrations
                 name: "FinancialExpenditure",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<Guid>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "Guidtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreationTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CreatedId = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedId = table.Column<Guid>(type: "bigint", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    LastModificationId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationId = table.Column<Guid>(type: "bigint", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    DeletedId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletedId = table.Column<Guid>(type: "bigint", nullable: true),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
@@ -104,16 +104,16 @@ namespace Sln.Management.Migrator.Migrations
                 name: "FinancialOverview",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<Guid>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "Guidtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreationTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CreatedId = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedId = table.Column<Guid>(type: "bigint", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    LastModificationId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationId = table.Column<Guid>(type: "bigint", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    DeletedId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletedId = table.Column<Guid>(type: "bigint", nullable: true),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
@@ -126,16 +126,16 @@ namespace Sln.Management.Migrator.Migrations
                 name: "FrequencyTask",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<Guid>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "Guidtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreationTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CreatedId = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedId = table.Column<Guid>(type: "bigint", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    LastModificationId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationId = table.Column<Guid>(type: "bigint", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    DeletedId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletedId = table.Column<Guid>(type: "bigint", nullable: true),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
@@ -148,16 +148,16 @@ namespace Sln.Management.Migrator.Migrations
                 name: "ImportanceTask",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<Guid>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "Guidtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreationTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CreatedId = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedId = table.Column<Guid>(type: "bigint", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    LastModificationId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationId = table.Column<Guid>(type: "bigint", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    DeletedId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletedId = table.Column<Guid>(type: "bigint", nullable: true),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
@@ -170,16 +170,16 @@ namespace Sln.Management.Migrator.Migrations
                 name: "PriorityTask",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<Guid>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "Guidtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreationTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CreatedId = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedId = table.Column<Guid>(type: "bigint", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    LastModificationId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationId = table.Column<Guid>(type: "bigint", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    DeletedId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletedId = table.Column<Guid>(type: "bigint", nullable: true),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
@@ -192,16 +192,16 @@ namespace Sln.Management.Migrator.Migrations
                 name: "RangeTask",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<Guid>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "Guidtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreationTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CreatedId = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedId = table.Column<Guid>(type: "bigint", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    LastModificationId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationId = table.Column<Guid>(type: "bigint", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    DeletedId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletedId = table.Column<Guid>(type: "bigint", nullable: true),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
@@ -214,16 +214,16 @@ namespace Sln.Management.Migrator.Migrations
                 name: "SectionTask",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<Guid>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "Guidtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreationTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CreatedId = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedId = table.Column<Guid>(type: "bigint", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    LastModificationId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationId = table.Column<Guid>(type: "bigint", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    DeletedId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletedId = table.Column<Guid>(type: "bigint", nullable: true),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
@@ -236,16 +236,16 @@ namespace Sln.Management.Migrator.Migrations
                 name: "SubTask",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<Guid>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "Guidtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreationTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CreatedId = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedId = table.Column<Guid>(type: "bigint", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    LastModificationId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationId = table.Column<Guid>(type: "bigint", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    DeletedId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletedId = table.Column<Guid>(type: "bigint", nullable: true),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
@@ -258,16 +258,16 @@ namespace Sln.Management.Migrator.Migrations
                 name: "TaskManagement",
                 columns: table => new
                 {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
+                    Id = table.Column<Guid>(type: "bigint", nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(type: "longtext", nullable: false)
+                    Name = table.Column<string>(type: "Guidtext", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreationTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    CreatedId = table.Column<long>(type: "bigint", nullable: true),
+                    CreatedId = table.Column<Guid>(type: "bigint", nullable: true),
                     LastModificationTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    LastModificationId = table.Column<long>(type: "bigint", nullable: true),
+                    LastModificationId = table.Column<Guid>(type: "bigint", nullable: true),
                     DeletionTime = table.Column<DateTime>(type: "datetime(6)", nullable: true),
-                    DeletedId = table.Column<long>(type: "bigint", nullable: true),
+                    DeletedId = table.Column<Guid>(type: "bigint", nullable: true),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>

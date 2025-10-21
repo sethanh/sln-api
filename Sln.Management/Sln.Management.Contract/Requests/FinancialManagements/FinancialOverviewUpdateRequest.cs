@@ -5,12 +5,12 @@ namespace Sln.Management.Contract.Requests.FinancialManagements;
 
 public class FinancialOverviewUpdateRequest : IRequest<FinancialOverviewUpdateResponse>
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
     public required string Name { get; set; }
 }
 
 public class FinancialOverviewUpdateResponse
 {
-    public long Id { get; set; }
+    public Guid Id { get; set; }
     public required string Name { get; set; }
 }

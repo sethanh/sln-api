@@ -26,7 +26,7 @@ public class ImportanceTasksController : ManagementControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(long id, [FromBody] ImportanceTaskUpdateRequest requestBody)
+    public async Task<IActionResult> Update(Guid id, [FromBody] ImportanceTaskUpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {

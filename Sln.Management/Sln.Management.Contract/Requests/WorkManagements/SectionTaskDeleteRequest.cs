@@ -5,5 +5,5 @@ namespace Sln.Management.Contract.Requests.WorkManagements;
 
 public class SectionTaskDeleteRequest: IRequest
 {
-    public long Id { get; set; }
+    public Guid Id { get; set; }
 }

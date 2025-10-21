@@ -5,11 +5,11 @@ namespace Sln.Management.Contract.Requests.FinancialManagements;
 
 public class FinancialOverviewGetDetailRequest : IRequest<FinancialOverviewGetDetailResponse>
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
 }
 
 public class FinancialOverviewGetDetailResponse
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
     public required string Name { get; set; }
 }

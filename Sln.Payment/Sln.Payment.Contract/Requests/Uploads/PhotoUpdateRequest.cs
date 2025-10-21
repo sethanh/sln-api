@@ -5,12 +5,12 @@ namespace Sln.Payment.Contract.Requests.Uploads;
 
 public class PhotoUpdateRequest : IRequest<PhotoUpdateResponse>
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
     public required string Name { get; set; }
 }
 
 public class PhotoUpdateResponse
 {
-    public long Id { get; set; }
+    public Guid Id { get; set; }
     public required string Name { get; set; }
 }

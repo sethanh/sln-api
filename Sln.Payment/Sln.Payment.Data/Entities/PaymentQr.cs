@@ -2,7 +2,7 @@ using Sln.Payment.Data.Models;
 
 namespace Sln.Payment.Data.Entities;
 
-public class PaymentQr : PaymentAuditModel<long>
+public class PaymentQr : PaymentAuditModel<Guid>
 {
     public string? BinCode { get; set; }
     public string? AccountNo { get; set; }

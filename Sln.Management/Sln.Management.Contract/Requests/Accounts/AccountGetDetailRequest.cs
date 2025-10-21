@@ -5,11 +5,11 @@ namespace Sln.Management.Contract.Requests.Accounts;
 
 public class AccountGetDetailRequest : IRequest<AccountGetDetailResponse>
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
 }
 
 public class AccountGetDetailResponse
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
     public required string Name { get; set; }
 }

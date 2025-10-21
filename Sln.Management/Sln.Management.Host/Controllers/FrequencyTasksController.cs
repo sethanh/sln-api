@@ -26,7 +26,7 @@ public class FrequencyTasksController : ManagementControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(long id, [FromBody] FrequencyTaskUpdateRequest requestBody)
+    public async Task<IActionResult> Update(Guid id, [FromBody] FrequencyTaskUpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {

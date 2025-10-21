@@ -5,5 +5,5 @@ namespace Sln.Management.Contract.Requests.FinancialManagements;
 
 public class FinancialOverviewDeleteRequest: IRequest
 {
-    public long Id { get; set; }
+    public Guid Id { get; set; }
 }

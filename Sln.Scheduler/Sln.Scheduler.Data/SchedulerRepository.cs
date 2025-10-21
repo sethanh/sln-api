@@ -21,7 +21,7 @@ public class SchedulerRepository<TEntity>(SchedulerDbContext context) : ISchedul
         return data;
     }
 
-    public async Task<TEntity?> FindAsync(long? id)
+    public async Task<TEntity?> FindAsync(Guid? id)
     {
         if (id == default)
         {
@@ -99,12 +99,12 @@ public class SchedulerRepository<TEntity>(SchedulerDbContext context) : ISchedul
         _context.Set<TEntity>().RemoveRange(entities);
     }
 
-    public Task<TEntity?> FindAsync(long id)
+    public Task<TEntity?> FindAsync(Guid id)
     {
         throw new NotImplementedException();
     }
 
-    public TEntity Remove(long id)
+    public TEntity Remove(Guid id)
     {
         throw new NotImplementedException();
     }

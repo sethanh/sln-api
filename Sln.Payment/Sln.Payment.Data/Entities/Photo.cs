@@ -2,7 +2,7 @@ using Sln.Payment.Data.Models;
 
 namespace Sln.Payment.Data.Entities;
 
-public class Photo : PaymentAuditModel<long>
+public class Photo : PaymentAuditModel<Guid>
 {
     public string? FileName { get; set; }
     public string? RelativePath { get; set; } 

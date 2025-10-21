@@ -13,6 +13,6 @@ public class BoardTaskGetAllResponse : PaginationResponse<BoardTaskGetAllRespons
 
 public class BoardTaskGetAllResponseItem
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
     public required string Name { get; set; }
 }

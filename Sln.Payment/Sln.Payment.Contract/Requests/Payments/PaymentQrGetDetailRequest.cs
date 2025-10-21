@@ -5,12 +5,12 @@ namespace Sln.Payment.Contract.Requests.Payments;
 
 public class PaymentQrGetDetailRequest : IRequest<PaymentQrGetDetailResponse>
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
 }
 
 public class PaymentQrGetDetailResponse
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
     public string? BinCode { get; set; }
     public string? AccountNo { get; set; }
     public string? AccountName { get; set; }

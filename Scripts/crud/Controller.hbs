@@ -39,7 +39,7 @@ public class {{Entity}}sController : {{App}}ControllerBase
 
 {{#if useUpdateDto}}
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(long id, [FromBody] {{Entity}}UpdateRequest requestBody)
+    public async Task<IActionResult> Update(Guid id, [FromBody] {{Entity}}UpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {

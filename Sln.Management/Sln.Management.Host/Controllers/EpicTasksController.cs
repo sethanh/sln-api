@@ -26,7 +26,7 @@ public class EpicTasksController : ManagementControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(long id, [FromBody] EpicTaskUpdateRequest requestBody)
+    public async Task<IActionResult> Update(Guid id, [FromBody] EpicTaskUpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {

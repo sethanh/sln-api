@@ -13,6 +13,6 @@ public class PriorityTaskGetAllResponse : PaginationResponse<PriorityTaskGetAllR
 
 public class PriorityTaskGetAllResponseItem
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
     public required string Name { get; set; }
 }

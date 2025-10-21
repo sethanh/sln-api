@@ -5,12 +5,12 @@ namespace Sln.Management.Contract.Requests.WorkManagements;
 
 public class TaskManagementUpdateRequest : IRequest<TaskManagementUpdateResponse>
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
     public required string Name { get; set; }
 }
 
 public class TaskManagementUpdateResponse
 {
-    public long Id { get; set; }
+    public Guid Id { get; set; }
     public required string Name { get; set; }
 }

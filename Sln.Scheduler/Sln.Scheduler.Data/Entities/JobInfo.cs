@@ -9,13 +9,13 @@ namespace Sln.Scheduler.Data.Entities;
 
 [Index(nameof(TransactionId))]
 [Index(nameof(ObjectId))]
-public class JobInfo : DataModelBase<long>, IRelationEntityModel
+public class JobInfo : DataModelBase<Guid>, IRelationEntityModel
 {
     public string? JobId { get; set; }
     public JobEvent JobEvent { get; set; }
     public string? JobType { get; set; }
-    public long? ObjectId { get; set; }
-    public long? TransactionId { get; set; }
+    public Guid? ObjectId { get; set; }
+    public Guid? TransactionId { get; set; }
     public JobStatus? JobStatus { get; set; }
     public string? Data { get; set; }
     public DateTime? SendTime { get; set; }

@@ -26,7 +26,7 @@ public class SocialContactsController : PaymentControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(long id, [FromBody] SocialContactUpdateRequest requestBody)
+    public async Task<IActionResult> Update(Guid id, [FromBody] SocialContactUpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {

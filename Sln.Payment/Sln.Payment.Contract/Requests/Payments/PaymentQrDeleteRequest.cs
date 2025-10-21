@@ -5,5 +5,5 @@ namespace Sln.Payment.Contract.Requests.Payments;
 
 public class PaymentQrDeleteRequest: IRequest
 {
-    public long Id { get; set; }
+    public Guid Id { get; set; }
 }

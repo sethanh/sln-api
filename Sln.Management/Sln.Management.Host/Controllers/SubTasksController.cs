@@ -26,7 +26,7 @@ public class SubTasksController : ManagementControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(long id, [FromBody] SubTaskUpdateRequest requestBody)
+    public async Task<IActionResult> Update(Guid id, [FromBody] SubTaskUpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {

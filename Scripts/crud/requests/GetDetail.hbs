@@ -9,11 +9,11 @@ namespace Sln.{{App}}.Contract.Requests.{{Module}}s;
 
 public class {{Entity}}GetDetailRequest : IRequest<{{Entity}}GetDetailResponse>
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
 }
 
 public class {{Entity}}GetDetailResponse
 {
-    public required long Id { get; set; }
+    public required Guid Id { get; set; }
     public required string Name { get; set; }
 }
