@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Sln.Shared.Common.Helpers;
@@ -60,44 +56,45 @@ namespace Sln.Shared.Data
             );
         }
 
-         private async Task AfterSaveChangeAsync(
-        List<ChangeIModelEntity> changeIModelEntities
-        )
-    {
-        try
+        private async Task AfterSaveChangeAsync(List<ChangeIModelEntity> changeIModelEntities)
         {
-            foreach (var entity in changeIModelEntities)
+            try
             {
-                var DeleterId = entity.DataChanges?.FirstOrDefault(e => e.Field == "DeleterId")?.ChangedValue;
+                foreach (var entity in changeIModelEntities)
+                {
+                    var DeleterId = entity.DataChanges?.FirstOrDefault(e => e.Field == "DeleterId")?.ChangedValue;
 
-                if(entity.State == EntityState.Added)
-                {
-                    await publisher.Publish(new ModelCreateEventRequest<IDataModel>() { 
-                        Data = (IDataModel)entity.Entity, 
-                        DataChanges = entity.DataChanges
-                    });
-                }
-                else if(entity.State == EntityState.Deleted || DeleterId != null)
-                {
-                    await publisher.Publish(new ModelDeleteEventRequest<IDataModel>() { 
-                        Data = (IDataModel)entity.Entity,
-                        DataChanges = entity.DataChanges
-                    });
-                }
-                else if(entity.State == EntityState.Modified && DeleterId == null)
-                {
-                    await publisher.Publish(new ModelModifyEventRequest<IDataModel>() { 
-                        Data = (IDataModel)entity.Entity,
-                        DataChanges = entity.DataChanges
-                    });
+                    if (entity.State == EntityState.Added)
+                    {
+                        await publisher.Publish(new ModelCreateEventRequest<IDataModel>()
+                        {
+                            Data = (IDataModel)entity.Entity,
+                            DataChanges = entity.DataChanges
+                        });
+                    }
+                    else if (entity.State == EntityState.Deleted || DeleterId != null)
+                    {
+                        await publisher.Publish(new ModelDeleteEventRequest<IDataModel>()
+                        {
+                            Data = (IDataModel)entity.Entity,
+                            DataChanges = entity.DataChanges
+                        });
+                    }
+                    else if (entity.State == EntityState.Modified && DeleterId == null)
+                    {
+                        await publisher.Publish(new ModelModifyEventRequest<IDataModel>()
+                        {
+                            Data = (IDataModel)entity.Entity,
+                            DataChanges = entity.DataChanges
+                        });
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
         }
-        catch (Exception e)
-        {
-            Console.WriteLine(e);
-        }
-        
-    }
     }
 }

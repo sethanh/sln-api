@@ -1,4 +1,5 @@
 using Mapster;
+using Sln.Management.Business.Services.ThirdParty;
 using Sln.Management.Data;
 using Sln.Management.Host.Filters;
 using Sln.Shared.Common.Constants.Envs;
@@ -32,6 +33,7 @@ namespace Sln.Management.Host
             services.AddApplicationService();
             services.AddDomainService();
             services.AddReportService();
+            services.AddScoped<ManagementExcelService>();
             services.AddScoped<CacheResourceFilter>();
             services.AddScoped<DateTimeToLocalTimeFilter>();
             services.AddAuthenticationService();
