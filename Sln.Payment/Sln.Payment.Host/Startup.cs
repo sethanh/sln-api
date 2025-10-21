@@ -1,4 +1,5 @@
 using Mapster;
+using Sln.Payment.Business.Services.Transactions;
 using Sln.Payment.Data;
 // using Sln.Payment.Host.Filters;
 using Sln.Shared.Common.Constants.Envs;
@@ -29,6 +30,7 @@ namespace Sln.Payment.Host
             services.AddRedisCache();
             services.AddDapperService();
             services.AddCacheService();
+            services.AddSingleton<TransactionListenerService>();
             services.AddApplicationService();
             services.AddDomainService();
             services.AddReportService();

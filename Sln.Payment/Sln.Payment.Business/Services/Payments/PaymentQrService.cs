@@ -7,12 +7,14 @@ using Sln.Shared.Common.Exceptions;
 using Newtonsoft.Json;
 using Sln.Payment.Contract.Values.VietQr;
 using Mapster;
+using Sln.Payment.Business.Services.Transactions;
 
 namespace Sln.Payment.Business.Services.Payments;
 
 public class PaymentQrService(IServiceProvider serviceProvider) : PaymentApplicationService(serviceProvider)
 {
     private PaymentQrManager PaymentQrManager => GetService<PaymentQrManager>();
+    private TransactionListenerService TransactionListenerService => GetService<TransactionListenerService>();
 
     public Task<PaymentQrGetAllResponse> GetAll(PaymentQrGetAllRequest request)
     {
@@ -151,6 +153,8 @@ public class PaymentQrService(IServiceProvider serviceProvider) : PaymentApplica
             QrCode = qr
         };
 
+        var qrKey = $"{request.Description}_{DateTime.Now:HHmmss}";
+        TransactionListenerService.StartBackgroundListening(qrKey, 300);
         return Task.FromResult(response);
     }
 }

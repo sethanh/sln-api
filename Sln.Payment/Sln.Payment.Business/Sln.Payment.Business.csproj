@@ -6,6 +6,10 @@
     <ProjectReference Include="..\Sln.Payment.Contract\Sln.Payment.Contract.csproj" />
     <ProjectReference Include="..\Sln.Payment.Data\Sln.Payment.Data.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.12.4" />
+    <PackageReference Include="MailKit" Version="4.14.1" />
+  </ItemGroup>
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
