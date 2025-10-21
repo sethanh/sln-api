@@ -1,4 +1,5 @@
 using Mapster;
+using Sln.Management.Business.Extensions;
 using Sln.Management.Business.Services.ThirdParty;
 using Sln.Management.Data;
 using Sln.Management.Host.Filters;
@@ -25,7 +26,7 @@ namespace Sln.Management.Host
             services.AddScoped(typeof(IRepository<>), typeof(ManagementRepository<>));
             services.AddScoped<IUnitOfWork, ManagementUnitOfWork>();
             services.AddMapster();
-            // services.RegisterMapsterConfiguration();
+            services.RegisterMapsterConfiguration();
             services.AddHttpClient();
             services.AddRedisCache();
             services.AddDapperService();
