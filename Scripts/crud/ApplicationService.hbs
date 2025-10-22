@@ -9,6 +9,7 @@ using Sln.{{App}}.Business.Managers.{{Module}}s;
 using Sln.Shared.Business.Interfaces;
 using Sln.Shared.Contract.Models;
 using Sln.Shared.Common.Exceptions;
+using Mapster;
 
 namespace Sln.{{App}}.Business.Services.{{Module}}s;
 
@@ -75,7 +76,7 @@ public class {{Entity}}Service(IServiceProvider serviceProvider) : {{App}}Applic
 
         await UnitOfWork.SaveChangesAsync();
 
-        return Mapper.Map<{{Entity}}UpdateResponse>(updated{{Entity}});
+        return Mapper.Map<{{Entity}}UpdateResponse>(update{{Entity}});
     }
     {{/if}}
 
