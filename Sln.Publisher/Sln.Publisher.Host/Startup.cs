@@ -116,7 +116,7 @@ public record Startup(IConfiguration Configuration)
             // connect to root realtime hub node
             // Have to call {Subscribe} method to initiate connection listening 
             endpoints.MapHub<RealtimeHub>("/hub/realtime");
-
+            endpoints.MapHub<MeetingHub>("/hub/meeting");
             // connect to specific {key} realtime hub node
             // This will auto {Subscribe} {key} node
             // do not need to call {Subscribe} method anymore
