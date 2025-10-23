@@ -36,45 +36,50 @@ public record Startup(IConfiguration Configuration)
         );
 
         // cache define
-        services.AddRedisCache();
+        // services.AddRedisCache();
         services.AddMemoryCacheService();
         services.AddDynamicCacheService();
 
         // SignalR raltime define
         services.AddSignalR()
             // Config redis backplane for SignalR using for multiple instance behind load balanacer
-            .AddStackExchangeRedis(options =>
-            {
-                var redisHost = Environment.GetEnvironmentVariable(EnvConstants.PUBLISHER_REDIS_CONNECTION) ?? "";
-                var redisPort = int.Parse(Environment.GetEnvironmentVariable(EnvConstants.PUBLISHER_REDIS_PORT) ?? "6379");
-                var redisChannel = Environment.GetEnvironmentVariable(EnvConstants.PUBLISHER_REDIS_CHANNEL) ?? "Publisher_Hub";
-                options.Configuration.ChannelPrefix = RedisChannel.Literal(redisChannel);
-                options.Configuration.DefaultDatabase = 1;
-                options.ConnectionFactory = async writer =>
-                {
-                    var config = new ConfigurationOptions
-                    {
-                        AbortOnConnectFail = false
-                    };
-                    config.EndPoints.Add(redisHost, redisPort);
-                    config.SetDefaultPorts();
-                    var connection = await ConnectionMultiplexer.ConnectAsync(config, writer);
-                    connection.ConnectionFailed += (_, e) =>
-                    {
-                        Console.WriteLine("Connection to Redis failed.");
-                    };
+            // .AddStackExchangeRedis(options =>
+            // {
+            //     var redisHost = Environment.GetEnvironmentVariable(EnvConstants.PUBLISHER_REDIS_CONNECTION) ?? "";
+            //     var redisPort = int.Parse(Environment.GetEnvironmentVariable(EnvConstants.PUBLISHER_REDIS_PORT) ?? "6379");
+            //     var redisChannel = Environment.GetEnvironmentVariable(EnvConstants.PUBLISHER_REDIS_CHANNEL) ?? "Publisher_Hub";
+            //     options.Configuration.ChannelPrefix = RedisChannel.Literal(redisChannel);
+            //     options.Configuration.DefaultDatabase = 1;
+            //     options.ConnectionFactory = async writer =>
+            //     {
+            //         var config = new ConfigurationOptions
+            //         {
+            //             AbortOnConnectFail = false
+            //         };
+            //         config.EndPoints.Add(redisHost, redisPort);
+            //         config.SetDefaultPorts();
+            //         var connection = await ConnectionMultiplexer.ConnectAsync(config, writer);
+            //         connection.ConnectionFailed += (_, e) =>
+            //         {
+            //             Console.WriteLine("Connection to Redis failed.");
+            //         };
 
-                    Console.WriteLine(!connection.IsConnected
-                        ? "Did not connect to Redis."
-                        : $"Redis connected: {redisHost} - {redisPort}");
+            //         Console.WriteLine(!connection.IsConnected
+            //             ? "Did not connect to Redis."
+            //             : $"Redis connected: {redisHost} - {redisPort}");
 
-                    return connection;
-                };
-            })
+            //         return connection;
+            //     };
+            // })
             .AddHubOptions<RealtimeHub>(options =>
             {
                 options.MaximumReceiveMessageSize = 1024 * 1024; // 1MB
+            })
+            .AddHubOptions<MeetingHub>(options =>
+            {
+                options.MaximumReceiveMessageSize = 1024 * 1024; // 1MB
             });
+        
         services.AddMediatR((configs) =>
         {
             configs.RegisterServicesFromAssemblyContaining<Startup>();
