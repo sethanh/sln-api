@@ -45,6 +45,8 @@ RUN dotnet build "Sln.Shared/Sln.Shared.Business/Sln.Shared.Business.csproj" -c 
 COPY ["Sln.Shared/Sln.Shared.Host/", "Sln.Shared/Sln.Shared.Host"]
 RUN dotnet build "Sln.Shared/Sln.Shared.Host/Sln.Shared.Host.csproj" -c Release
 
+COPY ["Sln.Publisher/Sln.Publisher.Contract/", "Sln.Publisher/Sln.Publisher.Contract"]
+RUN dotnet build "Sln.Publisher/Sln.Publisher.Contract/Sln.Publisher.Contract.csproj" -c Release
 COPY ["Sln.Publisher/Sln.Publisher.Common/", "Sln.Publisher/Sln.Publisher.Common"]
 RUN dotnet build "Sln.Publisher/Sln.Publisher.Common/Sln.Publisher.Common.csproj" -c Release
 COPY ["Sln.Publisher/Sln.Publisher.Data/", "Sln.Publisher/Sln.Publisher.Data"]
