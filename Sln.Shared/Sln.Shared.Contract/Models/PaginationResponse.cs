@@ -1,4 +1,5 @@
 ﻿using Sln.Shared.Common.Extensions;
+using Sln.Shared.Contract.Extensions;
 
 namespace Sln.Shared.Contract.Models
 {
@@ -27,6 +28,19 @@ namespace Sln.Shared.Contract.Models
                 : null;
 
             return new PaginationResponse<TItem>(items, PaginationRequestModel.PageSize, PaginationRequestModel.Page, totalItems);
+        }
+
+        public static PaginationResponse<TItem> Create(IQueryable<TItem> queryable, ScrollPaginationRequest PaginationRequestModel)
+        {
+            queryable = queryable.TryOrderByIdDescending(PaginationRequestModel);
+
+            var items = queryable.Take(PaginationRequestModel.PageSize).ToList();
+
+            int? totalItems = PaginationRequestModel.UseCountTotal
+                ? queryable.Count()
+                : null;
+
+            return new PaginationResponse<TItem>(items, PaginationRequestModel.PageSize, 1, totalItems);
         }
 
         public static PaginationResponse<TItem> Create(List<TItem>? queryable, PaginationRequest PaginationRequestModel)
