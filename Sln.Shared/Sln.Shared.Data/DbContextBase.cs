@@ -17,7 +17,7 @@ namespace Sln.Shared.Data
                 return;
             }
 
-            optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+            // optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
 
             optionsBuilder.UseMySql(
                 this.ConnectionString,
