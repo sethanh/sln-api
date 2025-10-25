@@ -5,6 +5,7 @@ using Sln.Payment.Business.Managers.Messages;
 using Sln.Shared.Contract.Models;
 using Sln.Shared.Common.Exceptions;
 using Mapster;
+using Microsoft.EntityFrameworkCore;
 
 namespace Sln.Payment.Business.Services.Messages;
 
@@ -15,6 +16,8 @@ public class ConversationService(IServiceProvider serviceProvider) : PaymentAppl
     public Task<ConversationGetAllResponse> GetAll(ConversationGetAllRequest request)
     {
         var Conversation = ConversationManager.GetAll()
+            .Include(c => c.Accounts)
+                .ThenInclude(c => c.Account)
             .Where(c => c.Accounts != null && c.Accounts.Any(a => a.AccountId == CurrentAccount.Id));
 
         var paginationResponse = PaginationResponse<Conversation>.Create(
