@@ -18,6 +18,7 @@ public class ConversationService(IServiceProvider serviceProvider) : PaymentAppl
         var Conversation = ConversationManager.GetAll()
             .Include(c => c.Accounts)
                 .ThenInclude(c => c.Account)
+                    .ThenInclude(c => c.GoogleAccounts)
             .Where(c => c.Accounts != null && c.Accounts.Any(a => a.AccountId == CurrentAccount.Id));
 
         var paginationResponse = PaginationResponse<Conversation>.Create(
