@@ -80,16 +80,10 @@ public record Startup(IConfiguration Configuration)
                 options.MaximumReceiveMessageSize = 1024 * 1024; // 1MB
             });
         
-        // services.AddMediatR((configs) =>
-        // {
-        //     configs.RegisterServicesFromAssemblyContaining<Startup>();
-        // });
-
-        var pubs = AppDomain.CurrentDomain
-            .GetAssemblies()
-            .Where(a => (a.FullName?.StartsWith("Sln.Publisher.") ?? false))
-            .ToArray();
-        services.AddMediatR(cfg => cfg.RegisterServicesFromAssemblies(pubs));
+        services.AddMediatR((configs) =>
+        {
+            configs.RegisterServicesFromAssemblyContaining<Startup>();
+        });
 
         services.AddMapster();
         services.RegisterMapsterConfiguration();

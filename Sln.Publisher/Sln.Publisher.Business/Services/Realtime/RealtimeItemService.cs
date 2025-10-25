@@ -14,7 +14,7 @@ public class RealtimeItemService(IServiceProvider serviceProvider, IRedisCacheSe
 {
     private RealtimeItemManager RealtimeItemManager => GetService<RealtimeItemManager>();
 
-    public RealtimeItemGetAllResponse GetAll(RealtimeItemGetAllRequest request)
+    public async Task<RealtimeItemGetAllResponse> GetAll(RealtimeItemGetAllRequest request)
     {
         var realtimeItems = RealtimeItemManager.GetAll();
         if (!string.IsNullOrEmpty(request.ParentKey))
