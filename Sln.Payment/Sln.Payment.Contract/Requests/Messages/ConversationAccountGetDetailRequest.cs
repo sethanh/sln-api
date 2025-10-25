@@ -11,5 +11,7 @@ public class ConversationAccountGetDetailRequest : IRequest<ConversationAccountG
 public class ConversationAccountGetDetailResponse
 {
     public required Guid Id { get; set; }
-    public required string Name { get; set; }
+    public Guid AccountId { get; set; }
+    public Guid ConversationId { get; set; }
+    public AccountResponse? Account { get; set; }
 }

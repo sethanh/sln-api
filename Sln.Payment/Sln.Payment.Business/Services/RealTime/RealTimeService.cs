@@ -32,7 +32,10 @@ namespace Sln.Payment.Business.Services.RealTime
                 Key = RealTimeUtils.GetKey(RealTimeJobs.MESSAGE_REFRESH, $"{chatMessage.ConversationId}"),
                 Data = new
                 {
-                    messageId = chatMessage.Id
+                    MessageId = chatMessage.Id,
+                    Message = chatMessage.Message,
+                    AccountId = chatMessage.AccountId,
+                    CreationTime = chatMessage.CreationTime
                 }
             });
         }

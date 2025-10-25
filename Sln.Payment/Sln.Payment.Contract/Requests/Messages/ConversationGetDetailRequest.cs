@@ -13,7 +13,7 @@ public class ConversationGetDetailResponse
 {
     public required Guid Id { get; set; }
     public string? Name { get; set; }
-    public virtual ICollection<AccountResponse>? Accounts { get; set; }
+    public List<ConversationAccountGetDetailResponse>? Accounts { get; set; }
     public string? Background { get; set; }
     public string? Icon { get; set; }
 }
