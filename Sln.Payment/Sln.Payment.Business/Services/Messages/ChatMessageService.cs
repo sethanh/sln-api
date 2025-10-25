@@ -5,12 +5,14 @@ using Sln.Payment.Business.Managers.Messages;
 using Sln.Shared.Contract.Models;
 using Sln.Shared.Common.Exceptions;
 using Mapster;
+using Sln.Payment.Business.Services.RealTime;
 
 namespace Sln.Payment.Business.Services.Messages;
 
 public class ChatMessageService(IServiceProvider serviceProvider) : PaymentApplicationService(serviceProvider)
 {
     private ChatMessageManager ChatMessageManager => GetService<ChatMessageManager>();
+    private RealTimeService RealTimeService => GetService<RealTimeService>();
 
     public Task<ChatMessageGetAllResponse> GetAll(ChatMessageGetAllRequest request)
     {
@@ -43,6 +45,8 @@ public class ChatMessageService(IServiceProvider serviceProvider) : PaymentAppli
         ChatMessageManager.Add(chatMessage);
 
         await UnitOfWork.SaveChangesAsync();
+
+        await RealTimeService.ChatMessageRefresh(chatMessage);
 
         return Mapper.Map<ChatMessageCreateResponse>(chatMessage);
     }

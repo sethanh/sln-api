@@ -1,19 +1,14 @@
 using Sln.Shared.Contract.Models;
 using MediatR;
+using Sln.Payment.Contract.Requests.Messages;
 
 namespace Sln.Payment.Contract.Requests.Accounts;
 
 public class AccountGetAllRequest : PaginationRequest, IRequest<AccountGetAllResponse>
 {
+    public required string Email { get; set; }
 }
 
-public class AccountGetAllResponse : PaginationResponse<AccountGetAllResponseItem>
+public class AccountGetAllResponse : PaginationResponse<AccountResponse>
 {
-}
-
-public class AccountGetAllResponseItem
-{
-    public required Guid Id { get; set; }
-    public required string Name { get; set; }
-    public required DateTime CreationTime { get; set; }
 }

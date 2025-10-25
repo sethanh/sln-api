@@ -130,7 +130,7 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
 
     public Task<AccountGetAllResponse> GetAll(AccountGetAllRequest request)
     {
-        var Account = AccountManager.GetAll();
+        var Account = AccountManager.GetAll().Where(c => c.Email == request.Email);
 
         var paginationResponse = PaginationResponse<Account>.Create(
             Account,

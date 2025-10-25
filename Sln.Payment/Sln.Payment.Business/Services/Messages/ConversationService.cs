@@ -14,7 +14,8 @@ public class ConversationService(IServiceProvider serviceProvider) : PaymentAppl
 
     public Task<ConversationGetAllResponse> GetAll(ConversationGetAllRequest request)
     {
-        var Conversation = ConversationManager.GetAll();
+        var Conversation = ConversationManager.GetAll()
+            .Where(c => c.Accounts != null && c.Accounts.Any(a => a.AccountId == CurrentAccount.Id));
 
         var paginationResponse = PaginationResponse<Conversation>.Create(
             Conversation,

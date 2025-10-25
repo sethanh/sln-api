@@ -1,4 +1,5 @@
 using Mapster;
+using Sln.Payment.Business.Services.RealTime;
 using Sln.Payment.Data;
 // using Sln.Payment.Host.Filters;
 using Sln.Shared.Common.Constants.Envs;
@@ -30,6 +31,7 @@ namespace Sln.Payment.Host
             services.AddDapperService();
             services.AddCacheService();
             services.AddApplicationService();
+            services.AddSingleton<RealTimeService>();
             services.AddDomainService();
             services.AddReportService();
             // services.AddScoped<CacheResourceFilter>();

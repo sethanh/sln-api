@@ -1,5 +1,6 @@
 using MediatR;
 using Sln.Payment.Contract.Requests.Accounts;
+using Sln.Payment.Contract.Requests.Uploads;
 
 namespace Sln.Payment.Contract.Requests.Messages;
 
@@ -21,5 +22,7 @@ public class AccountResponse
 {
     public required Guid Id { get; set; }
     public required string Name { get; set; }
+    public Guid? PhotoId { get; set; }
+    public PhotoGetDetailResponse? Photo { get; set;  }
     public List<GoogleAccountGetDetailResponse>? GoogleAccounts { get; set; }
 }
