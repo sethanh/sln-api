@@ -8,6 +8,7 @@ using Sln.Payment.Business.Helpers.Accounts;
 using Sln.Shared.Business.Services;
 using System.Text.Json;
 using Sln.Payment.Business.Managers.s;
+using Mapster;
 
 namespace Sln.Payment.Business.Services.Accounts;
 
@@ -192,9 +193,8 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
             throw new HttpBadRequest(AccountErrors.ACCOUNT_NOT_FOUND);
         }
 
-        // TODO: Update account properties
-
-        var updatedAccount = AccountManager.Update(account);
+        var updatedAccount = request.Adapt(account);
+        AccountManager.Update(updatedAccount);
 
         await UnitOfWork.SaveChangesAsync();
 
