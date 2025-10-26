@@ -1,9 +1,6 @@
-﻿namespace Sln.Shared.Host.Interfaces;
+﻿using Sln.Shared.Business.Interfaces;
 
-public interface IDomainService
-{
-
-}
+namespace Sln.Shared.Host.Interfaces;
 
 public interface IBaseDomainService<TEntity> : IDomainService where TEntity: class
 {
