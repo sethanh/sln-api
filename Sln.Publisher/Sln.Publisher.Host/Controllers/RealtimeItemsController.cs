@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Sln.Publisher.Contract.Requests.Realtime.RealtimeItems;
 using Sln.Publisher.Host.Infras;
-using RouteAttribute = Microsoft.AspNetCore.Components.RouteAttribute;
+
 
 namespace Sln.Publisher.Host.Controllers;
 
+[ApiController]
 [Route("realtime-items")]
 public class RealtimeItemsController : PublisherControllerBase
 {
