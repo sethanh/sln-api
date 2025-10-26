@@ -87,8 +87,8 @@ public record Startup(IConfiguration Configuration)
         services.AddTransient<IMapper, Mapper>();
         services.RegisterMapsterConfiguration();
         services.AddScoped<IUnitOfWork, PublisherUnitOfWork>();
-        services.AddApplicationServices();
-        services.AddDomainServices();
+        services.AddApplicationService();
+        services.AddDomainService();
         services.AddMongoRepositories();
         services.AddSingleton<RealtimeServices>();
         services.AddKafkaConsumerService();
