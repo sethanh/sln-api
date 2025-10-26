@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Sln.Payment.Contract.Requests.Accounts;
+using Sln.Payment.Contract.Requests.Messages;
 
 namespace Sln.Payment.Host.Controllers;
 
@@ -27,7 +28,7 @@ public class AccountsController : PaymentControllerBase
     [Authorize]
     public async Task<IActionResult> GetDetail([FromRoute]AccountGetDetailRequest request)
     {
-        return await RequestAsGet<AccountGetDetailRequest, AccountGetDetailResponse>(request);
+        return await RequestAsGet<AccountGetDetailRequest, AccountResponse>(request);
     }
 
     [HttpPost("google-verify")]

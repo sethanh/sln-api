@@ -18,7 +18,7 @@ namespace Sln.Shared.Data
             }
 
             // optionsBuilder.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-
+            optionsBuilder.UseLazyLoadingProxies();
             optionsBuilder.UseMySql(
                 this.ConnectionString,
                 ServerVersion.AutoDetect(this.ConnectionString),

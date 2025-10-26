@@ -1,9 +1,10 @@
 using Sln.Shared.Contract.Models;
 using MediatR;
+using Sln.Payment.Contract.Requests.Messages;
 
 namespace Sln.Payment.Contract.Requests.Accounts;
 
-public class AccountGetDetailRequest : IRequest<AccountGetDetailResponse>
+public class AccountGetDetailRequest : IRequest<AccountResponse>
 {
     public required Guid Id { get; set; }
 }

@@ -9,6 +9,7 @@ using Sln.Shared.Business.Services;
 using System.Text.Json;
 using Sln.Payment.Business.Managers.s;
 using Mapster;
+using Sln.Payment.Contract.Requests.Messages;
 
 namespace Sln.Payment.Business.Services.Accounts;
 
@@ -161,7 +162,7 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
         return Task.FromResult(result);
     }
 
-    public Task<AccountGetDetailResponse> GetDetail(AccountGetDetailRequest request)
+    public Task<AccountResponse> GetDetail(AccountGetDetailRequest request)
     {
         var account = AccountManager.FirstOrDefault(o => o.Id == request.Id);
 
@@ -170,7 +171,7 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
             throw new HttpNotFound(AccountErrors.ACCOUNT_NOT_FOUND);
         }
 
-        return Task.FromResult(Mapper.Map<AccountGetDetailResponse>(account));
+        return Task.FromResult(Mapper.Map<AccountResponse>(account));
     }
 
     public async Task<AccountCreateResponse> Create(AccountCreateRequest request)
