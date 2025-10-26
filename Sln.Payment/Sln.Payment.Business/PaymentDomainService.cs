@@ -10,7 +10,7 @@ using Sln.Shared.Data.Interfaces;
 namespace Sln.Payment.Business
 {
     public class PaymentDomainService<TEntity>(IRepository<TEntity> repository) 
-        : DomainServiceBase<TEntity>(repository) where TEntity : class
+        : DomainServiceBase<TEntity, Guid>(repository) where TEntity : class
     {
     }
 }

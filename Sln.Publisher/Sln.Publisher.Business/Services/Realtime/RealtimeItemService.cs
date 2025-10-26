@@ -86,12 +86,12 @@ public class RealtimeItemService(IServiceProvider serviceProvider, IRedisCacheSe
             {
                 exist.ParentKey = realtimeItem.ParentKey;
                 exist.Data = realtimeItem.Data;
-                RealtimeItemManager.Update(exist);
+                await RealtimeItemManager.Update(exist);
                 await UnitOfWork.SaveChangesAsync();
                 return Mapper.Map<RealtimeItemCreateResponse>(exist);
             }   
         }
-        realtimeItem = RealtimeItemManager.Add(realtimeItem);
+        realtimeItem = await RealtimeItemManager.AddAsync(realtimeItem);
         await UnitOfWork.SaveChangesAsync();
         return Mapper.Map<RealtimeItemCreateResponse>(realtimeItem);
     }
@@ -129,7 +129,7 @@ public class RealtimeItemService(IServiceProvider serviceProvider, IRedisCacheSe
             return null!;
         }
 
-        RealtimeItemManager.Delete(item);
+        RealtimeItemManager.Delete(item.Id);
         
         //remove all child item of current items
         var childs = await RealtimeItemManager.GetAll()
