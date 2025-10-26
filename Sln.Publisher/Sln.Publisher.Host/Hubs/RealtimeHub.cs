@@ -10,6 +10,7 @@ using Sln.Publisher.Host.Hubs.Models;
 using Sln.Publisher.Contract.Requests.Realtime.RealtimeItems;
 using Sln.Publisher.Data.Enums;
 using Sln.Shared.Contract.Models;
+using System.Text.Json;
 
 namespace Sln.Publisher.Host.Hubs;
 public class RealtimeHub(IMediator mediator, IMapper mapper, IMemoryCache memoryCache) : Hub
@@ -73,7 +74,7 @@ public class RealtimeHub(IMediator mediator, IMapper mapper, IMemoryCache memory
             Console.WriteLine(request);
             request = await ParseRequest<UpdateItemRealtimeHubModel>(request);
             Console.WriteLine($"Parse request");
-            Console.WriteLine(request);
+            Console.WriteLine(JsonSerializer.Serialize(request));
 
             var realtimeItem = await mediator.Send(new RealtimeItemGetDetailRequest()
             {

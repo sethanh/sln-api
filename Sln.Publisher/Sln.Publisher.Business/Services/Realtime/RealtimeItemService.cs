@@ -32,6 +32,8 @@ public class RealtimeItemService(IServiceProvider serviceProvider, IRedisCacheSe
 
     public async Task<RealtimeItemGetDetailResponse> GetDetail(RealtimeItemGetDetailRequest request)
     {
+        Console.WriteLine("Getting detail ");
+        Console.WriteLine(JsonSerializer.Serialize(request));
         var cacheKey = RealtimeItemManager.GetCacheKey(request.Key);
         var realtimeItem = cacheService.Get<RealtimeItem>(cacheKey);
         if (realtimeItem == null)
@@ -53,8 +55,19 @@ public class RealtimeItemService(IServiceProvider serviceProvider, IRedisCacheSe
             {
                 ParentKey = item.ParentKey,
                 Key = item.Key,
-                Data = JsonSerializer.Serialize(item.Data?? "")
+                Data = JsonSerializer.Serialize(item.Data ?? "")
             };
+        }
+        Console.WriteLine("Realtime Item Detail: ");
+        Console.WriteLine(JsonSerializer.Serialize(realtimeItem));
+
+        try
+        {
+            Mapper.Map<RealtimeItemGetDetailResponse>(realtimeItem);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Error parsing realtime item data: " + ex.Message);
         }
 
         return Mapper.Map<RealtimeItemGetDetailResponse>(realtimeItem);
