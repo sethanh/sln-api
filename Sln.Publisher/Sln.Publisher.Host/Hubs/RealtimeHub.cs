@@ -80,6 +80,8 @@ public class RealtimeHub(IMediator mediator, IMapper mapper, IMemoryCache memory
                 ParentKey = request.ParentKey,
                 Key = request.Key ?? ""
             });
+            Console.WriteLine($"realtimeItem fetched {request.Key} {string.IsNullOrEmpty(realtimeItem.Key)}");
+            
             object? data;
             if (string.IsNullOrEmpty(realtimeItem.Key))
             {
@@ -91,6 +93,7 @@ public class RealtimeHub(IMediator mediator, IMapper mapper, IMemoryCache memory
                 });
                 item.ChangeType = RealtimeChangeType.Modified.ToString(); // trigger as modified
                 data = item;
+                Console.WriteLine($"*Data created for key: {request.Key}");
             }
             else
             {
@@ -102,6 +105,7 @@ public class RealtimeHub(IMediator mediator, IMapper mapper, IMemoryCache memory
                 });
                 item.ChangeType = RealtimeChangeType.Modified.ToString();
                 data = item;
+                Console.WriteLine($"*Data updated for key: {request.Key}");
             }
             Console.WriteLine($"Data updated for key: {request.Key}");
 
@@ -121,6 +125,7 @@ public class RealtimeHub(IMediator mediator, IMapper mapper, IMemoryCache memory
         }
         catch (Exception e)
         {
+            Console.WriteLine($"ERROR: {e.Message}");
             await SendError(e);
         }
     }
