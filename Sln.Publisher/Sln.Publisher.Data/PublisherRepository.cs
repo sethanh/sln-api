@@ -5,7 +5,8 @@ using Sln.Shared.Data.Services;
 
 namespace Sln.Publisher.Data;
 
-public class PublisherRepository<TEntity>(PublisherDbContext context)
+public class PublisherRepository<TEntity>
+    (PublisherDbContext context)
     : RepositoryBase<TEntity, Guid>(context, null), IPublisherRepository<TEntity> where TEntity : class
 {
 

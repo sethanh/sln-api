@@ -15,6 +15,8 @@ namespace Sln.Shared.Data.Interfaces
         TEntity? FirstOrDefault(Expression<Func<TEntity, bool>> predicate);
         IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> predicate);
         IQueryable<TEntity> Search(string? searchTerm);
+
+        // CRUD
         TEntity Add(TEntity entity);
         List<TEntity> AddRange(List<TEntity> entities);
         TEntity Update(TEntity entity);

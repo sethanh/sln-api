@@ -8,7 +8,7 @@ using Sln.Shared.Data.Interfaces;
 
 namespace Sln.Shared.Business
 {
-    public abstract class DomainServiceBase<TEntity>(IRepository<TEntity> repository) 
+    public abstract class DomainServiceBase<TEntity, TKey>(IRepository<TEntity> repository) 
         : IDomainService<TEntity> where TEntity : class
     {
         public readonly IRepository<TEntity> MainRepository = repository;
