@@ -86,6 +86,7 @@ public record Startup(IConfiguration Configuration)
         });
         services.AddTransient<IMapper, Mapper>();
         services.RegisterMapsterConfiguration();
+        services.AddScoped(typeof(IRepository<>), typeof(PublisherRepository<>));
         services.AddScoped<IUnitOfWork, PublisherUnitOfWork>();
         services.AddApplicationServices();
         services.AddDomainServices();

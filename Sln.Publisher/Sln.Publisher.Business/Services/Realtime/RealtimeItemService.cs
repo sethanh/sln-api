@@ -37,7 +37,7 @@ public class RealtimeItemService(IServiceProvider serviceProvider, IRedisCacheSe
         var cacheKey = RealtimeItemManager.GetCacheKey(request.Key);
         var realtimeItem = cacheService.Get<RealtimeItem>(cacheKey);
         if (realtimeItem == null)
-        {
+        {   Console.WriteLine("Cache miss, fetching from database");
             realtimeItem = await RealtimeItemManager.GetAll()
                 .FirstOrDefaultAsync(e=>e.Key == request.Key);
             cacheService.Add(cacheKey, realtimeItem, DateTimeOffset.Now.AddMinutes(15));
