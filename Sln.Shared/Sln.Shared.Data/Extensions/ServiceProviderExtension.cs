@@ -13,7 +13,7 @@ namespace Sln.Shared.Data.Extensions
         {
             var assemblies = Assembly.GetCallingAssembly().GetReferencedAssemblies()
                 .Select(Assembly.Load)
-                .Where(a => a.FullName?.StartsWith("Esg") ?? false);
+                .Where(a => a.FullName?.StartsWith("Sln") ?? false);
 
             var types = assemblies.SelectMany(a => a.GetExportedTypes());
             var repositoryTypes = types
@@ -32,7 +32,7 @@ namespace Sln.Shared.Data.Extensions
         {
             var assemblies = Assembly.GetCallingAssembly().GetReferencedAssemblies()
                 .Select(Assembly.Load)
-                .Where(a => a.FullName?.StartsWith("Esg") ?? false);
+                .Where(a => a.FullName?.StartsWith("Sln") ?? false);
 
             var types = assemblies.SelectMany(a => a.GetExportedTypes()); 
             var checkType = types.Select(s => new

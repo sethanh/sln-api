@@ -19,7 +19,7 @@ public static class ServiceProviderExtension
     {
         var assemblies = Assembly.GetCallingAssembly().GetReferencedAssemblies()
             .Select(Assembly.Load)
-            .Where(a => a.FullName?.StartsWith("Esg") ?? false);
+            .Where(a => a.FullName?.StartsWith("Sln") ?? false);
         var types = assemblies.SelectMany(a => a.GetExportedTypes());
         var applicationServices = types
             .Where(t => t.IsAssignableTo(typeof(IApplicationService)) && !t.IsAbstract && !t.IsInterface)
@@ -39,7 +39,7 @@ public static class ServiceProviderExtension
         var assemblies = callingAssembly
             .GetReferencedAssemblies()
             .Select(Assembly.Load)
-            .Where(a => a.FullName?.StartsWith("Esg") ?? false);
+            .Where(a => a.FullName?.StartsWith("Sln") ?? false);
         var types = assemblies.SelectMany(a => a.GetExportedTypes()).Concat(callingAssembly.GetExportedTypes());
         var applicationServices = types
             .Where(t => t.IsAssignableTo(typeof(IJobService)) && !t.IsAbstract && !t.IsInterface)
@@ -57,7 +57,7 @@ public static class ServiceProviderExtension
     {
         var assemblies = Assembly.GetCallingAssembly().GetReferencedAssemblies()
             .Select(Assembly.Load)
-            .Where(a => a.FullName?.StartsWith("Esg") ?? false);
+            .Where(a => a.FullName?.StartsWith("Sln") ?? false);
 
         var types = assemblies.SelectMany(a => a.GetExportedTypes()).ToArray();
         var domainServices = types
