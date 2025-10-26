@@ -69,7 +69,11 @@ public class RealtimeHub(IMediator mediator, IMapper mapper, IMemoryCache memory
     {
         try
         {
+            Console.WriteLine($"Data request");
+            Console.WriteLine(request);
             request = await ParseRequest<UpdateItemRealtimeHubModel>(request);
+            Console.WriteLine($"Parse request");
+            Console.WriteLine(request);
 
             var realtimeItem = await mediator.Send(new RealtimeItemGetDetailRequest()
             {
@@ -99,8 +103,10 @@ public class RealtimeHub(IMediator mediator, IMapper mapper, IMemoryCache memory
                 item.ChangeType = RealtimeChangeType.Modified.ToString();
                 data = item;
             }
+            Console.WriteLine($"Data updated for key: {request.Key}");
 
             var groupName = request.GetGroupName();
+            Console.WriteLine($"Data updated for groupName: {groupName}");
 
             await Clients.Groups(groupName)
                 .SendCoreAsync(RealtimeEvents.DataModified.ToString(), new[] { data });
