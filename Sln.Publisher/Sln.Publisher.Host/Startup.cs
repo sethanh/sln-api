@@ -1,4 +1,3 @@
-using Mapster;
 using Sln.Publisher.Data;
 using StackExchange.Redis;
 using Sln.Publisher.Data.Extensions;
@@ -8,6 +7,7 @@ using Sln.Shared.Host.Extensions;
 using Sln.Publisher.Business.Services.Realtime;
 using Sln.Publisher.Host.Extensions;
 using Sln.Shared.Common.Constants.Envs;
+using MapsterMapper;
 
 namespace Sln.Publisher.Host;
 
@@ -84,8 +84,7 @@ public record Startup(IConfiguration Configuration)
         {
             configs.RegisterServicesFromAssemblyContaining<Startup>();
         });
-
-        services.AddMapster();
+        services.AddTransient<IMapper, Mapper>();
         services.RegisterMapsterConfiguration();
         services.AddScoped<IUnitOfWork, PublisherUnitOfWork>();
         services.AddApplicationServices();
