@@ -113,7 +113,7 @@ public class RealtimeItemService(IServiceProvider serviceProvider, IRedisCacheSe
         exist.ParentKey = realtimeItem.ParentKey;
         exist.Data = realtimeItem.Data;
 
-        var updatedRealtimeItem = RealtimeItemManager.Update(exist);
+        var updatedRealtimeItem = await RealtimeItemManager.Update(exist);
 
         await UnitOfWork.SaveChangesAsync();
         cacheService.Remove(cacheKey);
