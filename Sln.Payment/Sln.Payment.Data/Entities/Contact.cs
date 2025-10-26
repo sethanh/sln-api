@@ -12,7 +12,7 @@ public class Contact : PaymentAuditModel<Guid>
     public string? PhoneNumber { get; set; }
     public string? Email { get; set; }
     public Guid? PhotoId { get; set; }
-    public ICollection<SocialContact>? SocialContacts { get; set; }
+    public virtual ICollection<SocialContact>? SocialContacts { get; set; }
     public virtual Photo? Photo { get; set; }
     [Column(TypeName = "varchar(88)")]
     public string? ProfileName { get; set; }
