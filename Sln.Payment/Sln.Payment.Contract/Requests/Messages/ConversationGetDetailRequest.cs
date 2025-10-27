@@ -22,6 +22,7 @@ public class AccountResponse
 {
     public required Guid Id { get; set; }
     public required string Name { get; set; }
+    public string? Email { get; set; }
     public Guid? PhotoId { get; set; }
     public PhotoGetDetailResponse? Photo { get; set;  }
     public List<GoogleAccountGetDetailResponse>? GoogleAccounts { get; set; }

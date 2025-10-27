@@ -18,10 +18,8 @@ public class GoogleAccountGetDetailResponse
 }
 
 
-public class AccountGetDetailResponse
+public class AccountGetDetailResponse: AccountResponse
 {
-    public required Guid Id { get; set; }
-    public required string Name { get; set; }
     public GoogleAccountGetDetailResponse? GoogleAccount { get; set; }
 }
 

@@ -148,16 +148,13 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
 
         var googleAccount = GoogleAccountManager.FirstOrDefault(c => c.AccountId == CurrentAccount.Id);
 
-        var result = new AccountGetDetailResponse {
-            Name = account.Name,
-            Id = account.Id,
-            GoogleAccount = googleAccount != null ? new GoogleAccountGetDetailResponse{
-                Id = googleAccount!.Id,
-                Email = googleAccount.Email,
-                Picture = googleAccount.Picture
-                
-            } : null
-        };
+        var result = Mapper.Map<AccountGetDetailResponse>(account);
+        result.GoogleAccount = googleAccount != null ? new GoogleAccountGetDetailResponse {
+            Id = googleAccount!.Id,
+            Email = googleAccount.Email,
+            Picture = googleAccount.Picture
+
+        } : null;
 
         return Task.FromResult(result);
     }
@@ -187,11 +184,10 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
 
     public async Task<AccountUpdateResponse> Update(AccountUpdateRequest request)
     {
-        var account = AccountManager.FirstOrDefault(o => o.Id == request.Id);
-
-        if(account == null)
+        var account = AccountManager.FirstOrDefault(o => o.Id == request.Id) ?? throw new HttpBadRequest(AccountErrors.ACCOUNT_NOT_FOUND);
+        if (request.Password == "********")
         {
-            throw new HttpBadRequest(AccountErrors.ACCOUNT_NOT_FOUND);
+            request.Password = account.Password;
         }
 
         var updatedAccount = request.Adapt(account);
