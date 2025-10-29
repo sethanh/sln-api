@@ -40,7 +40,7 @@ namespace Sln.Payment.Business.Helpers.Accounts
             var jwtToken = new JwtSecurityToken(
                 claims: claims,
                 notBefore: DateTime.UtcNow,
-                expires: DateTime.UtcNow.AddDays(1),
+                expires: DateTime.UtcNow.AddDays(7),
                 signingCredentials: new SigningCredentials(
                     new SymmetricSecurityKey(
                        Encoding.UTF8.GetBytes(jwtSecret!)
