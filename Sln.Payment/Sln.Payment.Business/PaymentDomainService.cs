@@ -9,8 +9,9 @@ using Sln.Shared.Data.Interfaces;
 
 namespace Sln.Payment.Business
 {
-    public class PaymentDomainService<TEntity>(IRepository<TEntity> repository) 
+    public class PaymentDomainService<TEntity>(IRepository<TEntity> repository)
         : DomainServiceBase<TEntity, Guid>(repository) where TEntity : class
     {
+        // add getAllById
     }
 }

@@ -9,6 +9,6 @@ public class FacilityUpdateRequest : IRequest<FacilityUpdateResponse>
     public required string Name { get; set; }
 }
 
-public class FacilityUpdateResponse :FacilityGetDetailResponse
+public class FacilityUpdateResponse : FacilityGetDetailResponse
 {
 }

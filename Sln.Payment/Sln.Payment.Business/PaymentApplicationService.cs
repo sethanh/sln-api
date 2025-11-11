@@ -7,7 +7,7 @@ using Sln.Shared.Business;
 
 namespace Sln.Payment.Business
 {
-    public class PaymentApplicationService( IServiceProvider serviceProvider) 
+    public class PaymentApplicationService(IServiceProvider serviceProvider)
         : ApplicationServiceBase(serviceProvider)
     {
         public CurrentPaymentAccount CurrentAccount => GetService<CurrentPaymentAccount>();

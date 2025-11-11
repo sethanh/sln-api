@@ -14,8 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Sln.Scheduler.Data\Sln.Scheduler.Data.csproj" />
-    <ProjectReference Include="..\Sln.Scheduler.Business\Sln.Scheduler.Business.csproj" />
+    <ProjectReference Include="..\Sln.Payment.Data\Sln.Payment.Data.csproj" />
+    <ProjectReference Include="..\Sln.Payment.Business\Sln.Payment.Business.csproj" />
     <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Host\Sln.Shared.Host.csproj" />
   </ItemGroup>
 

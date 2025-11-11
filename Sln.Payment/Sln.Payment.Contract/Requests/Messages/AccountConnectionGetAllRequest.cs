@@ -1,5 +1,7 @@
 using Sln.Shared.Contract.Models;
 using MediatR;
+using Sln.Payment.Contract.Enums;
+using Sln.Payment.Contract.Requests.Messages;
 
 namespace Sln.Payment.Contract.Requests.Messages;
 

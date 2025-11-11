@@ -1,6 +1,6 @@
-@Sln.Scheduler.Migrator_HostAddress = http://localhost:5293
+@Sln.Payment.Migrator_HostAddress = http://localhost:5293
 
-GET {{Sln.Scheduler.Migrator_HostAddress}}/weatherforecast/
+GET {{Sln.Payment.Migrator_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###

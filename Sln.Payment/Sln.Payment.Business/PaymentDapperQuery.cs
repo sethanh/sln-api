@@ -9,7 +9,7 @@ namespace Sln.Payment.Business
 {
     public class PaymentDapperQuery : DapperQueryBase
     {
-        public PaymentDapperQuery() 
+        public PaymentDapperQuery()
         {
             this.ConnectionString = GetConnectionString();
         }

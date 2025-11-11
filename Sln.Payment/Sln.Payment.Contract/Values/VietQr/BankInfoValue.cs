@@ -20,7 +20,7 @@ namespace Sln.Payment.Contract.Values.VietQr
         public long IsTransfer { get; set; }
         public string? Swift_code { get; set; }
     }
-    
+
     public class BankInfoResponse
     {
         public string? Code { get; set; }

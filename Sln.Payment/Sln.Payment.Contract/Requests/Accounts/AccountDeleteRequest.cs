@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Sln.Payment.Contract.Requests.Accounts;
 
-public class AccountDeleteRequest: IRequest
+public class AccountDeleteRequest : IRequest
 {
     public Guid Id { get; set; }
 }

@@ -3,5 +3,5 @@ using Sln.Payment.Data.Entities;
 
 namespace Sln.Payment.Business.Managers.Sales;
 
-public class SaleManager(IRepository<Sale> repository) 
+public class SaleManager(IRepository<Sale> repository)
     : PaymentDomainService<Sale>(repository);

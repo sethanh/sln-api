@@ -1,20 +1,20 @@
-using Sln.Scheduler.Contract.Errors.Messages;
-using Sln.Scheduler.Contract.Requests.Messages;
-using Sln.Scheduler.Data.Entities;
-using Sln.Scheduler.Business.Managers.Messages;
+using Sln.Payment.Contract.Errors.Messages;
+using Sln.Payment.Contract.Requests.Messages;
+using Sln.Payment.Data.Entities;
+using Sln.Payment.Business.Managers.Messages;
 using Sln.Shared.Business.Interfaces;
 using Sln.Shared.Contract.Models;
 using Sln.Shared.Common.Exceptions;
 using Mapster;
-using Sln.Scheduler.Contract.Enums;
-using Sln.Scheduler.Business.Managers.Accounts;
+using Sln.Payment.Contract.Enums;
+using Sln.Payment.Business.Managers.Accounts;
 using DocumentFormat.OpenXml.Office2010.Excel;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Sln.Payment.Business.Helpers.Messages;
-using Sln.Scheduler.Contract.Requests.Uploads;
-using Sln.Scheduler.Contract.Requests.Accounts;
+using Sln.Payment.Contract.Requests.Uploads;
+using Sln.Payment.Contract.Requests.Accounts;
 
-namespace Sln.Scheduler.Business.Services.Messages;
+namespace Sln.Payment.Business.Services.Messages;
 
 public class AccountConnectionService(IServiceProvider serviceProvider) : PaymentApplicationService(serviceProvider)
 {
@@ -68,7 +68,7 @@ public class AccountConnectionService(IServiceProvider serviceProvider) : Paymen
 
         return Task.FromResult(new AccountConnectionGetAllResponse());
     }
-    
+
     public List<AccountConnectionGetAllResponseItem> GetAccountConnectionDetails(
         List<AccountConnection> accountConnections,
         RequestOptions options

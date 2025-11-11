@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Sln.Payment.Contract.Requests.Messages;
 
-public class AccountConnectionDeleteRequest: IRequest
+public class AccountConnectionDeleteRequest : IRequest
 {
     public Guid Id { get; set; }
 }

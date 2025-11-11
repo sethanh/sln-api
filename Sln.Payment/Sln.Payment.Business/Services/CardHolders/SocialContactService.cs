@@ -51,7 +51,7 @@ public class SocialContactService(IServiceProvider serviceProvider) : PaymentApp
     {
         var socialContact = SocialContactManager.FirstOrDefault(o => o.Id == request.Id);
 
-        if(socialContact == null)
+        if (socialContact == null)
         {
             throw new HttpBadRequest(SocialContactErrors.SOCIAL_CONTACT_NOT_FOUND);
         }

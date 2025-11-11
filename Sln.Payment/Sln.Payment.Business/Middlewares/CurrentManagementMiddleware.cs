@@ -5,11 +5,11 @@ using Sln.Shared.Host.Middlewares;
 
 namespace Sln.Payment.Business.Middlewares
 {
-     public class CurrentAccountMiddleware(RequestDelegate next) 
-        : CurrentAccountMiddlewareBase<CurrentPaymentAccount>(next)
+    public class CurrentAccountMiddleware(RequestDelegate next)
+       : CurrentAccountMiddlewareBase<CurrentPaymentAccount>(next)
     {
         private readonly RequestDelegate _next = next;
-        
+
         public override async Task InvokeAsync(HttpContext context, CurrentPaymentAccount currentAccount)
         {
             var user = context.User;

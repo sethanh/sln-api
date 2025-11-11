@@ -1,10 +1,10 @@
 using Hangfire.Dashboard;
 
-namespace Sln.Scheduler.Host.HangfireFilter;
+namespace Sln.Payment.Host.HangfireFilter;
 
 public class HangfireAuthorizationFilter : IDashboardAuthorizationFilter
 {
-     public bool Authorize(DashboardContext context)
+    public bool Authorize(DashboardContext context)
     {
         var httpContext = context.GetHttpContext();
 

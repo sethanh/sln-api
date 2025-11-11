@@ -52,7 +52,7 @@ public class SaleDetailService(IServiceProvider serviceProvider) : PaymentApplic
     {
         var saleDetail = SaleDetailManager.FirstOrDefault(o => o.Id == request.Id);
 
-        if(saleDetail == null)
+        if (saleDetail == null)
         {
             throw new HttpBadRequest(SaleDetailErrors.SALE_DETAIL_NOT_FOUND);
         }

@@ -10,6 +10,6 @@ namespace Sln.Payment.Data.Entities
     {
         public string SeederName { get; set; } = default!;
         public DateTime ExecutedAt { get; set; } = DateTime.UtcNow;
-        public Guid Id { get ; set; }
+        public Guid Id { get; set; }
     }
 }

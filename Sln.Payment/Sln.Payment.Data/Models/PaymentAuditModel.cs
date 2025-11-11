@@ -6,7 +6,7 @@ using Sln.Shared.Data.Models;
 
 namespace Sln.Payment.Data.Models
 {
-    public abstract class PaymentAuditModel<TID>: AuditModel<TID> where TID : struct
+    public abstract class PaymentAuditModel<TID> : AuditModel<TID> where TID : struct
     {
     }
 }

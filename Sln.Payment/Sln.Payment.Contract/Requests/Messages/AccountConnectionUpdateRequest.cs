@@ -10,6 +10,6 @@ public class AccountConnectionUpdateRequest : IRequest<AccountConnectionUpdateRe
     public AccountConnectionStatus Status { get; set; }
 }
 
-public class AccountConnectionUpdateResponse :AccountConnectionGetDetailResponse
+public class AccountConnectionUpdateResponse : AccountConnectionGetDetailResponse
 {
 }

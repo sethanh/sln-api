@@ -11,6 +11,6 @@ public class PaymentQrCreateRequest : IRequest<PaymentQrCreateResponse>
     public string? Description { get; set; }
 }
 
-public class PaymentQrCreateResponse: PaymentQrGetDetailResponse
+public class PaymentQrCreateResponse : PaymentQrGetDetailResponse
 {
 }

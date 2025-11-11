@@ -9,6 +9,6 @@ public class AccountNotificationUpdateRequest : IRequest<AccountNotificationUpda
     public required string Name { get; set; }
 }
 
-public class AccountNotificationUpdateResponse :AccountNotificationGetDetailResponse
+public class AccountNotificationUpdateResponse : AccountNotificationGetDetailResponse
 {
 }

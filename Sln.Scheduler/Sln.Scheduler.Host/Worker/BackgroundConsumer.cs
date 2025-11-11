@@ -1,5 +1,5 @@
 using Sln.Shared.Common.Interfaces;
-namespace Sln.Scheduler.Host.Worker;
+namespace Sln.Payment.Host.Worker;
 
 public class BackgroundConsumer : BackgroundService
 {
@@ -21,7 +21,7 @@ public class BackgroundConsumer : BackgroundService
 
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        
+
         return Task.CompletedTask;
     }
 

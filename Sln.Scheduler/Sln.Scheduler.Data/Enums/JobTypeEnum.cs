@@ -1,4 +1,4 @@
-namespace Sln.Scheduler.Data.Enums;
+namespace Sln.Payment.Data.Enums;
 
 
 public enum JobTypeEnum

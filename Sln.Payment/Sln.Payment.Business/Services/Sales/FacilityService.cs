@@ -52,7 +52,7 @@ public class FacilityService(IServiceProvider serviceProvider) : PaymentApplicat
     {
         var facility = FacilityManager.FirstOrDefault(o => o.Id == request.Id);
 
-        if(facility == null)
+        if (facility == null)
         {
             throw new HttpBadRequest(FacilityErrors.FACILITY_NOT_FOUND);
         }

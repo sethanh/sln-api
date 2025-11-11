@@ -52,7 +52,7 @@ public class SaleService(IServiceProvider serviceProvider) : PaymentApplicationS
     {
         var sale = SaleManager.FirstOrDefault(o => o.Id == request.Id);
 
-        if(sale == null)
+        if (sale == null)
         {
             throw new HttpBadRequest(SaleErrors.SALE_NOT_FOUND);
         }

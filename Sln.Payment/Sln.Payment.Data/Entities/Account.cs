@@ -14,5 +14,5 @@ public class Account : PaymentAuditModel<Guid>
     public virtual ICollection<GoogleAccount>? GoogleAccounts { get; set; }
     public virtual ICollection<ChatMessage>? ChatMessages { get; set; }
     public virtual ICollection<ConversationAccount>? Conversations { get; set; }
-    public virtual Photo? Photo { get; set;}
+    public virtual Photo? Photo { get; set; }
 }

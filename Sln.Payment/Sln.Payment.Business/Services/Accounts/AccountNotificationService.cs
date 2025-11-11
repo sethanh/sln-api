@@ -52,7 +52,7 @@ public class AccountNotificationService(IServiceProvider serviceProvider) : Paym
     {
         var accountNotification = AccountNotificationManager.FirstOrDefault(o => o.Id == request.Id);
 
-        if(accountNotification == null)
+        if (accountNotification == null)
         {
             throw new HttpBadRequest(AccountNotificationErrors.ACCOUNT_NOTIFICATION_NOT_FOUND);
         }

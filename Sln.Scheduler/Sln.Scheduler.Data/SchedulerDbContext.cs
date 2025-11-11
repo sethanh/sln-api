@@ -2,7 +2,7 @@
 using Sln.Shared.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 
-namespace Sln.Scheduler.Data;
+namespace Sln.Payment.Data;
 
 public class SchedulerDbContext : DbContextBase
 {

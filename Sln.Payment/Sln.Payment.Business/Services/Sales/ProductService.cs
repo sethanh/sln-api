@@ -52,7 +52,7 @@ public class ProductService(IServiceProvider serviceProvider) : PaymentApplicati
     {
         var product = ProductManager.FirstOrDefault(o => o.Id == request.Id);
 
-        if(product == null)
+        if (product == null)
         {
             throw new HttpBadRequest(ProductErrors.PRODUCT_NOT_FOUND);
         }

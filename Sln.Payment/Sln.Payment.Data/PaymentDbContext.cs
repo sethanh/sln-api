@@ -34,6 +34,6 @@ namespace Sln.Payment.Data
             builder.RegisterAllEntities();
             base.OnModelCreating(builder);
         }
-        
+
     }
 }

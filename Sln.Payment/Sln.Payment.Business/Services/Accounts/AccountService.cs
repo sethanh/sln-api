@@ -23,7 +23,7 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
 
     public async Task<AccountLoginResponse> GoogleVerifyLogin(AccountGoogleVerifyRequest request)
     {
-        var payload = await GoogleTokenValidatorService.ValidateTokenAsync(request.IdToken) ?? throw new HttpUnauthorized("Invalid Google token" );
+        var payload = await GoogleTokenValidatorService.ValidateTokenAsync(request.IdToken) ?? throw new HttpUnauthorized("Invalid Google token");
         var account = AccountManager.GetAll()
             .FirstOrDefault(c => c.Email == payload.Email);
 
@@ -59,21 +59,21 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
 
         if (!response.IsSuccessStatusCode)
         {
-            throw new HttpUnauthorized("Invalid Google token" );
+            throw new HttpUnauthorized("Invalid Google token");
         }
 
         var jsonResponse = await response.Content.ReadAsStringAsync();
 
         var googleAccount = JsonSerializer.Deserialize<AccountGoogleInfo>(jsonResponse);
 
-        if(googleAccount?.email == null)
+        if (googleAccount?.email == null)
         {
-            throw new HttpUnauthorized("Invalid Google token" );
+            throw new HttpUnauthorized("Invalid Google token");
         }
-        
+
         var account = AccountManager.GetAll()
             .FirstOrDefault(c => c.Email == googleAccount.email);
-        
+
         var oldGoogleAccount = GoogleAccountManager.GetAll()
             .FirstOrDefault(c => c.Email == googleAccount.email);
 
@@ -89,7 +89,7 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
             AccountManager.Add(account);
             await UnitOfWork.SaveChangesAsync();
         }
-        
+
         if (oldGoogleAccount == null)
         {
             var newGoogleAccount = new GoogleAccount
@@ -122,7 +122,7 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
             ?? throw new HttpNotFound(AccountErrors.ACCOUNT_NOT_FOUND);
 
         var tokenValue = JwtHelpers.GenerateJWTTokens(account);
-        
+
         AccountRefreshTokenManager.AddOrgAccountRefreshToken(account, tokenValue.RefreshToken);
 
         await UnitOfWork.SaveChangesAsync();
@@ -149,7 +149,8 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
         var googleAccount = GoogleAccountManager.FirstOrDefault(c => c.AccountId == CurrentAccount.Id);
 
         var result = Mapper.Map<AccountGetDetailResponse>(account);
-        result.GoogleAccount = googleAccount != null ? new GoogleAccountGetDetailResponse {
+        result.GoogleAccount = googleAccount != null ? new GoogleAccountGetDetailResponse
+        {
             Id = googleAccount!.Id,
             Email = googleAccount.Email,
             Picture = googleAccount.Picture
@@ -210,6 +211,6 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
         AccountManager.Delete(account);
 
         await UnitOfWork.SaveChangesAsync();
-        return ;
+        return;
     }
 }

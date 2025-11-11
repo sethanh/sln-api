@@ -10,7 +10,7 @@ public class ChatMessageGetDetailRequest : IRequest<ChatMessageGetDetailResponse
 
 public class ChatMessageGetDetailResponse
 {
-    public required Guid Id { get; set; }    
+    public required Guid Id { get; set; }
     public Guid ConversationId { get; set; }
     public Guid CreatedId { get; set; }
     public DateTime CreationTime { get; set; }

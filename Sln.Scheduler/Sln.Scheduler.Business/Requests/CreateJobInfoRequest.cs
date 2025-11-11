@@ -2,7 +2,7 @@
 
 using Sln.Shared.Common.Enums.Jobs;
 
-namespace Sln.Scheduler.Business.Requests
+namespace Sln.Payment.Business.Requests
 {
     public class CreateJobInfoRequest
     {

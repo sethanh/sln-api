@@ -14,5 +14,5 @@ public class SocialContactGetDetailResponse
     public required Guid Id { get; set; }
     public required Guid ContactId { get; set; }
     public string? Link { get; set; }
-    public SocialType? SocialType { get; set;}
+    public SocialType? SocialType { get; set; }
 }

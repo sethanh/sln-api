@@ -52,7 +52,7 @@ public class ProductCategoryService(IServiceProvider serviceProvider) : PaymentA
     {
         var productCategory = ProductCategoryManager.FirstOrDefault(o => o.Id == request.Id);
 
-        if(productCategory == null)
+        if (productCategory == null)
         {
             throw new HttpBadRequest(ProductCategoryErrors.PRODUCT_CATEGORY_NOT_FOUND);
         }

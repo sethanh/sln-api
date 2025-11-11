@@ -9,6 +9,6 @@ public class ChatMessageCreateRequest : IRequest<ChatMessageCreateResponse>
     public Guid ConversationId { get; set; }
 }
 
-public class ChatMessageCreateResponse: ChatMessageGetDetailResponse
+public class ChatMessageCreateResponse : ChatMessageGetDetailResponse
 {
 }

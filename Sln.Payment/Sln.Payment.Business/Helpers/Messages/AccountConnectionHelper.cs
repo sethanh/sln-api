@@ -1,10 +1,10 @@
 using Mapster;
 using Microsoft.Extensions.DependencyInjection;
-using Sln.Scheduler.Business.Managers.Accounts;
-using Sln.Scheduler.Business.Managers.Messages;
-using Sln.Scheduler.Contract.Enums;
-using Sln.Scheduler.Contract.Requests.Messages;
-using Sln.Scheduler.Data.Entities;
+using Sln.Payment.Business.Managers.Accounts;
+using Sln.Payment.Business.Managers.Messages;
+using Sln.Payment.Contract.Enums;
+using Sln.Payment.Contract.Requests.Messages;
+using Sln.Payment.Data.Entities;
 
 namespace Sln.Payment.Business.Helpers.Messages;
 

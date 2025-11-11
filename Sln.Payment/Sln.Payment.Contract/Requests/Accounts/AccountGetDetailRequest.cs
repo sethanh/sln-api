@@ -18,7 +18,7 @@ public class GoogleAccountGetDetailResponse
 }
 
 
-public class AccountGetDetailResponse: AccountResponse
+public class AccountGetDetailResponse : AccountResponse
 {
     public GoogleAccountGetDetailResponse? GoogleAccount { get; set; }
 }

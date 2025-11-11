@@ -9,6 +9,6 @@ public class ChatMessageUpdateRequest : IRequest<ChatMessageUpdateResponse>
     public required string Name { get; set; }
 }
 
-public class ChatMessageUpdateResponse :ChatMessageGetDetailResponse
+public class ChatMessageUpdateResponse : ChatMessageGetDetailResponse
 {
 }

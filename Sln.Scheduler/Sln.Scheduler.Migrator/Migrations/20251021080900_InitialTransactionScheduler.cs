@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace Sln.Scheduler.Migrator.Migrations
+namespace Sln.Payment.Migrator.Migrations
 {
     /// <inheritdoc />
     public partial class InitialTransactionScheduler : Migration

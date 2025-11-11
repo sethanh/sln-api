@@ -59,7 +59,7 @@ public class ContactService(IServiceProvider serviceProvider) : PaymentApplicati
     public async Task<ContactUpdateResponse> Update(ContactUpdateRequest request)
     {
         var contact = ContactManager.FirstOrDefault(o => o.Id == request.Id);
-        
+
         if (string.IsNullOrEmpty(request.ProfileName))
         {
             contact.ProfileName = Guid.NewGuid().ToString();

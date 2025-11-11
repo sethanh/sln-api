@@ -9,6 +9,6 @@ public class SaleUpdateRequest : IRequest<SaleUpdateResponse>
     public required string Name { get; set; }
 }
 
-public class SaleUpdateResponse :SaleGetDetailResponse
+public class SaleUpdateResponse : SaleGetDetailResponse
 {
 }

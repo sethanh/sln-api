@@ -51,7 +51,7 @@ public class PaymentQrSettingService(IServiceProvider serviceProvider) : Payment
     {
         var paymentQrSetting = PaymentQrSettingManager.FirstOrDefault(o => o.Id == request.Id);
 
-        if(paymentQrSetting == null)
+        if (paymentQrSetting == null)
         {
             throw new HttpBadRequest(PaymentQrSettingErrors.PAYMENT_QR_SETTING_NOT_FOUND);
         }
