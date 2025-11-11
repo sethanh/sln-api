@@ -16,9 +16,8 @@ public class AccountConnectionsController : PaymentControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetDetail(Guid id)
+    public async Task<IActionResult> GetDetail([FromRoute] AccountConnectionGetDetailRequest request)
     {
-        var request = new AccountConnectionGetDetailRequest { Id = id };
         return await RequestAsGet<AccountConnectionGetDetailRequest, AccountConnectionGetDetailResponse>(request);
     }
 
@@ -29,7 +28,7 @@ public class AccountConnectionsController : PaymentControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update(Guid id, [FromBody] AccountConnectionUpdateRequest requestBody)
+    public async Task<IActionResult> Update([FromRoute]Guid id, [FromBody] AccountConnectionUpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {
@@ -40,7 +39,7 @@ public class AccountConnectionsController : PaymentControllerBase
     }
 
     [HttpDelete("{id}")]
-    public async Task<IActionResult> Delete(AccountConnectionDeleteRequest request)
+    public async Task<IActionResult> Delete([FromRoute]AccountConnectionDeleteRequest request)
     {
         return await RequestAsDelete(request);
     }
