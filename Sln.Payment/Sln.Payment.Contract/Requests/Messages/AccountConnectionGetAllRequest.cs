@@ -5,6 +5,8 @@ namespace Sln.Payment.Contract.Requests.Messages;
 
 public class AccountConnectionGetAllRequest : PaginationRequest, IRequest<AccountConnectionGetAllResponse>
 {
+    public required AccountConnectionStatus Status { get; set; }
+    public bool? IsSender { get; set; }
 }
 
 public class AccountConnectionGetAllResponse : PaginationResponse<AccountConnectionGetAllResponseItem>
@@ -13,5 +15,5 @@ public class AccountConnectionGetAllResponse : PaginationResponse<AccountConnect
 
 public class AccountConnectionGetAllResponseItem : AccountResponse
 {
-    
+    public required Guid ConnectionId { get; set; }
 }

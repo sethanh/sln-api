@@ -16,8 +16,9 @@ public class AccountConnectionsController : PaymentControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetDetail(AccountConnectionGetDetailRequest request)
+    public async Task<IActionResult> GetDetail(Guid id)
     {
+        var request = new AccountConnectionGetDetailRequest { Id = id };
         return await RequestAsGet<AccountConnectionGetDetailRequest, AccountConnectionGetDetailResponse>(request);
     }
 

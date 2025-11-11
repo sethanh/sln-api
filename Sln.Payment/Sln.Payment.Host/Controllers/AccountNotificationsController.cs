@@ -16,8 +16,12 @@ public class AccountNotificationsController : PaymentControllerBase
     }
 
     [HttpGet("{id}")]
-    public async Task<IActionResult> GetDetail(AccountNotificationGetDetailRequest request)
+    public async Task<IActionResult> GetDetail(Guid id)
     {
+        var request = new AccountNotificationGetDetailRequest
+        {
+            Id = id
+        };
         return await RequestAsGet<AccountNotificationGetDetailRequest, AccountNotificationGetDetailResponse>(request);
     }
 

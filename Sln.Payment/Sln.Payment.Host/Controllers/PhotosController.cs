@@ -43,5 +43,5 @@ public class PhotosController : PaymentControllerBase
     {
         return await RequestAsDelete(request);
     }
-    
+
 }

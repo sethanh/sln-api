@@ -18,7 +18,7 @@ public class AccountsController : PaymentControllerBase
 
     [HttpGet("me")]
     [Authorize]
-    public async Task<IActionResult> GetCurrentAccount([FromRoute]CurrentAccountGetDetailRequest request)
+    public async Task<IActionResult> GetCurrentAccount([FromRoute] CurrentAccountGetDetailRequest request)
     {
         return await RequestAsGet<CurrentAccountGetDetailRequest, AccountGetDetailResponse>(request);
     }
@@ -26,7 +26,7 @@ public class AccountsController : PaymentControllerBase
 
     [HttpGet("{id}")]
     [Authorize]
-    public async Task<IActionResult> GetDetail([FromRoute]AccountGetDetailRequest request)
+    public async Task<IActionResult> GetDetail([FromRoute] AccountGetDetailRequest request)
     {
         return await RequestAsGet<AccountGetDetailRequest, AccountResponse>(request);
     }
