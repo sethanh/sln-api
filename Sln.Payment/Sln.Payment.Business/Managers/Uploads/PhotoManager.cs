@@ -3,5 +3,5 @@ using Sln.Payment.Data.Entities;
 
 namespace Sln.Payment.Business.Managers.Uploads;
 
-public class PhotoManager(IRepository<Photo> repository) 
+public class PhotoManager(IRepository<Photo> repository)
     : PaymentDomainService<Photo>(repository);

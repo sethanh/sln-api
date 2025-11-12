@@ -21,7 +21,7 @@ public class BackgroundConsumer : BackgroundService
 
     protected override Task ExecuteAsync(CancellationToken stoppingToken)
     {
-        
+
         return Task.CompletedTask;
     }
 

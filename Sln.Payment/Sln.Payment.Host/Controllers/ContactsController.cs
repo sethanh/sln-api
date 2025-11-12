@@ -23,7 +23,7 @@ public class ContactsController : PaymentControllerBase
 
     [AllowAnonymous]
     [HttpGet("by-profile-name")]
-    public async Task<IActionResult> GetByProfileName([FromQuery]ContactGetByProfileNameRequest request)
+    public async Task<IActionResult> GetByProfileName([FromQuery] ContactGetByProfileNameRequest request)
     {
         return await RequestAsGet<ContactGetByProfileNameRequest, ContactGetDetailResponse>(request);
     }
@@ -35,7 +35,7 @@ public class ContactsController : PaymentControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update([FromRoute]Guid id, [FromBody] ContactUpdateRequest requestBody)
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] ContactUpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {

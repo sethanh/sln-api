@@ -3,5 +3,5 @@ using Sln.Payment.Data.Entities;
 
 namespace Sln.Payment.Business.Managers.Payments;
 
-public class PaymentQrManager(IRepository<PaymentQr> repository) 
+public class PaymentQrManager(IRepository<PaymentQr> repository)
     : PaymentDomainService<PaymentQr>(repository);

@@ -82,7 +82,7 @@ public class PhotoService(IServiceProvider serviceProvider, IWebHostEnvironment 
     {
         var photo = PhotoManager.FirstOrDefault(o => o.Id == request.Id);
 
-        if(photo == null)
+        if (photo == null)
         {
             throw new HttpBadRequest(PhotoErrors.PHOTO_NOT_FOUND);
         }

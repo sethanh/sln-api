@@ -9,6 +9,6 @@ public class ConversationAccountUpdateRequest : IRequest<ConversationAccountUpda
     public required string Name { get; set; }
 }
 
-public class ConversationAccountUpdateResponse :ConversationAccountGetDetailResponse
+public class ConversationAccountUpdateResponse : ConversationAccountGetDetailResponse
 {
 }

@@ -52,7 +52,7 @@ public class ConversationAccountService(IServiceProvider serviceProvider) : Paym
     {
         var conversationAccount = ConversationAccountManager.FirstOrDefault(o => o.Id == request.Id);
 
-        if(conversationAccount == null)
+        if (conversationAccount == null)
         {
             throw new HttpBadRequest(ConversationAccountErrors.CONVERSATION_ACCOUNT_NOT_FOUND);
         }

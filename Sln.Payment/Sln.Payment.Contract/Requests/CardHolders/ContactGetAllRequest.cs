@@ -11,7 +11,7 @@ public class ContactGetAllResponse : PaginationResponse<ContactGetAllResponseIte
 {
 }
 
-public class ContactGetAllResponseItem:ContactGetDetailResponse
+public class ContactGetAllResponseItem : ContactGetDetailResponse
 {
 
 }

@@ -56,7 +56,7 @@ public class ConversationService(IServiceProvider serviceProvider) : PaymentAppl
     {
         var conversation = ConversationManager.FirstOrDefault(o => o.Id == request.Id);
 
-        if(conversation == null)
+        if (conversation == null)
         {
             throw new HttpBadRequest(ConversationErrors.CONVERSATION_NOT_FOUND);
         }

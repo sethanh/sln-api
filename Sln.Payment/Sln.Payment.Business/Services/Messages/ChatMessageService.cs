@@ -55,7 +55,7 @@ public class ChatMessageService(IServiceProvider serviceProvider) : PaymentAppli
     {
         var chatMessage = ChatMessageManager.FirstOrDefault(o => o.Id == request.Id);
 
-        if(chatMessage == null)
+        if (chatMessage == null)
         {
             throw new HttpBadRequest(ChatMessageErrors.CHAT_MESSAGE_NOT_FOUND);
         }

@@ -1,4 +1,5 @@
-﻿using Sln.Shared.Common.Extensions;
+﻿using System.Linq.Dynamic.Core;
+using Sln.Shared.Common.Extensions;
 using Sln.Shared.Contract.Extensions;
 
 namespace Sln.Shared.Contract.Models
@@ -19,6 +20,11 @@ namespace Sln.Shared.Contract.Models
                 {
                     queryable = queryable.OrderBy(PaginationRequestModel.OrderBy);
                 }
+            }
+
+            if (!string.IsNullOrEmpty(PaginationRequestModel.Filter))
+            {
+                queryable = queryable.Where(PaginationRequestModel.Filter);
             }
 
             var items = queryable.Skip((PaginationRequestModel.Page - 1) * PaginationRequestModel.PageSize).Take(PaginationRequestModel.PageSize).ToList();

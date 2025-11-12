@@ -9,6 +9,6 @@ public class ProductCategoryUpdateRequest : IRequest<ProductCategoryUpdateRespon
     public required string Name { get; set; }
 }
 
-public class ProductCategoryUpdateResponse :ProductCategoryGetDetailResponse
+public class ProductCategoryUpdateResponse : ProductCategoryGetDetailResponse
 {
 }

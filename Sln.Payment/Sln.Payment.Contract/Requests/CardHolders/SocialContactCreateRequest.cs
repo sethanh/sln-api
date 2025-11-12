@@ -9,7 +9,7 @@ public class SocialContactCreateRequest : IRequest<SocialContactCreateResponse>
     public Guid? Id { get; set; }
     public Guid? ContactId { get; set; }
     public string? Link { get; set; }
-    public SocialType? SocialType { get; set;}
+    public SocialType? SocialType { get; set; }
 }
 
 public class SocialContactCreateResponse

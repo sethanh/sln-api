@@ -51,7 +51,7 @@ public class PaymentQrTransactionService(IServiceProvider serviceProvider) : Pay
     {
         var paymentQrTransaction = PaymentQrTransactionManager.FirstOrDefault(o => o.Id == request.Id);
 
-        if(paymentQrTransaction == null)
+        if (paymentQrTransaction == null)
         {
             throw new HttpBadRequest(PaymentQrTransactionErrors.PAYMENT_QR_TRANSACTION_NOT_FOUND);
         }

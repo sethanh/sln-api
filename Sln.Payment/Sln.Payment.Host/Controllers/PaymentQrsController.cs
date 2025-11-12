@@ -40,7 +40,7 @@ public class PaymentQrsController : PaymentControllerBase
     }
 
     [HttpPatch("{id}")]
-    public async Task<IActionResult> Update([FromRoute]Guid id, [FromBody] PaymentQrUpdateRequest requestBody)
+    public async Task<IActionResult> Update([FromRoute] Guid id, [FromBody] PaymentQrUpdateRequest requestBody)
     {
         if (id != requestBody.Id)
         {

@@ -38,7 +38,7 @@ public class JobInfoService(IServiceProvider serviceProvider) : ApplicationServi
     public async Task<UpdateJobInfoResponse> UpdateJobInfoAsync(Guid id, UpdateJobInfoRequest request)
     {
         var jobInfo = GetJobInfo(id);
-        
+
         var jobUpdated = request.Adapt(jobInfo);
         JobInfoManager.Update(jobInfo);
 
@@ -56,7 +56,7 @@ public class JobInfoService(IServiceProvider serviceProvider) : ApplicationServi
         {
             jobInfoQuery = jobInfoQuery.Where(c => c.JobEvent == jobEvent);
         };   
-        
+
         var jobInfo =  jobInfoQuery
             .FirstOrDefault();
 
@@ -80,7 +80,7 @@ public class JobInfoService(IServiceProvider serviceProvider) : ApplicationServi
             {
                 jobInfo.JobStatus = JobStatus.Deleted;
             }
-            
+
         }
         JobInfoManager.UpdateRange(jobInfos ?? []);
         await UnitOfWork.SaveChangesAsync();

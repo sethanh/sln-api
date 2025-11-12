@@ -20,7 +20,7 @@ class Program
     public static void ConfigureServices(HostBuilderContext context, IServiceCollection services)
     {
         services.AddMySqlDb<SchedulerDbContext>(
-            Environment.GetEnvironmentVariable(EnvConstants.SCHEDULER_CONNECTION) ?? "", 
+            Environment.GetEnvironmentVariable(EnvConstants.SCHEDULER_CONNECTION) ?? "",
             "Sln.Scheduler.Migrator"
         );
         services.AddHostedService<DatabaseStartup<SchedulerDbContext>>();

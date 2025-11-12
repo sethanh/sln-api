@@ -3,5 +3,5 @@ using Sln.Payment.Data.Entities;
 
 namespace Sln.Payment.Business.Managers.Messages;
 
-public class ChatMessageManager(IRepository<ChatMessage> repository) 
+public class ChatMessageManager(IRepository<ChatMessage> repository)
     : PaymentDomainService<ChatMessage>(repository);

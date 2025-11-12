@@ -27,7 +27,7 @@ namespace Sln.Payment.Contract.Requests.Accounts
     public class AccountGoogleInfo
     {
         public string? name { get; set; }
-        public string? picture { get; set; } 
+        public string? picture { get; set; }
         public string? email { get; set; }
         public string? sub { get; set; }
     }

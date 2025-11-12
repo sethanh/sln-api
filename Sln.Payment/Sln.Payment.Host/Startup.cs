@@ -72,7 +72,7 @@ namespace Sln.Payment.Host
             app.UseRouting();
             app.UseAuthentication();
             app.UseAuthorization();
-            
+
             app.UseCurrentAccount();
 
             app.UseEndpoints(endpoints =>
