@@ -7,7 +7,7 @@ using Sln.Shared.Common.Exceptions;
 using Sln.Payment.Business.Helpers.Accounts;
 using Sln.Shared.Business.Services;
 using System.Text.Json;
-using Sln.Payment.Business.Managers.s;
+using Sln.Payment.Business.Managers.GoogleAccounts;
 using Mapster;
 using Sln.Payment.Contract.Requests.Messages;
 
