@@ -9,6 +9,7 @@ public class AccountConnectionGetAllRequest : PaginationRequest, IRequest<Accoun
 {
     public AccountConnectionStatus? Status { get; set; }
     public AccountAction? Action { get; set; }
+    public string? Email { get; set; }  
 }
 
 public enum AccountAction

@@ -22,18 +22,26 @@ public class AccountConnectionService(IServiceProvider serviceProvider) : Paymen
             accountConnectionQuery = accountConnectionQuery.Where(c => c.Status == request.Status);
         }
 
-        if(request.Action != null)
+        if (request.Action != null)
         {
             if (request.Action == AccountAction.Send)
             {
                 accountConnectionQuery = accountConnectionQuery.Where(c => c.AccountRequestId == CurrentAccount.Id);
             }
 
-            if(request.Action == AccountAction.receive)
+            if (request.Action == AccountAction.receive)
             {
-                accountConnectionQuery = accountConnectionQuery.Where(c => c.AccountAcceptId== CurrentAccount.Id);
+                accountConnectionQuery = accountConnectionQuery.Where(c => c.AccountAcceptId == CurrentAccount.Id);
             }
         } 
+        
+        if (request.Email != null)
+        {
+            accountConnectionQuery = accountConnectionQuery.Where(c => 
+                (c.AccountRequest != null && c.AccountRequest.Email.Contains(request.Email)) ||
+                (c.AccountAccept != null && c.AccountAccept.Email.Contains(request.Email))
+            );
+        }
 
         var paginationResponse = PaginationResponse<AccountConnection>.Create(
             accountConnectionQuery,
