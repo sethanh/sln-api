@@ -8,6 +8,7 @@ public class AccountConnectionGetAllHandler(AccountConnectionService accountConn
 {
     public Task<AccountConnectionGetAllResponse> Handle(AccountConnectionGetAllRequest request, CancellationToken cancellationToken)
     {
-        return accountConnectionService.GetAll(request);
+        var response = accountConnectionService.GetAll(request);
+        return Task.FromResult(response);
     }
 }
