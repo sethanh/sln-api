@@ -6,7 +6,7 @@ namespace Sln.Payment.Contract.Requests.Accounts;
 
 public class AccountGetAllRequest : PaginationRequest, IRequest<AccountGetAllResponse>
 {
-    public required string Email { get; set; }
+    public string? Email { get; set; }
 }
 
 public class AccountGetAllResponse : PaginationResponse<AccountResponse>
