@@ -1,11 +1,11 @@
 
-using Sln.Payment.Data.Enums;
+using Sln.Scheduler.Data.Enums;
 using Sln.Shared.Data.Abstractions;
 using Sln.Shared.Data.Models;
 using Microsoft.EntityFrameworkCore;
 using Sln.Shared.Common.Enums.Jobs;
 
-namespace Sln.Payment.Data.Entities;
+namespace Sln.Scheduler.Data.Entities;
 
 [Index(nameof(TransactionId))]
 [Index(nameof(ObjectId))]

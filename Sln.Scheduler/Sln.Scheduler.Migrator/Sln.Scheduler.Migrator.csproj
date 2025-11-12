@@ -9,7 +9,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Migrator\Sln.Shared.Migrator.csproj" />
     <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Host\Sln.Shared.Host.csproj" />
-    <ProjectReference Include="..\Sln.Payment.Data\Sln.Payment.Data.csproj" />
+    <ProjectReference Include="..\Sln.Scheduler.Data\Sln.Scheduler.Data.csproj" />
   </ItemGroup>
 
   <ItemGroup>

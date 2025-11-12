@@ -1,8 +1,8 @@
-﻿using Sln.Payment.Data.Abstractions;
+﻿using Sln.Scheduler.Data.Abstractions;
 using System.Linq.Expressions;
 using Microsoft.EntityFrameworkCore;
 
-namespace Sln.Payment.Data;
+namespace Sln.Scheduler.Data;
 
 public class SchedulerRepository<TEntity>(SchedulerDbContext context) : ISchedulerRepository<TEntity> where TEntity : class
 {

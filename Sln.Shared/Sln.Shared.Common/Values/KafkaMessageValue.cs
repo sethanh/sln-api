@@ -9,7 +9,7 @@ public class KafkaMessage
     public string? Data { get; set; }
     public DateTime? SendTime { get; set; }
     public JobEvent? JobEvent { get; set; }
-    public long ProcessCount { get; set; }
+    public Guid ProcessCount { get; set; }
     public string? KafkaTopicString { get; set; }
     public override string ToString()
     {

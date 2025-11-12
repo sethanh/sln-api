@@ -2,7 +2,7 @@ using Sln.Shared.Common.Constants;
 using Microsoft.Extensions.DependencyInjection;
 using Sln.Shared.Common.Constants.Envs;
 
-namespace Sln.Payment.Data.Extensions;
+namespace Sln.Scheduler.Data.Extensions;
 
 public static class ServiceCollectionExtensions
 {

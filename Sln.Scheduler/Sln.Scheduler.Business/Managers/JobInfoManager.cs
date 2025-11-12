@@ -1,9 +1,9 @@
 
-using Sln.Payment.Data;
-using Sln.Payment.Data.Abstractions;
-using Sln.Payment.Data.Entities;
+using Sln.Scheduler.Data;
+using Sln.Scheduler.Data.Abstractions;
+using Sln.Scheduler.Data.Entities;
 
-namespace Sln.Payment.Business.Managers;
+namespace Sln.Scheduler.Business.Managers;
 
 public class JobInfoManager(ISchedulerRepository<JobInfo> jobInfoRepository)
     : SchedulerDomainService<JobInfo>((Shared.Data.Interfaces.IRepository<JobInfo>)jobInfoRepository);

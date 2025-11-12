@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Sln.Payment.Data;
+using Sln.Scheduler.Data;
 
 #nullable disable
 
-namespace Sln.Payment.Migrator.Migrations
+namespace Sln.Scheduler.Migrator.Migrations
 {
     [DbContext(typeof(SchedulerDbContext))]
     partial class SchedulerDbContextModelSnapshot : ModelSnapshot
@@ -25,7 +25,7 @@ namespace Sln.Payment.Migrator.Migrations
 
             MySqlModelBuilderExtensions.AutoIncrementColumns(modelBuilder);
 
-            modelBuilder.Entity("Sln.Payment.Data.Entities.JobInfo", b =>
+            modelBuilder.Entity("Sln.Scheduler.Data.Entities.JobInfo", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()

@@ -1,10 +1,10 @@
 using Sln.Shared.Data.Extensions;
 using Sln.Shared.Migrator;
-using Sln.Payment.Data;
+using Sln.Scheduler.Data;
 using Sln.Shared.Common.Constants.Envs;
 using DotNetEnv;
 
-namespace Sln.Payment.Migrator;
+namespace Sln.Scheduler.Migrator;
 
 class Program
 {
@@ -21,7 +21,7 @@ class Program
     {
         services.AddMySqlDb<SchedulerDbContext>(
             Environment.GetEnvironmentVariable(EnvConstants.SCHEDULER_CONNECTION) ?? "",
-            "Sln.Payment.Migrator"
+            "Sln.Scheduler.Migrator"
         );
         services.AddHostedService<DatabaseStartup<SchedulerDbContext>>();
     }

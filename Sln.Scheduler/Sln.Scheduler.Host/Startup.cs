@@ -4,17 +4,17 @@ using Hangfire.MySql;
 using Sln.Shared.Common.Services;
 using Sln.Shared.Common.Abstractions;
 using Sln.Shared.Data.Extensions;
-using Sln.Payment.Data;
-using Sln.Payment.Data.Extensions;
-using Sln.Payment.Business.Services;
-using Sln.Payment.Business.Managers;
-using Sln.Payment.Data.Abstractions;
+using Sln.Scheduler.Data;
+using Sln.Scheduler.Data.Extensions;
+using Sln.Scheduler.Business.Services;
+using Sln.Scheduler.Business.Managers;
+using Sln.Scheduler.Data.Abstractions;
 using Mapster;
 using DotNetEnv;
 using Sln.Shared.Common.Constants.Envs;
 using Sln.Shared.Data.Interfaces;
-using Sln.Payment.Host.HangfireFilter;
-using Sln.Payment.Host.Worker;
+using Sln.Scheduler.Host.HangfireFilter;
+using Sln.Scheduler.Host.Worker;
 
 
 namespace Sln.Scheduler.App;
@@ -54,7 +54,7 @@ public class Startup
                 )
             ));
 
-        services.AddMySqlDb<SchedulerDbContext>(services.GetSchedulerConnectionString(), "Sln.Payment.Migrator");
+        services.AddMySqlDb<SchedulerDbContext>(services.GetSchedulerConnectionString(),"Sln.Scheduler.Migrator");
         services.AddMediatR((configs) =>
         {
             configs.RegisterServicesFromAssemblyContaining<Startup>();

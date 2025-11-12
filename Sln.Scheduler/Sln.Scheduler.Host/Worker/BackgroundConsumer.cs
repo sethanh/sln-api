@@ -1,5 +1,5 @@
 using Sln.Shared.Common.Interfaces;
-namespace Sln.Payment.Host.Worker;
+namespace Sln.Scheduler.Host.Worker;
 
 public class BackgroundConsumer : BackgroundService
 {

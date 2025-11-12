@@ -1,18 +1,18 @@
-using Sln.Payment.Business.Managers;
-using Sln.Payment.Business.Requests;
-using Sln.Payment.Data.Entities;
-using Sln.Payment.Data.Enums;
+using Sln.Scheduler.Business.Managers;
+using Sln.Scheduler.Business.Requests;
+using Sln.Scheduler.Data.Entities;
+using Sln.Scheduler.Data.Enums;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
 using Sln.Shared.Business;
 using Microsoft.Extensions.DependencyInjection;
 using Sln.Shared.Common.Enums.Jobs;
 
-namespace Sln.Payment.Business.Services;
+namespace Sln.Scheduler.Business.Services;
 
 public class JobInfoService(IServiceProvider serviceProvider) : ApplicationServiceBase(serviceProvider)
 {
-    private readonly JobInfoManager JobInfoManager = serviceProvider.GetRequiredService<JobInfoManager>();
+    private readonly  JobInfoManager JobInfoManager = serviceProvider.GetRequiredService<JobInfoManager>();
 
     public JobInfo GetJobInfo(Guid id)
     {
@@ -55,13 +55,12 @@ public class JobInfoService(IServiceProvider serviceProvider) : ApplicationServi
         if (jobEvent != null)
         {
             jobInfoQuery = jobInfoQuery.Where(c => c.JobEvent == jobEvent);
-        }
-        ;
+        };   
 
-        var jobInfo = jobInfoQuery
+        var jobInfo =  jobInfoQuery
             .FirstOrDefault();
 
-        if (jobInfo != null)
+        if(jobInfo != null)
         {
             jobInfo.JobStatus = JobStatus.Deleted;
             JobInfoManager.Update(jobInfo);
@@ -75,7 +74,7 @@ public class JobInfoService(IServiceProvider serviceProvider) : ApplicationServi
         var jobInfos = await JobInfoManager.GetAll()
             .Where(x => x.JobStatus != JobStatus.Deleted)
             .ToListAsync();
-        if (jobInfos != null)
+        if(jobInfos != null)
         {
             foreach (var jobInfo in jobInfos)
             {

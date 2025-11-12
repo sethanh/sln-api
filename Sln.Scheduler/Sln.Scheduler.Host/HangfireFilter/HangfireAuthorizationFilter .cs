@@ -1,6 +1,6 @@
 using Hangfire.Dashboard;
 
-namespace Sln.Payment.Host.HangfireFilter;
+namespace Sln.Scheduler.Host.HangfireFilter;
 
 public class HangfireAuthorizationFilter : IDashboardAuthorizationFilter
 {

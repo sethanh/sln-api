@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
-    <ProjectReference Include="..\Sln.Payment.Data\Sln.Payment.Data.csproj" />
+    <ProjectReference Include="..\Sln.Scheduler.Data\Sln.Scheduler.Data.csproj" />
     <ProjectReference Include="..\..\Sln.Shared\Sln.Shared.Business\Sln.Shared.Business.csproj" />
   </ItemGroup>
 

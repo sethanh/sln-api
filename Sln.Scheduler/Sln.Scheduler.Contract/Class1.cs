@@ -1,4 +1,4 @@
-﻿namespace Sln.Payment.Contract;
+﻿namespace Sln.Scheduler.Contract;
 
 public class Class1
 {

@@ -1,5 +1,5 @@
 
-namespace Sln.Payment.Business.Requests
+namespace Sln.Scheduler.Business.Requests
 {
     public class UpdateJobInfoRequest
     {

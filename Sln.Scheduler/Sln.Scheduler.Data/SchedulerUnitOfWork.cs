@@ -2,7 +2,7 @@
 using Sln.Shared.Data;
 using MediatR;
 
-namespace Sln.Payment.Data;
+namespace Sln.Scheduler.Data;
 
 public class SchedulerUnitOfWork(
     SchedulerDbContext context,

@@ -1,6 +1,6 @@
-@Sln.Payment.Host_HostAddress = http://localhost:5137
+@Sln.Scheduler.Host_HostAddress = http://localhost:5137
 
-GET {{Sln.Payment.Host_HostAddress}}/weatherforecast/
+GET {{Sln.Scheduler.Host_HostAddress}}/weatherforecast/
 Accept: application/json
 
 ###
