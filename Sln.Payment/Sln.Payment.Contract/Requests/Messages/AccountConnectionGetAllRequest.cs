@@ -22,8 +22,6 @@ public class AccountConnectionGetAllResponse : PaginationResponse<AccountConnect
 {
 }
 
-public class AccountConnectionGetAllResponseItem : AccountResponse
+public class AccountConnectionGetAllResponseItem : AccountConnectionGetDetailResponse
 {
-    public required Guid ConnectionId { get; set; }
-    
 }
