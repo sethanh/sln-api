@@ -6,6 +6,8 @@ using Sln.Shared.Contract.Models;
 using Sln.Shared.Common.Exceptions;
 using Mapster;
 using Microsoft.EntityFrameworkCore;
+using Sln.Shared.Common.Values;
+using Sln.Payment.Contract.Enums;
 
 namespace Sln.Payment.Business.Services.Messages;
 
@@ -85,5 +87,37 @@ public class ConversationService(IServiceProvider serviceProvider) : PaymentAppl
 
         await UnitOfWork.SaveChangesAsync();
         return;
+    }
+
+    public async Task HandleModifyAccountConnectionAsync(AccountConnection data, List<AuditDataChange> dataChanges)
+    {
+        var isStatusValue = dataChanges.FirstOrDefault(c => c.Field == nameof(data.Status));
+
+        var shouldCreateConversation = isStatusValue != null && (AccountConnectionStatus)isStatusValue.OriginValue! == AccountConnectionStatus.Wait && data.Status == AccountConnectionStatus.Accepted;
+
+        var newConversation = new Conversation
+        {
+            Id = Guid.NewGuid(),
+            Name = Guid.NewGuid().ToString(),
+            Accounts = [],
+            Type = ConversationType.Single
+        };
+        
+        newConversation.Accounts.Add(new ConversationAccount
+        {
+            Id = Guid.NewGuid(),
+            AccountId =  data.AccountRequestId!.Value,
+            ConversationId = newConversation.Id
+        });
+
+        newConversation.Accounts.Add(new ConversationAccount
+        {
+            Id = Guid.NewGuid(),
+            AccountId = data.AccountAcceptId!.Value,
+            ConversationId = newConversation.Id
+        });
+
+        ConversationManager.Add(newConversation);
+        await UnitOfWork.SaveChangesAsync();
     }
 }

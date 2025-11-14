@@ -1,4 +1,5 @@
 using MediatR;
+using Sln.Payment.Contract.Enums;
 using Sln.Payment.Contract.Requests.Accounts;
 using Sln.Payment.Contract.Requests.Uploads;
 
@@ -16,6 +17,7 @@ public class ConversationGetDetailResponse
     public List<ConversationAccountGetDetailResponse>? Accounts { get; set; }
     public string? Background { get; set; }
     public string? Icon { get; set; }
+    public ConversationType? Type { get; set;}
 }
 
 public class AccountResponse
