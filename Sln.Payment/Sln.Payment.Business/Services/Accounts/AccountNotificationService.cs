@@ -6,12 +6,19 @@ using Sln.Shared.Business.Interfaces;
 using Sln.Shared.Contract.Models;
 using Sln.Shared.Common.Exceptions;
 using Mapster;
+using Sln.Shared.Common.Values;
+using System.Text.Json;
+using Sln.Payment.Business.Services.RealTime;
+using Sln.Shared.Common.Constants.Realtimes;
+using Sln.Shared.Common.Utils;
 
 namespace Sln.Payment.Business.Services.Accounts;
 
 public class AccountNotificationService(IServiceProvider serviceProvider) : PaymentApplicationService(serviceProvider)
 {
     private AccountNotificationManager AccountNotificationManager => GetService<AccountNotificationManager>();
+    
+    private RealTimeService RealTimeService => GetService<RealTimeService>();
 
     public Task<AccountNotificationGetAllResponse> GetAll(AccountNotificationGetAllRequest request)
     {
@@ -81,5 +88,23 @@ public class AccountNotificationService(IServiceProvider serviceProvider) : Paym
 
         await UnitOfWork.SaveChangesAsync();
         return;
+    }
+
+    public async Task HandleCreateAccountConnectionNotificationAsync(Conversation data, List<AuditDataChange> dataChanges)
+    {
+        var AccountRequest = data.Accounts!.First().Account;
+        var AccountAccept = data.Accounts!.Last().Account;
+
+        var notification = AccountNotificationManager.Add(new AccountNotification
+        {
+            Id = Guid.NewGuid(),
+            AccountId = AccountRequest!.Id,
+            Title = "Friend request",
+            Body = $"{AccountAccept!.Name} has accepted your friend request.",
+        });
+
+        await UnitOfWork.SaveChangesAsync();
+
+        await RealTimeService.PublishAccountConnectionNotification(notification);
     }
 }

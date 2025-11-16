@@ -13,9 +13,18 @@ namespace Sln.Payment.Business.Services.RealTime
 
         public RealTimeService()
         {
-            connection = new HubConnectionBuilder()
-                .WithUrl(Environment.GetEnvironmentVariable(EnvConstants.PUBLISHER_REALTIME_SERVER) ?? "")
+            var connectionUrl = Environment.GetEnvironmentVariable(EnvConstants.PUBLISHER_REALTIME_SERVER);
+            try
+            {
+                connection = new HubConnectionBuilder()
+                .WithUrl(connectionUrl ?? "")
                 .Build();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"[{DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")}]:{ex.Message}");
+                throw;
+            }
 
             connection.Closed += async (error) =>
             {
@@ -36,6 +45,20 @@ namespace Sln.Payment.Business.Services.RealTime
                     Message = chatMessage.Message,
                     AccountId = chatMessage.AccountId,
                     CreationTime = chatMessage.CreationTime
+                }
+            });
+        }
+
+        public async Task PublishAccountConnectionNotification(AccountNotification notification)
+        {
+            await InvokeAsync(RealtimeMethods.Update, new BaseRealtimeHubModel
+            {
+                Key = RealTimeUtils.GetKey(RealTimeJobs.NOTIFY, $"{notification.AccountId}"),
+                Data = new
+                {
+                    NotificationId = notification.Id,
+                    Title = notification.Title,
+                    Body = notification.Body,
                 }
             });
         }
