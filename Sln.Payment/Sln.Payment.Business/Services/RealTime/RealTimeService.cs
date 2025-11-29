@@ -17,12 +17,6 @@ namespace Sln.Payment.Business.Services.RealTime
             connection = new HubConnectionBuilder()
                 .WithUrl(Environment.GetEnvironmentVariable(EnvConstants.PUBLISHER_REALTIME_SERVER) ?? "")
                 .Build();
-
-            connection.Closed += async (error) =>
-            {
-                await Task.Delay(new Random().Next(0, 5) * 1000);
-                await connection.StartAsync();
-            };
         }
 
 

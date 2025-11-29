@@ -18,7 +18,7 @@ public class AccountNotificationService(IServiceProvider serviceProvider) : Paym
 
     public Task<AccountNotificationGetAllResponse> GetAll(AccountNotificationGetAllRequest request)
     {
-        var AccountNotification = AccountNotificationManager.GetAll().Where(c => c.AccountId == CurrentAccount.Id);
+        var AccountNotification = AccountNotificationManager.GetAll().Where(c => c.AccountId == CurrentAccount.Id).OrderByDescending(c => c.CreationTime);
 
         var paginationResponse = PaginationResponse<AccountNotification>.Create(
             AccountNotification,
@@ -61,6 +61,10 @@ public class AccountNotificationService(IServiceProvider serviceProvider) : Paym
         }
 
         // TODO: Update accountNotification properties
+        if (request.ReadAt != null)
+        {
+            accountNotification.ReadAt = request.ReadAt;
+        }
 
         var updateAccountNotification = request.Adapt(accountNotification);
 
