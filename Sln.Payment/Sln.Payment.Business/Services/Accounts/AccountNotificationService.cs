@@ -2,15 +2,13 @@ using Sln.Payment.Contract.Errors.Accounts;
 using Sln.Payment.Contract.Requests.Accounts;
 using Sln.Payment.Data.Entities;
 using Sln.Payment.Business.Managers.Accounts;
-using Sln.Shared.Business.Interfaces;
 using Sln.Shared.Contract.Models;
 using Sln.Shared.Common.Exceptions;
 using Mapster;
 using Sln.Shared.Common.Values;
 using System.Text.Json;
 using Sln.Payment.Business.Services.RealTime;
-using Sln.Shared.Common.Constants.Realtimes;
-using Sln.Shared.Common.Utils;
+using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
 
 namespace Sln.Payment.Business.Services.Accounts;
 
@@ -90,21 +88,42 @@ public class AccountNotificationService(IServiceProvider serviceProvider) : Paym
         return;
     }
 
-    public async Task HandleCreateAccountConnectionNotificationAsync(Conversation data, List<AuditDataChange> dataChanges)
+    public async Task HandleCreateAccountConnectionNotificationAsync(AccountConnection data, List<AuditDataChange> dataChanges)
     {
-        var AccountRequest = data.Accounts!.First().Account;
-        var AccountAccept = data.Accounts!.Last().Account;
+        var AccountRequest = data.AccountRequest;
+        var AccountAccept = data.AccountAccept;
 
-        var notification = AccountNotificationManager.Add(new AccountNotification
+        try
         {
-            Id = Guid.NewGuid(),
-            AccountId = AccountRequest!.Id,
-            Title = "Friend request",
-            Body = $"{AccountAccept!.Name} has accepted your friend request.",
-        });
+            var notification = AccountNotificationManager.Add(new AccountNotification
+            {
+                Id = Guid.NewGuid(),
+                Title = "Friend request",
+                Action = "ACCOUNT_CONNECTION_ACCEPTED",
+                Body = $"{AccountAccept!.Name} has accepted your friend request.",
+                ReferenceId = data.Id,
+                ReferenceObjectName = nameof(AccountConnection),
+                AccountId = AccountRequest!.Id,
+                BodyJson = JsonSerializer.Serialize(new
+                {
 
-        await UnitOfWork.SaveChangesAsync();
+                    Id = Guid.NewGuid(),
+                    Title = "Friend request",
+                    Action = "ACCOUNT_CONNECTION_ACCEPTED",
+                    Body = $"{AccountAccept!.Name} has accepted your friend request.",
+                    ReferenceId = data.Id,
+                    ReferenceObjectName = nameof(AccountConnection),
+                    AccountId = AccountRequest!.Id,
+                }),
+            });
 
-        await RealTimeService.PublishAccountConnectionNotification(notification);
+            await UnitOfWork.SaveChangesAsync();
+
+            await RealTimeService.PublishAccountConnectionNotification(notification);
+
+        } catch (Exception ex)
+        {
+            Console.WriteLine($"Error creating notification: {ex.Message}");
+        }
     }
 }

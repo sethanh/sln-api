@@ -1,3 +1,4 @@
+using DocumentFormat.OpenXml.Bibliography;
 using Microsoft.AspNetCore.SignalR.Client;
 using Sln.Payment.Data.Entities;
 using Sln.Shared.Common.Constants.Envs;
@@ -49,16 +50,22 @@ namespace Sln.Payment.Business.Services.RealTime
             });
         }
 
-        public async Task PublishAccountConnectionNotification(AccountNotification notification)
+        public async Task PublishAccountConnectionNotification(AccountNotification accountNotification)
         {
             await InvokeAsync(RealtimeMethods.Update, new BaseRealtimeHubModel
             {
-                Key = RealTimeUtils.GetKey(RealTimeJobs.NOTIFY, $"{notification.AccountId}"),
+                Key = RealTimeUtils.GetKey(RealTimeJobs.NOTIFY, $"{accountNotification.AccountId}"),
                 Data = new
                 {
-                    NotificationId = notification.Id,
-                    Title = notification.Title,
-                    Body = notification.Body,
+                    NotificationId = accountNotification.Id,
+                    Title = accountNotification.Title,
+                    Action = accountNotification.Action,
+                    Body = accountNotification.Body,
+                    ReferenceId = accountNotification.ReferenceId,
+                    ReferenceObjectName = accountNotification.ReferenceObjectName,
+                    AccountId = accountNotification.AccountId,
+                    Account = accountNotification.Account,
+                    BodyJson = accountNotification.BodyJson,
                 }
             });
         }
