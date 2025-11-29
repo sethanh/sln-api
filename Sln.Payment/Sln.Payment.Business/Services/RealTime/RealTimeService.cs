@@ -14,18 +14,9 @@ namespace Sln.Payment.Business.Services.RealTime
 
         public RealTimeService()
         {
-            var connectionUrl = Environment.GetEnvironmentVariable(EnvConstants.PUBLISHER_REALTIME_SERVER);
-            try
-            {
-                connection = new HubConnectionBuilder()
-                .WithUrl(connectionUrl ?? "")
+            connection = new HubConnectionBuilder()
+                .WithUrl(Environment.GetEnvironmentVariable(EnvConstants.PUBLISHER_REALTIME_SERVER) ?? "")
                 .Build();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"[{DateTime.UtcNow.ToString("yyyy-MM-ddTHH:mm:ssZ")}]:{ex.Message}");
-                throw;
-            }
 
             connection.Closed += async (error) =>
             {
@@ -59,13 +50,14 @@ namespace Sln.Payment.Business.Services.RealTime
                 {
                     NotificationId = accountNotification.Id,
                     Title = accountNotification.Title,
-                    Action = accountNotification.Action,
                     Body = accountNotification.Body,
+                    Action = accountNotification.Action,
                     ReferenceId = accountNotification.ReferenceId,
                     ReferenceObjectName = accountNotification.ReferenceObjectName,
                     AccountId = accountNotification.AccountId,
-                    Account = accountNotification.Account,
                     BodyJson = accountNotification.BodyJson,
+                    CreationTime = accountNotification.CreationTime,
+                    ReadAt = accountNotification.ReadAt
                 }
             });
         }

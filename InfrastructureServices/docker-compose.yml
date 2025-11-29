@@ -12,7 +12,7 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: BGlCYZHM1eQM
       MONGO_INITDB_DATABASE: EsgNoSql
     volumes:
-      - ./sln/data/mongodb:/data/db
+      - /home/sln/data/mongodb:/data/db
 
   redis:
     image: 'redis:alpine'
@@ -24,7 +24,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
-      - ./sln/data/redis:/data
+      - /home/sln/data/redis:/data
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
@@ -40,8 +40,8 @@ services:
       ZOOKEEPER_SERVER_ID: 1
       ZOOKEEPER_SERVERS: zookeeper:2888:3888
     volumes:
-      - ./sln/data/zookeeper/log:/var/lib/zookeeper/log
-      - ./sln/data/zookeeper/data:/var/lib/zookeeper/data
+      - /home/sln/data/zookeeper/log:/var/lib/zookeeper/log
+      - /home/sln/data/zookeeper/data:/var/lib/zookeeper/data
 
   kafka:
     image: confluentinc/cp-kafka:7.2.1
@@ -56,7 +56,7 @@ services:
     extra_hosts:
       - "host.docker.internal:host-gateway"
     volumes:
-      - ./sln/data/kafka:/var/lib/kafka/data
+      - /home/sln/data/kafka:/var/lib/kafka/data
     environment:
       KAFKA_LISTENERS: INTERNAL://:19092,OUTSIDE://:29092,EXTERNAL://:9092
       KAFKA_ADVERTISED_LISTENERS: INTERNAL://kafka:19092,OUTSIDE://localhost:29092,EXTERNAL://${KAFKA_PUBLIC_IP}:9092

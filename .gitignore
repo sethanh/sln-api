@@ -363,5 +363,3 @@ yarn.lock
 
 # environment specific files
 .env
-
-InfrastructureServices/

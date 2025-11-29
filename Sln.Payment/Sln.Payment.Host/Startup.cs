@@ -1,5 +1,4 @@
 using Mapster;
-using Microsoft.EntityFrameworkCore;
 using Sln.Payment.Business.Services.RealTime;
 using Sln.Payment.Data;
 // using Sln.Payment.Host.Filters;
@@ -17,10 +16,7 @@ namespace Sln.Payment.Host
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
             services.AddHealthChecks();
-            services.AddDbContext<PaymentDbContext>(options =>
-            {
-                options.UseLazyLoadingProxies();
-            });
+            services.AddDbContext<PaymentDbContext>();
             services.AddMediatR((configs) =>
             {
                 configs.RegisterServicesFromAssemblyContaining<Startup>();

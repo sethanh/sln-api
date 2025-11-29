@@ -8,14 +8,12 @@ using Mapster;
 using Sln.Shared.Common.Values;
 using System.Text.Json;
 using Sln.Payment.Business.Services.RealTime;
-using OfficeOpenXml.FormulaParsing.Excel.Functions.DateTime;
 
 namespace Sln.Payment.Business.Services.Accounts;
 
 public class AccountNotificationService(IServiceProvider serviceProvider) : PaymentApplicationService(serviceProvider)
 {
     private AccountNotificationManager AccountNotificationManager => GetService<AccountNotificationManager>();
-    
     private RealTimeService RealTimeService => GetService<RealTimeService>();
 
     public Task<AccountNotificationGetAllResponse> GetAll(AccountNotificationGetAllRequest request)
@@ -93,37 +91,35 @@ public class AccountNotificationService(IServiceProvider serviceProvider) : Paym
         var AccountRequest = data.AccountRequest;
         var AccountAccept = data.AccountAccept;
 
-        try
+        var notification = AccountNotificationManager.Add(new AccountNotification
         {
-            var notification = AccountNotificationManager.Add(new AccountNotification
+            Id = Guid.NewGuid(),
+            Title = $"{AccountAccept!.Name}",
+            Action = "ACCOUNT_CONNECTION_ACCEPTED",
+            Body = $"{AccountAccept!.Name} has accepted your friend request.",
+            ReferenceId = data.Id,
+            ReferenceObjectName = nameof(AccountConnection),
+            AccountId = AccountRequest!.Id,
+            BodyJson = JsonSerializer.Serialize(new
             {
+
                 Id = Guid.NewGuid(),
-                Title = "Friend request",
+                Title = $"{AccountAccept!.Name}",
                 Action = "ACCOUNT_CONNECTION_ACCEPTED",
                 Body = $"{AccountAccept!.Name} has accepted your friend request.",
                 ReferenceId = data.Id,
                 ReferenceObjectName = nameof(AccountConnection),
                 AccountId = AccountRequest!.Id,
-                BodyJson = JsonSerializer.Serialize(new
+                AccountAccept = new
                 {
+                    Photo = AccountAccept.Photo,
+                    GoogleAccounts = AccountAccept.GoogleAccounts?.Select(ga => ga.Picture).ToList()
+                }
+            }),
+        });
 
-                    Id = Guid.NewGuid(),
-                    Title = "Friend request",
-                    Action = "ACCOUNT_CONNECTION_ACCEPTED",
-                    Body = $"{AccountAccept!.Name} has accepted your friend request.",
-                    ReferenceId = data.Id,
-                    ReferenceObjectName = nameof(AccountConnection),
-                    AccountId = AccountRequest!.Id,
-                }),
-            });
+        await UnitOfWork.SaveChangesAsync();
 
-            await UnitOfWork.SaveChangesAsync();
-
-            await RealTimeService.PublishAccountConnectionNotification(notification);
-
-        } catch (Exception ex)
-        {
-            Console.WriteLine($"Error creating notification: {ex.Message}");
-        }
+        await RealTimeService.PublishAccountConnectionNotification(notification);
     }
 }
