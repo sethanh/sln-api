@@ -1,0 +1,16 @@
+using Sln.Shared.Contract.Models;
+using MediatR;
+
+namespace Sln.Payment.Contract.Requests.Capturess;
+
+public class CommentGetAllRequest : PaginationRequest, IRequest<CommentGetAllResponse>
+{
+}
+
+public class CommentGetAllResponse : PaginationResponse<CommentGetAllResponseItem>
+{
+}
+
+public class CommentGetAllResponseItem : CommentGetDetailResponse
+{
+}

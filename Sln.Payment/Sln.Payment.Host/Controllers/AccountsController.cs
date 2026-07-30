@@ -49,6 +49,12 @@ public class AccountsController : PaymentControllerBase
         return await RequestAsCreate<AccountLoginRequest, AccountLoginResponse>(requestBody);
     }
 
+    [HttpPost("registry")]
+    public async Task<IActionResult> Registry([FromBody] AccountRegistryRequest requestBody)
+    {
+        return await RequestAsCreate<AccountRegistryRequest, AccountRegistryResponse>(requestBody);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] AccountCreateRequest requestBody)
     {

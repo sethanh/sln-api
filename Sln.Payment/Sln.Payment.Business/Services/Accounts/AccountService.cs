@@ -10,6 +10,7 @@ using System.Text.Json;
 using Sln.Payment.Business.Managers.GoogleAccounts;
 using Mapster;
 using Sln.Payment.Contract.Requests.Messages;
+using Microsoft.EntityFrameworkCore;
 
 namespace Sln.Payment.Business.Services.Accounts;
 
@@ -217,5 +218,24 @@ public class AccountService(IServiceProvider serviceProvider) : PaymentApplicati
 
         await UnitOfWork.SaveChangesAsync();
         return;
+    }
+
+    public async Task<AccountRegistryResponse> Registry(AccountRegistryRequest request)
+    {
+        var existAccount = await AccountManager.GetAll()
+            .FirstOrDefaultAsync(c => c.Email == request.Email) 
+            ?? throw new HttpBadRequest(AccountErrors.ACCOUNT_ALREADY_EXISTS);
+        
+        var newAcc = Mapper.Map<Account>(request);
+        AccountManager.Add(newAcc);
+        await UnitOfWork.SaveChangesAsync();
+
+        var tokenValue = JwtHelpers.GenerateJWTTokens(newAcc);
+
+        AccountRefreshTokenManager.AddOrgAccountRefreshToken(newAcc, tokenValue.RefreshToken);
+
+        await UnitOfWork.SaveChangesAsync();
+
+        return Mapper.Map<AccountRegistryResponse>(tokenValue);
     }
 }

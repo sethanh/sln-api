@@ -363,3 +363,4 @@ yarn.lock
 
 # environment specific files
 .env
+*.DS_Store
