@@ -18,4 +18,5 @@ public class AccountNotificationGetDetailResponse
     public Guid? AccountId { get; set; }
     public string? BodyJson { get; set; }
     public DateTime? CreationTime { get; set; }
+    public DateTime? ReadAt { get; set; }
 }

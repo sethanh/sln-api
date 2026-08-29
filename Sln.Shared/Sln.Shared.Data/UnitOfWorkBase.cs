@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Sln.Shared.Common.Helpers;
 using Sln.Shared.Data.Interfaces;
 using Sln.Shared.Data.Models;
-using Sln.Shared.Data.Requests;
+using Sln.Shared.Data.Events.Requests;
 
 namespace Sln.Shared.Data
 {

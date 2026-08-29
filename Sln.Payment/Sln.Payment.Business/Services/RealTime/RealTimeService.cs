@@ -1,3 +1,4 @@
+using DocumentFormat.OpenXml.Bibliography;
 using Microsoft.AspNetCore.SignalR.Client;
 using Sln.Payment.Data.Entities;
 using Sln.Shared.Common.Constants.Envs;
@@ -16,12 +17,6 @@ namespace Sln.Payment.Business.Services.RealTime
             connection = new HubConnectionBuilder()
                 .WithUrl(Environment.GetEnvironmentVariable(EnvConstants.PUBLISHER_REALTIME_SERVER) ?? "")
                 .Build();
-
-            connection.Closed += async (error) =>
-            {
-                await Task.Delay(new Random().Next(0, 5) * 1000);
-                await connection.StartAsync();
-            };
         }
 
 
@@ -36,6 +31,27 @@ namespace Sln.Payment.Business.Services.RealTime
                     Message = chatMessage.Message,
                     AccountId = chatMessage.AccountId,
                     CreationTime = chatMessage.CreationTime
+                }
+            });
+        }
+
+        public async Task PublishAccountConnectionNotification(AccountNotification accountNotification)
+        {
+            await InvokeAsync(RealtimeMethods.Update, new BaseRealtimeHubModel
+            {
+                Key = RealTimeUtils.GetKey(RealTimeJobs.NOTIFY, $"{accountNotification.AccountId}"),
+                Data = new
+                {
+                    NotificationId = accountNotification.Id,
+                    Title = accountNotification.Title,
+                    Body = accountNotification.Body,
+                    Action = accountNotification.Action,
+                    ReferenceId = accountNotification.ReferenceId,
+                    ReferenceObjectName = accountNotification.ReferenceObjectName,
+                    AccountId = accountNotification.AccountId,
+                    BodyJson = accountNotification.BodyJson,
+                    CreationTime = accountNotification.CreationTime,
+                    ReadAt = accountNotification.ReadAt
                 }
             });
         }

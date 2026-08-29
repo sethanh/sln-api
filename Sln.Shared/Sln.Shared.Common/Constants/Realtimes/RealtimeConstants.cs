@@ -15,6 +15,6 @@ namespace Sln.Shared.Common.Constants.Realtimes
     public class RealTimeJobs
     {
         public const string MESSAGE_REFRESH = "MESSAGE_REFRESH";
-
+        public const string NOTIFY = "NOTIFY";
     }
 }

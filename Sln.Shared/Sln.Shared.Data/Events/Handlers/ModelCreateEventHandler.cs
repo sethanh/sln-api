@@ -6,5 +6,4 @@ namespace Sln.Shared.Data.Events.Handlers;
 
 public abstract class ModelCreateEventHandler<T>: ModelEventHandler<ModelCreateEventRequest<IDataModel>, T>, INotificationHandler<ModelCreateEventRequest<IDataModel>>
 {
-
 }

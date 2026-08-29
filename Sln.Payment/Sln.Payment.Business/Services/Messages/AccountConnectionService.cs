@@ -19,7 +19,10 @@ public class AccountConnectionService(IServiceProvider serviceProvider) : Paymen
 
         if (request.Status != null)
         {
-            accountConnectionQuery = accountConnectionQuery.Where(c => c.Status == request.Status);
+            accountConnectionQuery = accountConnectionQuery
+            .Where(c => c.Status == request.Status)
+            .Where(c => c.AccountRequestId == CurrentAccount.Id || c.AccountAcceptId == CurrentAccount.Id);
+
         }
 
         if (request.Action != null)
@@ -84,6 +87,7 @@ public class AccountConnectionService(IServiceProvider serviceProvider) : Paymen
         }
 
         // TODO: Update accountConnection properties
+        accountConnection.Status = request.Status;
 
         var updateAccountConnection = request.Adapt(accountConnection);
 
